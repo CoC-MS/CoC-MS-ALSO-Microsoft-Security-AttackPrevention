@@ -1,2 +1,2 @@
 # CoC-MS-ALSO-Microsoft-Security-AttackPrevention
-This repo includes dffreent common attacks scenarios and maps them to ready to use packages to prevent that this attacks happens in your enovirment. 
+This repository includes common attack scenarios and maps them to ready-to-use security packages that help prevent these attacks from occurring in your environment.
