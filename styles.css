@@ -42,10 +42,6 @@ h1 br { display: none; }
 .scenario-button[aria-pressed="true"] { background: #eaf1ff; color: #1a57b6; border-color: #c7d9fa; }
 .scenario-icon { width: 29px; height: 29px; border-radius: 8px; background: #eaf0f7; color: #667a98; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 29px; font-size: 12px; font-weight: 750; }
 [aria-pressed="true"] .scenario-icon { background: #d6e5ff; color: #215fc3; }
-.package-control { border-top: 1px solid var(--line); padding: 20px 5px 0; margin-top: 24px; }
-.package-control label { display: block; color: #41516a; font-size: 11px; font-weight: 650; margin-bottom: 8px; }
-select { padding: 10px 30px 10px 10px; width: 100%; border: 1px solid #cfd9e7; border-radius: 7px; background: white; color: #263b58; font-size: 12px; }
-.package-control p { font-size: 11px; line-height: 1.6; color: var(--muted); margin-bottom: 0; }
 .results { min-width: 0; padding: 23px 27px 25px; }
 .result-header .step { margin-bottom: 16px; }
 .result-title { display: flex; align-items: center; gap: 15px; justify-content: space-between; }
@@ -73,8 +69,6 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .policy-links { display: flex; gap: 5px; flex: 0 0 auto; }
 .policy-links a { border: 1px solid #d9e3f4; border-radius: 5px; color: var(--blue); background: #f8faff; font-size: 10px; padding: 6px 7px; text-decoration: none; }
 .policy-links a:hover { background: #eaf1ff; }
-.group-help { font-size: 11px; margin: 9px 0 0; }
-.group-help a { color: #667c9b; }
 .state { border-radius: 4px; background: #f1f4f7; padding: 2px 5px; font-size: 9px; }
 footer { display: flex; gap: 12px; justify-content: space-between; padding: 23px 0 8px; font-size: 10px; color: #687991; line-height: 1.6; }
 footer > div { display: flex; flex-wrap: wrap; gap: 14px; }
@@ -106,10 +100,6 @@ footer a { color: #687991; }
   .scenario-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scenario-button { font-size: 12px; padding: 9px 6px; gap: 7px; }
   .scenario-icon { width: 24px; height: 24px; flex-basis: 24px; }
-  .package-control { display: flex; align-items: center; gap: 9px; margin-top: 16px; padding-top: 14px; }
-  .package-control label { flex: 1; font-size: 10px; margin: 0; }
-  .package-control select { width: 65%; font-size: 11px; }
-  .package-control p { display: none; }
   .results { padding: 21px 15px; }
   h2 { font-size: 21px; }
   .result-title { align-items: flex-start; gap: 9px; }

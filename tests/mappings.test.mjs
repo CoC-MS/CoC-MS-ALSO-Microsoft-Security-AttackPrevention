@@ -111,7 +111,7 @@ test("simplified UI has no JSON panels or tactic dashboard and includes local AL
 test("site omits risk messages, template disclaimer, and research percentage section", async () => {
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
   const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
-  for (const removed of ["risk-description", "risk-title", "risk-note", "template-note", "research-title", "population-reduction", "leaked-reduction", "research-scope", "research-link"]) {
+  for (const removed of ["risk-description", "risk-title", "risk-note", "template-note", "research-title", "population-reduction", "leaked-reduction", "research-scope", "research-link", "package-filter", "package-control", "snapshot-info", "group-help", "Why this helps", "Source licenses", "ALSO logo source"]) {
     assert.ok(!html.includes(removed), `Removed section remains in HTML: ${removed}`);
     assert.ok(!app.includes(removed), `Removed section remains in rendering code: ${removed}`);
   }

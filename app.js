@@ -67,7 +67,7 @@ function policyRow(variants, group) {
 
 function renderScenario() {
   const scenario = scenarios.find((item) => item.id === selectedId);
-  const groups = groupPolicies(inventory.policies, scenario, byId("package-filter").value);
+  const groups = groupPolicies(inventory.policies, scenario);
   const count = new Set(groups.flatMap((group) => group.policies.map((variants) => variants[0].code))).size;
   byId("scenario-name").textContent = scenario.name;
   byId("scenario-summary").textContent = scenario.summary;
@@ -94,18 +94,10 @@ function renderScenario() {
     list.append(...group.policies.map((variants) => policyRow(variants, group.id)));
     if (!group.policies.length) list.append(element("p", "empty", "No matching template in this package. Try All packages."));
     section.append(list);
-    const help = element("p", "group-help");
-    const link = externalLink("Why this helps ↗", group.source);
-    link.title = group.reason;
-    help.append(link);
-    section.append(help);
     container.append(section);
   });
-  byId("results-status").textContent = `${scenario.name}: ${count} policies in ${byId("package-filter").selectedOptions[0].textContent}.`;
+  byId("results-status").textContent = `${scenario.name}: ${count} policies.`;
 }
 
-byId("snapshot-info").replaceChildren(document.createTextNode(`Source snapshot ${inventory.fetchedAt.slice(0, 10)} · `),
-  externalLink(inventory.revision.slice(0, 7), `https://github.com/${inventory.repository}/tree/${inventory.revision}`));
-byId("package-filter").addEventListener("change", renderScenario);
 renderNavigation();
 renderScenario();
