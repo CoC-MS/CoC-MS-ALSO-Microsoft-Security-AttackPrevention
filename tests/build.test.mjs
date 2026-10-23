@@ -33,6 +33,7 @@ test("production HTML and every module dependency use content-hashed assets", as
     }
     assert.ok((await readFile(join(output, "assets", "also-logo.png"))).length);
     assert.ok((await readFile(join(output, "data", "SOURCE_LICENSE.txt"))).length);
+    assert.ok((await readFile(join(output, "data", "endpoint-licenses", "ALSO-Microsoft-Security-MacOS.txt"))).length);
     const files = await readdir(output);
     assert.ok(!files.includes("app.js"), "Unversioned scripts must not be published");
   } finally {

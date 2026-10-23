@@ -67,15 +67,15 @@ export const controlGroups = {
   },
   "endpoint-av": {
     title: "Defender Antivirus",
-    description: "Existing antivirus configurations for malware detection and endpoint protection.",
+    description: "Antivirus configurations and update profiles for malware detection and endpoint protection.",
   },
   "endpoint-firewall": {
     title: "Host firewall",
     description: "Existing host firewall configurations to restrict network access and help limit lateral movement. A firewall does not block every token-exfiltration or ransomware path.",
   },
   "endpoint-defender": {
-    title: "Defender & attack surface reduction",
-    description: "Defender enrollment, tamper protection, and attack surface reduction templates. Audit-only profiles monitor behavior; they do not block it.",
+    title: "Defender protection & setup",
+    description: "Defender deployment, permissions, network protection, device-risk requirements, and attack surface reduction. Setup profiles enable protection; they are not standalone ransomware blockers. Audit-only profiles monitor behavior; they do not block it.",
   },
   "endpoint-edge": {
     title: "Microsoft Edge security",
@@ -87,11 +87,11 @@ export const scenarios = [
   {
     id: "aitm", icon: "A", name: "AiTM phishing",
     short: "An attacker proxies a sign-in to capture credentials and sessions.",
-    summary: "Use phishing-resistant authentication to give strong protection against common adversary-in-the-middle phishing proxies.",
-    groups: ["phishing"],
+    summary: "Use phishing-resistant authentication against common adversary-in-the-middle phishing proxies, and require compliant devices as an additional access check.",
+    groups: ["phishing", "device"],
     techniques: ["T1557"],
     protection: "Strong protection at sign-in",
-    limitation: "These templates protect their targeted administrators or authentication contexts, not automatically every user. They do not remove already-stolen tokens or prevent every form of session theft.",
+    limitation: "Phishing-resistant MFA protects authentication; compliant-device policies add a device trust check. Each template only protects its assigned users and resources. Device compliance does not bind every token to a device, remove already-stolen tokens, or prevent every form of session theft.",
     riskNote: "The cited MFA study does not quantify AiTM-specific protection. Its general MFA percentage must not be presented as an AiTM success rate."
   },
   {
@@ -148,12 +148,12 @@ export const scenarios = [
   {
     id: "ransomware", icon: "R", name: "Ransomware",
     short: "Malware encrypts files and disrupts endpoints and servers.",
-    summary: "Find antivirus, host firewall, and Defender templates from the Windows, Windows Server, and Linux repositories.",
+    summary: "Find antivirus, host firewall, and Defender templates by operating system: Windows, Windows Server, macOS, Linux, Android, and iOS / iPadOS.",
     groups: ["endpoint-av", "endpoint-firewall", "endpoint-defender"],
-    endpointPlatforms: ["Windows", "Windows Server", "Linux"],
+    endpointPlatforms: ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"],
     techniques: ["T1486", "T1204.002"],
     protection: "Protect endpoints and servers",
-    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. The Linux repository currently provides Defender Antivirus, but no host firewall template."
+    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. The Linux repository currently provides Defender Antivirus, but no host firewall template. Mobile Defender setup and device-risk policies are supporting controls, not desktop-style antivirus or a guarantee against file encryption."
   },
   {
     id: "clickfix", icon: "F", name: "ClickFix",
@@ -209,6 +209,24 @@ export function groupPolicies(policies, scenario, packageName = "all") {
   });
 }
 
+export const policyCategories = [
+  { id: "ca", title: "Conditional Access (CA)", description: "Microsoft Entra sign-in and access rules for users and cloud resources. A device condition here is still a CA policy, not an operating-system configuration." },
+  { id: "Windows", title: "Windows", description: "Windows endpoint and device-protection policies." },
+  { id: "Windows Server", title: "Windows Server", description: "Windows Server endpoint and device-protection policies." },
+  { id: "macOS", title: "macOS", description: "Mac antivirus, firewall, and Defender deployment and permission profiles." },
+  { id: "Linux", title: "Linux", description: "Linux endpoint-protection policies available in the source repository." },
+  { id: "Android", title: "Android", description: "Mobile Defender deployment, configuration, and device-risk requirements. These support protection; they are not Windows-style ransomware controls." },
+  { id: "iOS / iPadOS", title: "iOS / iPadOS", description: "Mobile Defender deployment, web/network protection, and device-risk requirements. These do not provide desktop-style antivirus scanning." }
+];
+
+export function categorizePolicies(policies, scenario) {
+  return policyCategories.map((category) => ({
+    ...category,
+    groups: groupPolicies(policies.filter((policy) => (policy.platform ?? "ca") === category.id), scenario)
+      .filter((group) => group.policies.length)
+  })).filter((category) => category.groups.length);
+}
+
 export function policyLabel(policy, group) {
   if (policy.platform) {
     if (group === "endpoint-privilege") {
@@ -216,8 +234,25 @@ export function policyLabel(policy, group) {
       return /24H2/i.test(policy.name) ? "Windows 11 24H2+ · LAPS configuration" : "Windows · LAPS configuration";
     }
     if (group === "endpoint-edge") return "Windows · Microsoft Edge security";
-    if (group === "endpoint-firewall") return `${policy.platform} · Firewall configuration`;
-    if (group === "endpoint-av") return `${policy.platform} · Defender Antivirus${/Additional/i.test(policy.name) ? " additional configuration" : " configuration"}${/v1\.0/i.test(policy.name) ? " (v1.0)" : ""}`;
+    if (group === "endpoint-firewall") return `${policy.platform} · ${policy.platform === "macOS" ? "Firewall & Gatekeeper" : "Firewall configuration"}`;
+    if (group === "endpoint-av") {
+      if (/updates|ring \d/i.test(policy.name)) return `${policy.platform} · Defender Antivirus updates${policy.name.match(/ring \d/i) ? ` (${policy.name.match(/ring \d/i)[0]})` : ""}`;
+      return `${policy.platform} · Defender Antivirus${/Additional/i.test(policy.name) ? " additional configuration" : " configuration"}${/v1\.0/i.test(policy.name) ? " (v1.0)" : ""}`;
+    }
+    if (policy.definitionIds.some((id) => /^(advancedThreatProtectionRequiredSecurityLevel|deviceThreatProtectionRequiredSecurityLevel)$/.test(id))) {
+      return `${policy.platform} · Defender device-risk requirement${/BYOD/i.test(policy.name) ? " (BYOD)" : ""}`;
+    }
+    if (policy.definitionIds.includes("defenderEnabled")) return `${policy.platform} · Require Defender to be enabled`;
+    if (!["Windows", "Windows Server"].includes(policy.platform)) {
+      if (policy.key.includes("/Applications/")) return `${policy.platform} · Defender app deployment`;
+      if (/Auto Enrollment/i.test(policy.name)) return `${policy.platform} · Defender enrollment`;
+      if (policy.key.includes("/AppConfigurationManagedDevice/")) return `${policy.platform} · Defender app configuration`;
+      const name = policy.name.replace(/^.*?Device Configuration\s*-\s*/i, "")
+        .replace(/^.*?(?:App Configuration|DeviceConfig)\s*-\s*/i, "")
+        .replace(/\s*-\s*D$/i, "").replace(/\bMDE\b/g, "Defender").trim();
+      return `${policy.platform} · ${name}`;
+    }
+    if (/network protection/i.test(policy.name)) return `${policy.platform} · Defender network protection`;
     if (/Tamper/i.test(policy.name)) return `${policy.platform} · Defender tamper protection`;
     if (/Enrollment/i.test(policy.name)) return `${policy.platform} · Defender for Endpoint enrollment`;
     if (policy.auditOnly) return `${policy.platform} · Attack surface reduction (audit only)`;

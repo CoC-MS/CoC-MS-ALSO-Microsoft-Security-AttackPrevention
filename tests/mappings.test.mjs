@@ -48,11 +48,19 @@ test("device-code phishing retains the requested spearphishing link reference", 
   assert.equal(techniqueUrl("T1566.002"), "https://attack.mitre.org/techniques/T1566/002/");
 });
 
-test("AiTM lists only phishing-resistant policies, including Tier 0 role activation", () => {
-  assert.deepEqual(codes("aitm"), ["BP-ALSO-CA105", "E5-ALSO-CA106"]);
-  for (const policy of scenarioPolicies(inventory.policies, scenario("aitm"))) {
+test("AiTM lists all phishing-resistant and compliant-device policies without generic MFA", () => {
+  assert.deepEqual(scenario("aitm").groups, ["phishing", "device"]);
+  const expected = inventory.policies.filter((policy) =>
+    policy.grantControls?.authenticationStrength?.id === "00000000-0000-0000-0000-000000000004"
+    || policy.grantControls?.builtInControls?.includes("compliantDevice"));
+  assert.deepEqual(scenarioPolicies(inventory.policies, scenario("aitm")), expected);
+  assert.deepEqual(codes("aitm"), codes("token-theft"));
+  const phishing = groupPolicies(inventory.policies, scenario("aitm")).find((group) => group.id === "phishing");
+  for (const policy of phishing.policies.flat()) {
     assert.equal(policy.grantControls.authenticationStrength.id, "00000000-0000-0000-0000-000000000004");
   }
+  assert.ok(codes("aitm").includes("E5-ALSO-CA106"));
+  assert.ok(codes("aitm").includes("A365-ALSO-CA503"));
   assert.ok(!matchesScenario(find("BP-ALSO-CA000"), scenario("aitm")));
 });
 
@@ -136,4 +144,14 @@ test("site omits risk messages, template disclaimer, and research percentage sec
     assert.ok(!html.includes(removed), `Removed section remains in HTML: ${removed}`);
     assert.ok(!app.includes(removed), `Removed section remains in rendering code: ${removed}`);
   }
+});
+
+test("deployment guidance distinguishes broad appropriate scope from a limited pilot", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(html, /class="scope-note"/);
+  for (const text of ["good starting point", "enabling and enforcing", "all intended users, resources, and devices",
+    "not just a small pilot group", "Test and roll out in stages", "admin-only policies targeted to admins", "emergency-access accounts"]) {
+    assert.ok(html.includes(text), text);
+  }
+  assert.ok(html.includes("Conditional Access (CA) controls sign-ins."));
 });

@@ -3,15 +3,15 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import endpoints from "../data/endpoint-policies.js";
 import identity from "../data/policies.js";
-import { endpointGroup } from "../scripts/sync-endpoint-policies.mjs";
-import { scenarios, groupPolicies, scenarioPolicies } from "../mappings.mjs";
+import { endpointGroup, endpointEvidence, includeEndpoint } from "../scripts/sync-endpoint-policies.mjs";
+import { scenarios, groupPolicies, scenarioPolicies, categorizePolicies, policyLabel } from "../mappings.mjs";
 
 const policies = [...identity.policies, ...endpoints.policies];
 const scenario = (id) => scenarios.find((item) => item.id === id);
 
-test("endpoint inventory links to real pinned templates from all three repositories", () => {
-  assert.equal(endpoints.sources.length, 3);
-  assert.ok(endpoints.policies.length >= 40);
+test("endpoint inventory links to real pinned templates from all six OS repositories", () => {
+  assert.equal(endpoints.sources.length, 6);
+  assert.ok(endpoints.policies.length >= 100);
   assert.equal(new Set(endpoints.policies.map((policy) => policy.key)).size, endpoints.policies.length);
   for (const policy of endpoints.policies) {
     const source = endpoints.sources.find((item) => item.platform === policy.platform);
@@ -36,17 +36,88 @@ test("token theft includes only Windows endpoint controls alongside identity con
   assert.ok(!endpoint.some((policy) => policy.group === "endpoint-edge"));
 });
 
-test("ransomware has AV on all three platforms and available Windows firewall policies", () => {
+test("ransomware includes every imported AV, firewall, and Defender policy across all OSes", () => {
   const selected = scenarioPolicies(policies, scenario("ransomware"));
-  for (const platform of ["Windows", "Windows Server", "Linux"]) {
+  assert.deepEqual(selected, endpoints.policies.filter((policy) =>
+    ["endpoint-av", "endpoint-firewall", "endpoint-defender"].includes(policy.group)));
+  for (const platform of ["Windows", "Windows Server", "macOS", "Linux"]) {
     assert.ok(selected.some((policy) => policy.platform === platform && policy.group === "endpoint-av"));
   }
-  for (const platform of ["Windows", "Windows Server"]) {
+  for (const platform of ["Windows", "Windows Server", "macOS"]) {
     assert.ok(selected.some((policy) => policy.platform === platform && policy.group === "endpoint-firewall"));
   }
   assert.ok(!selected.some((policy) => policy.platform === "Linux" && policy.group === "endpoint-firewall"));
   assert.match(scenario("ransomware").limitation, /no host firewall template/);
   assert.ok(selected.every((policy) => policy.platform));
+  for (const platform of ["macOS", "Android", "iOS / iPadOS"]) {
+    assert.ok(selected.some((policy) => policy.platform === platform && policy.group === "endpoint-defender"));
+  }
+  assert.match(scenario("ransomware").limitation, /Mobile Defender setup and device-risk policies are supporting controls/);
+});
+
+test("macOS includes antivirus, firewall, Defender app and all deployment prerequisites in BP and E5", () => {
+  const mac = endpoints.policies.filter((policy) => policy.platform === "macOS");
+  for (const pkg of ["BP", "E5"]) {
+    const variants = mac.filter((policy) => policy.package === pkg);
+    assert.equal(variants.length, 11);
+    assert.ok(variants.some((policy) => policy.group === "endpoint-av"));
+    assert.ok(variants.some((policy) => policy.group === "endpoint-firewall"));
+    for (const name of ["Microsoft Defender for Endpoint", "Accessibility", "Auto Onboarding", "Background Services",
+      "Full Disk Access", "Network Filter", "Notifications", "MDE Settings", "System Extensions"]) {
+      const policy = variants.find((item) => item.name.includes(name));
+      assert.ok(policy, name);
+      assert.equal(policy.group, "endpoint-defender", name);
+      assert.ok(!/surface reduction/i.test(policyLabel(policy, policy.group)));
+    }
+  }
+});
+
+test("Windows includes Defender AV update profiles, network protection, and device-risk policies", () => {
+  const windows = endpoints.policies.filter((policy) => policy.platform === "Windows");
+  for (const name of [/updates/i, /ring 1/i, /network protection/i, /Defender Compliance/i]) {
+    const selected = windows.filter((policy) => name.test(policy.name));
+    assert.ok(selected.length, String(name));
+    assert.ok(selected.every((policy) => !/Attack surface reduction/i.test(policyLabel(policy, policy.group))));
+  }
+});
+
+test("CA and OS categories partition results without mixing sign-in and endpoint policies", () => {
+  for (const attack of scenarios) {
+    const categories = categorizePolicies(policies, attack);
+    const actual = categories.flatMap((category) => category.groups.flatMap((group) => group.policies.flat()));
+    assert.deepEqual(actual.map((policy) => policy.key).sort(),
+      scenarioPolicies(policies, attack).map((policy) => policy.key).sort());
+    for (const category of categories) {
+      assert.ok(category.groups.every((group) => group.policies.length));
+      assert.ok(category.groups.flatMap((group) => group.policies.flat())
+        .every((policy) => (policy.platform ?? "ca") === category.id));
+    }
+  }
+  assert.deepEqual(categorizePolicies(policies, scenario("aitm")).map((item) => item.title), ["Conditional Access (CA)"]);
+  assert.deepEqual(categorizePolicies(policies, scenario("token-theft")).map((item) => item.id), ["ca", "Windows"]);
+  assert.deepEqual(categorizePolicies(policies, scenario("ransomware")).map((item) => item.id),
+    ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"]);
+});
+
+test("custom and mobile profiles retain evidence identifiers without copying payloads or secrets", () => {
+  const payload = Buffer.from("<plist><string>com.microsoft.wdav.atp</string><string>secret-org-value</string></plist>").toString("base64");
+  assert.deepEqual(endpointEvidence({ payload }), ["com.microsoft.wdav.atp"]);
+  assert.deepEqual(endpointEvidence({ settings: [{ appConfigKey: "DefenderNetworkProtectionEnable", appConfigKeyValue: "true" }] }),
+    ["DefenderNetworkProtectionEnable"]);
+  assert.deepEqual(endpointEvidence({ defenderNetworkProtectionType: "enable" }), ["defenderNetworkProtectionType"]);
+  assert.deepEqual(endpointEvidence({ advancedThreatProtectionRequiredSecurityLevel: "low" }), ["advancedThreatProtectionRequiredSecurityLevel"]);
+  assert.deepEqual(endpointEvidence({ advancedThreatProtectionRequiredSecurityLevel: "notSet" }), []);
+  assert.ok(endpoints.policies.every((policy) => !("payload" in policy) && !("payloadJson" in policy)));
+});
+
+test("imports exclude offboarding and select AV updates and supported custom profiles", () => {
+  for (const platform of ["Windows", "macOS", "Android", "iOS / iPadOS"]) {
+    assert.equal(includeEndpoint("DeviceConfiguration/MDE Offboarding.json", platform), false);
+  }
+  assert.equal(includeEndpoint("Windows/BP/SettingsCatalog/Antivirus updates ring 1.json", "Windows"), true);
+  assert.equal(includeEndpoint("Windows/BP/DeviceConfiguration/Turn network protection ON.json", "Windows"), true);
+  assert.equal(includeEndpoint("ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/Applications/Defender.json", "macOS"), true);
+  assert.equal(includeEndpoint("ALSO_MACOS_BP/SettingsCatalog/FileVault.json", "macOS"), false);
 });
 
 test("ClickFix includes Windows privilege, AV, firewall, Defender, and Edge templates", () => {

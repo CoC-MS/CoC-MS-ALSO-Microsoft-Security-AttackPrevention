@@ -1,6 +1,6 @@
 import inventory from "./data/policies.js";
 import endpoints from "./data/endpoint-policies.js";
-import { scenarios, techniques, techniqueUrl, groupPolicies, policyLabel } from "./mappings.mjs";
+import { scenarios, techniques, techniqueUrl, categorizePolicies, policyLabel } from "./mappings.mjs";
 
 const byId = (id) => document.getElementById(id);
 let selectedId = scenarios[0].id;
@@ -47,7 +47,7 @@ function policyRow(variants, group) {
   const row = element("div", "policy");
   row.dataset.policy = policy.code;
   const copy = element("div", "policy-copy");
-  copy.append(element("h4", "policy-title", policyLabel(policy, group)));
+  copy.append(element("h5", "policy-title", policyLabel(policy, group)));
   const meta = element("div", "policy-meta");
   if (policy.platform) {
     meta.append(element("span", "policy-code", policy.platform));
@@ -77,7 +77,8 @@ function policyRow(variants, group) {
 
 function renderScenario() {
   const scenario = scenarios.find((item) => item.id === selectedId);
-  const groups = groupPolicies([...inventory.policies, ...endpoints.policies], scenario);
+  const categories = categorizePolicies([...inventory.policies, ...endpoints.policies], scenario);
+  const groups = categories.flatMap((category) => category.groups);
   const count = new Set(groups.flatMap((group) => group.policies.map((variants) => variants[0].code))).size;
   byId("scenario-name").textContent = scenario.name;
   byId("scenario-summary").textContent = scenario.summary;
@@ -94,17 +95,23 @@ function renderScenario() {
 
   const container = byId("policy-groups");
   container.replaceChildren();
-  groups.forEach((group) => {
-    const section = element("section", "policy-group");
-    section.dataset.group = group.id;
-    const header = element("div", "group-header");
-    header.append(element("h3", "", group.title), element("span", "", `${group.policies.length} ${group.policies.length === 1 ? "policy" : "policies"}`));
-    section.append(header, element("p", "group-description", group.description));
-    const list = element("div", "policy-list");
-    list.append(...group.policies.map((variants) => policyRow(variants, group.id)));
-    if (!group.policies.length) list.append(element("p", "empty", "No matching source template is currently available."));
-    section.append(list);
-    container.append(section);
+  categories.forEach((category) => {
+    const categorySection = element("section", "policy-category");
+    categorySection.dataset.category = category.id;
+    categorySection.append(element("h3", "category-title", category.title),
+      element("p", "category-description", category.description));
+    category.groups.forEach((group) => {
+      const section = element("section", "policy-group");
+      section.dataset.group = group.id;
+      const header = element("div", "group-header");
+      header.append(element("h4", "", group.title), element("span", "", `${group.policies.length} ${group.policies.length === 1 ? "policy" : "policies"}`));
+      section.append(header, element("p", "group-description", group.description));
+      const list = element("div", "policy-list");
+      list.append(...group.policies.map((variants) => policyRow(variants, group.id)));
+      section.append(list);
+      categorySection.append(section);
+    });
+    container.append(categorySection);
   });
   byId("results-status").textContent = `${scenario.name}: ${count} policies.`;
 }

@@ -2,7 +2,7 @@
 // Original names, control identifiers, and descriptions from ALSO public endpoint repositories.
 // Source licenses are retained in endpoint-licenses/. Source JSON is linked at pinned revisions.
 export default {
-  "fetchedAt": "2026-10-23T10:27:13.201Z",
+  "fetchedAt": "2026-10-23T10:43:41.333Z",
   "sources": [
     {
       "repository": "CoC-MS/ALSO-Microsoft-Security-Windows",
@@ -18,9 +18,252 @@ export default {
       "repository": "CoC-MS/ALSO-Microsoft-Security-Linux",
       "revision": "8b943415d41873b1ad81ccaf8daf45ed113b44e1",
       "platform": "Linux"
+    },
+    {
+      "repository": "CoC-MS/ALSO-Microsoft-Security-MacOS",
+      "revision": "70c592bf996e0d131744f671d0f09b5b1f67b336",
+      "platform": "macOS"
+    },
+    {
+      "repository": "CoC-MS/ALSO-Microsoft-Security-Android",
+      "revision": "103d00555d1ab56d0a4f3076837e4ca5553a79c9",
+      "platform": "Android"
+    },
+    {
+      "repository": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS",
+      "revision": "9b78d52c1573481d1fffa6dddfe3905885427117",
+      "platform": "iOS / iPadOS"
     }
   ],
   "policies": [
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/BP/DeviceConfiguration/BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D.json",
+      "code": "Android-174f99d36b21",
+      "name": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "platform": "Android",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "vpnAlwaysOnPackageIdentifier:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/BP/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%20%E2%80%93%20Android%20(BYOD)%20%E2%80%93%20Auto%20Enrollment%20to%20MDE%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/E5/DeviceConfiguration/BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D.json",
+      "code": "Android-174f99d36b21",
+      "name": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "platform": "Android",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "vpnAlwaysOnPackageIdentifier:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/E5/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%20%E2%80%93%20Android%20(BYOD)%20%E2%80%93%20Auto%20Enrollment%20to%20MDE%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/Full/AppConfigurationManagedDevice/[Android - BYOD] Microsoft Defender policy.json",
+      "code": "Android-43adee2419e3",
+      "name": "[Android - BYOD] Microsoft Defender policy",
+      "platform": "Android",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "",
+      "settingCount": 2,
+      "definitionIds": [
+        "packageId:app:com.microsoft.scmx",
+        "com.microsoft.scmx.managedConfiguration"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/Full/AppConfigurationManagedDevice/%5BAndroid%20-%20BYOD%5D%20Microsoft%20Defender%20policy.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/Full/Applications/Microsoft Defender Antivirus.json",
+      "code": "Android-acfe1ad2438f",
+      "name": "Microsoft Defender: Antivirus",
+      "platform": "Android",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Microsoft Defender is an online security app for your digital life1 and work2.",
+      "settingCount": 1,
+      "definitionIds": [
+        "packageId:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/Full/Applications/Microsoft%20Defender%20Antivirus.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/Full/CompliancePolicies/ALSO - Compliance - Android - BYOD - MDE risk level under Medium.json",
+      "code": "Android-6bae9f507a17",
+      "name": "ALSO - Compliance - Android - BYOD - MDE risk level under Medium",
+      "platform": "Android",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "",
+      "settingCount": 1,
+      "definitionIds": [
+        "advancedThreatProtectionRequiredSecurityLevel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/Full/CompliancePolicies/ALSO%20-%20Compliance%20-%20Android%20-%20BYOD%20-%20MDE%20risk%20level%20under%20Medium.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/Full/CompliancePolicies/ALSO - Compliance - Android Enterprise - Microsoft Defender for Endpoint Compliance.json",
+      "code": "Android-0f3c31e7b79a",
+      "name": "ALSO - Compliance - Android Enterprise - Microsoft Defender for Endpoint Compliance",
+      "platform": "Android",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Android Enterprise - Microsoft Defender for endpoint Compliance\nLow Risk score\n",
+      "settingCount": 1,
+      "definitionIds": [
+        "advancedThreatProtectionRequiredSecurityLevel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/Full/CompliancePolicies/ALSO%20-%20Compliance%20-%20Android%20Enterprise%20-%20Microsoft%20Defender%20for%20Endpoint%20Compliance.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Android/Android/Full/DeviceConfiguration/BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D.json",
+      "code": "Android-174f99d36b21",
+      "name": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "platform": "Android",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v1.0 – Android (BYOD) – Auto Enrollment to MDE - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "vpnAlwaysOnPackageIdentifier:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Android/blob/103d00555d1ab56d0a4f3076837e4ca5553a79c9/Android/Full/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%20%E2%80%93%20Android%20(BYOD)%20%E2%80%93%20Auto%20Enrollment%20to%20MDE%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_BP/ALSO_IOS_COMPLIANCE_POLICIES/CompliancePolicies/ALSO - Compliance - iOSiPadOS - Corp - MDE- Risk score requirements - D.json",
+      "code": "iOS / iPadOS-db34e85c2952",
+      "name": "ALSO - Compliance - iOS/iPadOS - Corp - MDE- Risk score requirements - D",
+      "platform": "iOS / iPadOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "",
+      "settingCount": 1,
+      "definitionIds": [
+        "advancedThreatProtectionRequiredSecurityLevel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_BP/ALSO_IOS_COMPLIANCE_POLICIES/CompliancePolicies/ALSO%20-%20Compliance%20-%20iOSiPadOS%20-%20Corp%20-%20MDE-%20Risk%20score%20requirements%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/AppConfigurationManagedDevice/ALSO- MI- BP- Basic - App Configuration- [iOSiPadOS - Corp] - Defender Configuration - D.json",
+      "code": "iOS / iPadOS-771b7ca9d2c9",
+      "name": "ALSO- MI- BP- Basic - App Configuration- [iOS/iPadOS - Corp] - Defender Configuration - D",
+      "platform": "iOS / iPadOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Turns Real Time and Network Protection ON. ",
+      "settingCount": 2,
+      "definitionIds": [
+        "WebProtection",
+        "DefenderNetworkProtectionEnable"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/AppConfigurationManagedDevice/ALSO-%20MI-%20BP-%20Basic%20-%20App%20Configuration-%20%5BiOSiPadOS%20-%20Corp%5D%20-%20Defender%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/Applications/Microsoft Defender Security.json",
+      "code": "iOS / iPadOS-cd6801dbff5e",
+      "name": "Microsoft Defender: Security",
+      "platform": "iOS / iPadOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Microsoft Defender is an online security app for your personal life[1]and work [2].\nUse Microsoft Defender for individuals[1] at home and on the go to stay safer online. Defender is an easy-to-use app that helps keep you and your family one step ahead of threats. Microsoft Defender for individuals is available exclusively with a Microsoft 365 Personal or Family subscription.\n\nAll-in-one security app\nProtect your personal identity, and devices against malicious threats with antivirus scanning[3], threat monitoring[4], multidevice alerts, and expert guidance.\n\nManage your security in one place\n▪ Check the security status of your family’s devices and identity[5].\n▪ Get threat alerts, notifications, and recommended steps across your devices.\n▪ Receive security tips and take recommended actions to improve your online security.\n\nSafeguard your family’s personal information\n▪ Threats to your identity and personal identifying information[4] are continuously scanned on the dark web.\n▪ Get credit monitoring with timely alerts and monthly credit reports.[6]\n▪ Call an identity theft restoration expert anytime day or night if you need help.\n▪ Get identity insurance coverage, up to USD1 million, to help cover legal and expert fees associated with restoration. Insurance coverage includes up to USD100,000 to recover lost funds.[7]\n\nTrusted device and data protection\n▪ Anti-phishing protection for your and your family’s devices against new and existing threats [3].\n▪ Continuously scans for harmful links before you click on them to help protect you from malicious threats.\n \nMicrosoft Defender for Endpoint\nMicrosoft Defender for Endpoint[2] is an industry-leading, cloud-powered endpoint security solution that helps to secure against ransomware, file-less malware, and other sophisticated attacks across platforms.\n1. Microsoft 365 Family or Personal subscription required. Sign in with your Microsoft account. App is currently not available in certain Microsoft 365 Personal or Family regions.\n2. If you are a member of a business or organization, login with your work or school email. Your school or business is required to have a valid license or subscription.\n3. Does not replace existing malware protection on iOS and Windows devices.\n4. Feature is available in the United States and US territories.\n5. A one-time parent or legal guardian verification is required to receive dark web threat alert details for children. If the organizer’s family member is under 13, consent is not required to create and/or monitor a child’s identity. Consent is required to create and/or monitor identity of family members over 13 years of age.\n6. Feature available in the United States and US territories. Credit score is a single bureau VantageScore 3.0 provided by Experian®. The monthly credit report is provided by Experian® using single bureau data. For users under the age of 18 or those without a credit history, credit score not included. Family organizers will not have the ability to onboard, view, and receive alerts related to family member credit monitoring. Your device's primary display language must be set to English.\n7. The identity theft insurance is underwritten and administered by American Bankers Insurance Company of Florida, an Assurant company. Please refer to the actual policies for terms, conditions, and exclusions of coverage. Coverage may not be available in all jurisdictions. Review the Summary of Benefits: https://learn.microsoft.com/en-us/legal/microsoft-365/summary-of-benefits-for-itm.",
+      "settingCount": 1,
+      "definitionIds": [
+        "bundleId:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/Applications/Microsoft%20Defender%20Security.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO- MI- BP- Basic - DeviceConfig- VPN- [iOSiPadOS -Corp]- Auto Enrollment to MDE - D.json",
+      "code": "iOS / iPadOS-02733f7de457",
+      "name": "ALSO- MI- BP- Basic - DeviceConfig- VPN- [iOS/iPadOS -Corp]- Auto Enrollment to MDE - D",
+      "platform": "iOS / iPadOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Auto enrolls mobile device to MDB and MDE. ",
+      "settingCount": 1,
+      "definitionIds": [
+        "identifier:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_BP/ALSO_IOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO-%20MI-%20BP-%20Basic%20-%20DeviceConfig-%20VPN-%20%5BiOSiPadOS%20-Corp%5D-%20Auto%20Enrollment%20to%20MDE%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_E5/ALSO_IOS_COMPLIANCE_POLICIES/CompliancePolicies/ALSO - Compliance - iOSiPadOS - Corp - MDE- Risk score requirements - D.json",
+      "code": "iOS / iPadOS-db34e85c2952",
+      "name": "ALSO - Compliance - iOS/iPadOS - Corp - MDE- Risk score requirements - D",
+      "platform": "iOS / iPadOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "",
+      "settingCount": 1,
+      "definitionIds": [
+        "advancedThreatProtectionRequiredSecurityLevel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_E5/ALSO_IOS_COMPLIANCE_POLICIES/CompliancePolicies/ALSO%20-%20Compliance%20-%20iOSiPadOS%20-%20Corp%20-%20MDE-%20Risk%20score%20requirements%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/AppConfigurationManagedDevice/ALSO- MI- BP- Basic - App Configuration- [iOSiPadOS - Corp] - Defender Configuration - D.json",
+      "code": "iOS / iPadOS-771b7ca9d2c9",
+      "name": "ALSO- MI- BP- Basic - App Configuration- [iOS/iPadOS - Corp] - Defender Configuration - D",
+      "platform": "iOS / iPadOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Turns Real Time and Network Protection ON. ",
+      "settingCount": 2,
+      "definitionIds": [
+        "WebProtection",
+        "DefenderNetworkProtectionEnable"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/AppConfigurationManagedDevice/ALSO-%20MI-%20BP-%20Basic%20-%20App%20Configuration-%20%5BiOSiPadOS%20-%20Corp%5D%20-%20Defender%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/Applications/Microsoft Defender Security.json",
+      "code": "iOS / iPadOS-cd6801dbff5e",
+      "name": "Microsoft Defender: Security",
+      "platform": "iOS / iPadOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Microsoft Defender is an online security app for your personal life[1]and work [2].\nUse Microsoft Defender for individuals[1] at home and on the go to stay safer online. Defender is an easy-to-use app that helps keep you and your family one step ahead of threats. Microsoft Defender for individuals is available exclusively with a Microsoft 365 Personal or Family subscription.\n\nAll-in-one security app\nProtect your personal identity, and devices against malicious threats with antivirus scanning[3], threat monitoring[4], multidevice alerts, and expert guidance.\n\nManage your security in one place\n▪ Check the security status of your family’s devices and identity[5].\n▪ Get threat alerts, notifications, and recommended steps across your devices.\n▪ Receive security tips and take recommended actions to improve your online security.\n\nSafeguard your family’s personal information\n▪ Threats to your identity and personal identifying information[4] are continuously scanned on the dark web.\n▪ Get credit monitoring with timely alerts and monthly credit reports.[6]\n▪ Call an identity theft restoration expert anytime day or night if you need help.\n▪ Get identity insurance coverage, up to USD1 million, to help cover legal and expert fees associated with restoration. Insurance coverage includes up to USD100,000 to recover lost funds.[7]\n\nTrusted device and data protection\n▪ Anti-phishing protection for your and your family’s devices against new and existing threats [3].\n▪ Continuously scans for harmful links before you click on them to help protect you from malicious threats.\n \nMicrosoft Defender for Endpoint\nMicrosoft Defender for Endpoint[2] is an industry-leading, cloud-powered endpoint security solution that helps to secure against ransomware, file-less malware, and other sophisticated attacks across platforms.\n1. Microsoft 365 Family or Personal subscription required. Sign in with your Microsoft account. App is currently not available in certain Microsoft 365 Personal or Family regions.\n2. If you are a member of a business or organization, login with your work or school email. Your school or business is required to have a valid license or subscription.\n3. Does not replace existing malware protection on iOS and Windows devices.\n4. Feature is available in the United States and US territories.\n5. A one-time parent or legal guardian verification is required to receive dark web threat alert details for children. If the organizer’s family member is under 13, consent is not required to create and/or monitor a child’s identity. Consent is required to create and/or monitor identity of family members over 13 years of age.\n6. Feature available in the United States and US territories. Credit score is a single bureau VantageScore 3.0 provided by Experian®. The monthly credit report is provided by Experian® using single bureau data. For users under the age of 18 or those without a credit history, credit score not included. Family organizers will not have the ability to onboard, view, and receive alerts related to family member credit monitoring. Your device's primary display language must be set to English.\n7. The identity theft insurance is underwritten and administered by American Bankers Insurance Company of Florida, an Assurant company. Please refer to the actual policies for terms, conditions, and exclusions of coverage. Coverage may not be available in all jurisdictions. Review the Summary of Benefits: https://learn.microsoft.com/en-us/legal/microsoft-365/summary-of-benefits-for-itm.",
+      "settingCount": 1,
+      "definitionIds": [
+        "bundleId:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/Applications/Microsoft%20Defender%20Security.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO- MI- BP- Basic - DeviceConfig- VPN- [iOSiPadOS -Corp]- Auto Enrollment to MDE - D.json",
+      "code": "iOS / iPadOS-02733f7de457",
+      "name": "ALSO- MI- BP- Basic - DeviceConfig- VPN- [iOS/iPadOS -Corp]- Auto Enrollment to MDE - D",
+      "platform": "iOS / iPadOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Auto enrolls mobile device to MDB and MDE. ",
+      "settingCount": 1,
+      "definitionIds": [
+        "identifier:com.microsoft.scmx"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS/blob/9b78d52c1573481d1fffa6dddfe3905885427117/ALSO_IOS_E5/ALSO_IOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO-%20MI-%20BP-%20Basic%20-%20DeviceConfig-%20VPN-%20%5BiOSiPadOS%20-Corp%5D-%20Auto%20Enrollment%20to%20MDE%20-%20D.json"
+    },
     {
       "key": "CoC-MS/ALSO-Microsoft-Security-Linux/ALSO_LINUX_SERVER/SettingsCatalog/ALSO – MI – MDBS – Basic – v1.0 - Linux Server - Defender Antivirus - AV Configuration - D.json",
       "code": "Linux-22b750c1e6a2",
@@ -44,6 +287,441 @@ export default {
         "linux_mdatp_managed_networkprotection_enforcementlevel"
       ],
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Linux/blob/8b943415d41873b1ad81ccaf8daf45ed113b44e1/ALSO_LINUX_SERVER/SettingsCatalog/ALSO%20%E2%80%93%20MI%20%E2%80%93%20MDBS%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%20-%20Linux%20Server%20-%20Defender%20Antivirus%20-%20AV%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_DEVICE_CONFIG_POLICIES/SettingsCatalog/ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D.json",
+      "code": "macOS-902718cf990e",
+      "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-firewall",
+      "auditOnly": false,
+      "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D",
+      "settingCount": 2,
+      "definitionIds": [
+        "com.apple.security.firewall_com.apple.security.firewall",
+        "com.apple.security.firewall_blockallincoming",
+        "com.apple.security.firewall_enablefirewall",
+        "com.apple.security.firewall_enablelogging",
+        "com.apple.security.firewall_enablestealthmode",
+        "com.apple.systempolicy.control_com.apple.systempolicy.control",
+        "com.apple.systempolicy.control_allowidentifieddevelopers",
+        "com.apple.systempolicy.control_enableassessment",
+        "com.apple.systempolicy.control_enablexprotectmalwareupload"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_DEVICE_CONFIG_POLICIES/SettingsCatalog/ALSO%20%E2%80%93%20MI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Firewall%20%20-%20Gatekeeper%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDCA_READY/SettingsCatalog/ ALSO – MI – BPE5 – Basic – v1.0– MacOS – Device Configuration - AV - Configuration - D.json",
+      "code": "macOS-4c2b097a9b1a",
+      "name": " ALSO – MI – BP/E5 – Basic – v1.0– MacOS – Device Configuration - AV - Configuration - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "This policy requires deployment of ALSO_MACOS_MDE_AUTO_ONBOARDING policies first. This policy are pre configured with required settings  to use Defender For Cloud Apps block/monitor functions. Things like Real Time Protection, Cloud Protection, Network Protection, Tamper and so on. \n",
+      "settingCount": 19,
+      "definitionIds": [
+        "com.apple.managedclient.preferences_disallowedthreatactions",
+        "com.apple.managedclient.preferences_enforcementlevel_antivirusengine",
+        "com.apple.managedclient.preferences_exclusionsmergepolicy",
+        "com.apple.managedclient.preferences_scanafterdefinitionupdate",
+        "com.apple.managedclient.preferences_scanarchives",
+        "com.apple.managedclient.preferences_threattypesettings",
+        "com.apple.managedclient.preferences_threattypesettings_item_value",
+        "com.apple.managedclient.preferences_threattypesettings_item_key",
+        "com.apple.managedclient.preferences_threattypesettingsmergepolicy",
+        "com.apple.managedclient.preferences_automaticdefinitionupdateenabled",
+        "com.apple.managedclient.preferences_cloudblocklevel",
+        "com.apple.managedclient.preferences_diagnosticlevel",
+        "com.apple.managedclient.preferences_automaticsamplesubmission",
+        "com.apple.managedclient.preferences_enabled",
+        "com.apple.managedclient.preferences_earlypreview",
+        "com.apple.managedclient.preferences_systemextensions",
+        "com.apple.managedclient.preferences_enforcementlevel",
+        "com.apple.managedclient.preferences_enforcementlevel_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_path_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_signingid_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_teamid_tamperprotection",
+        "com.apple.managedclient.preferences_consumerexperience",
+        "com.apple.managedclient.preferences_hidestatusmenuicon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDCA_READY/SettingsCatalog/%20ALSO%20%E2%80%93%20MI%20%E2%80%93%20BPE5%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20AV%20-%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/Applications/Microsoft Defender for Endpoint (macOS).json",
+      "code": "macOS-602a48a3a4cf",
+      "name": "Microsoft Defender for Endpoint (macOS)",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Microsoft Defender for Endpoint is a unified platform for preventative protection, post-breach detection, automated investigation, and response. Microsoft Defender for Endpoint protects endpoints from cyber threats; detects advanced attacks and data breaches, automates security incidents and improves security posture.",
+      "settingCount": 1,
+      "definitionIds": [
+        "macOSMicrosoftDefenderApp"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/Applications/Microsoft%20Defender%20for%20Endpoint%20(macOS).json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D.json",
+      "code": "macOS-391864f0a581",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D",
+      "settingCount": 2,
+      "definitionIds": [
+        "com.microsoft.wdav.tcc.accessibility",
+        "com.microsoft.dlp.daemon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Accessibility%20Settings%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D.json",
+      "code": "macOS-5c63c01e5607",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.microsoft.wdav.atp"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Auto%20Onboarding%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D.json",
+      "code": "macOS-c0df5f2c9dc2",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D",
+      "settingCount": 4,
+      "definitionIds": [
+        "com.microsoft.wdav.background",
+        "com.microsoft.fresno",
+        "com.microsoft.dlp",
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Background%20Services%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D.json",
+      "code": "macOS-25df43377274",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D",
+      "settingCount": 4,
+      "definitionIds": [
+        "com.microsoft.wdav.tcc.fulldiskaccess",
+        "com.microsoft.wdav",
+        "com.microsoft.wdav.epsext",
+        "com.microsoft.dlp.daemon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Full%20Disk%20Access-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D.json",
+      "code": "macOS-48ce69e7d676",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – HI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "com.microsoft.wdav.webcontentfilter",
+        "com.microsoft.wdav.netext",
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Network%20Filter%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D.json",
+      "code": "macOS-a23f7db954df",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "com.microsoft.wdav.notification",
+        "com.microsoft.autoupdate2",
+        "com.microsoft.wdav.tray"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Notifications%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D.json",
+      "code": "macOS-37f3582d2e24",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Settings%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/SettingsCatalog/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D.json",
+      "code": "macOS-d30fdfd30fc2",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D",
+      "platform": "macOS",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.apple.system-extension-policy_com.apple.system-extension-policy",
+        "com.apple.system-extension-policy_allowedsystemextensions",
+        "com.apple.system-extension-policy_allowedsystemextensions_generickey",
+        "com.apple.system-extension-policy_allowedsystemextensions_generickey_keytobereplaced"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_BP/ALSO_MACOS_MDE_AUTO_ONBOARDING/SettingsCatalog/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20System%20Extensions%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_DEVICE_CONFIG_POLICIES/SettingsCatalog/ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D.json",
+      "code": "macOS-902718cf990e",
+      "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-firewall",
+      "auditOnly": false,
+      "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Firewall  - Gatekeeper  - D",
+      "settingCount": 2,
+      "definitionIds": [
+        "com.apple.security.firewall_com.apple.security.firewall",
+        "com.apple.security.firewall_blockallincoming",
+        "com.apple.security.firewall_enablefirewall",
+        "com.apple.security.firewall_enablelogging",
+        "com.apple.security.firewall_enablestealthmode",
+        "com.apple.systempolicy.control_com.apple.systempolicy.control",
+        "com.apple.systempolicy.control_allowidentifieddevelopers",
+        "com.apple.systempolicy.control_enableassessment",
+        "com.apple.systempolicy.control_enablexprotectmalwareupload"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_DEVICE_CONFIG_POLICIES/SettingsCatalog/ALSO%20%E2%80%93%20MI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Firewall%20%20-%20Gatekeeper%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDCA_READY/SettingsCatalog/ ALSO – MI – BPE5 – Basic – v1.0– MacOS – Device Configuration - AV - Configuration - D.json",
+      "code": "macOS-4c2b097a9b1a",
+      "name": " ALSO – MI – BP/E5 – Basic – v1.0– MacOS – Device Configuration - AV - Configuration - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "This policy requires deployment of ALSO_MACOS_MDE_AUTO_ONBOARDING policies first. This policy are pre configured with required settings  to use Defender For Cloud Apps block/monitor functions. Things like Real Time Protection, Cloud Protection, Network Protection, Tamper and so on. \n",
+      "settingCount": 19,
+      "definitionIds": [
+        "com.apple.managedclient.preferences_disallowedthreatactions",
+        "com.apple.managedclient.preferences_enforcementlevel_antivirusengine",
+        "com.apple.managedclient.preferences_exclusionsmergepolicy",
+        "com.apple.managedclient.preferences_scanafterdefinitionupdate",
+        "com.apple.managedclient.preferences_scanarchives",
+        "com.apple.managedclient.preferences_threattypesettings",
+        "com.apple.managedclient.preferences_threattypesettings_item_value",
+        "com.apple.managedclient.preferences_threattypesettings_item_key",
+        "com.apple.managedclient.preferences_threattypesettingsmergepolicy",
+        "com.apple.managedclient.preferences_automaticdefinitionupdateenabled",
+        "com.apple.managedclient.preferences_cloudblocklevel",
+        "com.apple.managedclient.preferences_diagnosticlevel",
+        "com.apple.managedclient.preferences_automaticsamplesubmission",
+        "com.apple.managedclient.preferences_enabled",
+        "com.apple.managedclient.preferences_earlypreview",
+        "com.apple.managedclient.preferences_systemextensions",
+        "com.apple.managedclient.preferences_enforcementlevel",
+        "com.apple.managedclient.preferences_enforcementlevel_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_path_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_signingid_tamperprotection",
+        "com.apple.managedclient.preferences_exclusions_item_teamid_tamperprotection",
+        "com.apple.managedclient.preferences_consumerexperience",
+        "com.apple.managedclient.preferences_hidestatusmenuicon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDCA_READY/SettingsCatalog/%20ALSO%20%E2%80%93%20MI%20%E2%80%93%20BPE5%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20AV%20-%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/Applications/Microsoft Defender for Endpoint (macOS).json",
+      "code": "macOS-602a48a3a4cf",
+      "name": "Microsoft Defender for Endpoint (macOS)",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "Microsoft Defender for Endpoint is a unified platform for preventative protection, post-breach detection, automated investigation, and response. Microsoft Defender for Endpoint protects endpoints from cyber threats; detects advanced attacks and data breaches, automates security incidents and improves security posture.",
+      "settingCount": 1,
+      "definitionIds": [
+        "macOSMicrosoftDefenderApp"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/Applications/Microsoft%20Defender%20for%20Endpoint%20(macOS).json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D.json",
+      "code": "macOS-391864f0a581",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Accessibility Settings - D",
+      "settingCount": 2,
+      "definitionIds": [
+        "com.microsoft.wdav.tcc.accessibility",
+        "com.microsoft.dlp.daemon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Accessibility%20Settings%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D.json",
+      "code": "macOS-5c63c01e5607",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Auto Onboarding  - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.microsoft.wdav.atp"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Auto%20Onboarding%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D.json",
+      "code": "macOS-c0df5f2c9dc2",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Background Services  - D",
+      "settingCount": 4,
+      "definitionIds": [
+        "com.microsoft.wdav.background",
+        "com.microsoft.fresno",
+        "com.microsoft.dlp",
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Background%20Services%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D.json",
+      "code": "macOS-25df43377274",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Full Disk Access- D",
+      "settingCount": 4,
+      "definitionIds": [
+        "com.microsoft.wdav.tcc.fulldiskaccess",
+        "com.microsoft.wdav",
+        "com.microsoft.wdav.epsext",
+        "com.microsoft.dlp.daemon"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Full%20Disk%20Access-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D.json",
+      "code": "macOS-48ce69e7d676",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – HI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Network Filter - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "com.microsoft.wdav.webcontentfilter",
+        "com.microsoft.wdav.netext",
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Network%20Filter%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D.json",
+      "code": "macOS-a23f7db954df",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Notifications  - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "com.microsoft.wdav.notification",
+        "com.microsoft.autoupdate2",
+        "com.microsoft.wdav.tray"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Notifications%20%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D.json",
+      "code": "macOS-37f3582d2e24",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE Settings - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.microsoft.wdav"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/DeviceConfiguration/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20Settings%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-MacOS/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/SettingsCatalog/ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D.json",
+      "code": "macOS-d30fdfd30fc2",
+      "name": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D",
+      "platform": "macOS",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO – LI – BP – Basic – v1.0– MacOS – Device Configuration - MDE System Extensions - D",
+      "settingCount": 1,
+      "definitionIds": [
+        "com.apple.system-extension-policy_com.apple.system-extension-policy",
+        "com.apple.system-extension-policy_allowedsystemextensions",
+        "com.apple.system-extension-policy_allowedsystemextensions_generickey",
+        "com.apple.system-extension-policy_allowedsystemextensions_generickey_keytobereplaced"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS/blob/70c592bf996e0d131744f671d0f09b5b1f67b336/ALSO_MACOS_E5/ALSO_MACOS_MDE_AUTO_ONBOARDING/SettingsCatalog/ALSO%20%E2%80%93%20LI%20%E2%80%93%20BP%20%E2%80%93%20Basic%20%E2%80%93%20v1.0%E2%80%93%20MacOS%20%E2%80%93%20Device%20Configuration%20-%20MDE%20System%20Extensions%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/DeviceConfiguration/BP – ALSO – LI – Basic – NEW - Turn network protection ON.json",
+      "code": "Windows-56aba815b167",
+      "name": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "platform": "Windows",
+      "package": "BP",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "settingCount": 1,
+      "definitionIds": [
+        "defenderNetworkProtectionType"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20NEW%20-%20Turn%20network%20protection%20ON.json"
     },
     {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/SettingsCatalog/ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D.json",
@@ -377,6 +1055,57 @@ export default {
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.1-%20Windows%20-%20Windows%20Firewall%20%20-%20Firewall%20Configuration%20-%20D.json"
     },
     {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D.json",
+      "code": "Windows-d7c1ad22f24c",
+      "name": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "platform": "Windows",
+      "package": "BP",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20-%20Windows%20-%20Defender%20Antivirus%20Updates%20%20-%20Ring%201%20-%20Pilot%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT.json",
+      "code": "Windows-aa053f844caa",
+      "name": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "platform": "Windows",
+      "package": "BP",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20%E2%80%93%20Windows%20%E2%80%93%20Defender%20Antivirus%20Updates%20-%20Ring%202%20-%20UAT.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/SettingsCatalog/BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D.json",
+      "code": "Windows-748a73f782cc",
+      "name": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "platform": "Windows",
+      "package": "BP",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4-%20Windows%20-%20Defender%20Antivirus%20Updates%20-%20%20Ring%203%20-%20Production%20-%20D.json"
+    },
+    {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/BP/SettingsCatalog/BP – ALSO – MI – Adv – v3.6 - Windows - Defender Antivirus   -  Additional Configuration - D.json",
       "code": "Windows-ef071307ae27",
       "name": "BP – ALSO – MI – Adv – v3.6 - Windows - Defender Antivirus   -  Additional Configuration - D",
@@ -578,6 +1307,21 @@ export default {
         "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename"
       ],
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/BP/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20MI%20%E2%80%93%20Basic%20%E2%80%93%20v3.6%20%E2%80%93%20Windows%2011%2024H2%20%E2%80%93%20Windows%20LAPS%20-%20LAPS%20Configuration%20(24H2%2B)%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/DeviceConfiguration/BP – ALSO – LI – Basic – NEW - Turn network protection ON.json",
+      "code": "Windows-56aba815b167",
+      "name": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "platform": "Windows",
+      "package": "E5",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "settingCount": 1,
+      "definitionIds": [
+        "defenderNetworkProtectionType"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20NEW%20-%20Turn%20network%20protection%20ON.json"
     },
     {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/SettingsCatalog/ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D.json",
@@ -911,6 +1655,57 @@ export default {
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.1-%20Windows%20-%20Windows%20Firewall%20%20-%20Firewall%20Configuration%20-%20D.json"
     },
     {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D.json",
+      "code": "Windows-d7c1ad22f24c",
+      "name": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "platform": "Windows",
+      "package": "E5",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20-%20Windows%20-%20Defender%20Antivirus%20Updates%20%20-%20Ring%201%20-%20Pilot%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT.json",
+      "code": "Windows-aa053f844caa",
+      "name": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "platform": "Windows",
+      "package": "E5",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20%E2%80%93%20Windows%20%E2%80%93%20Defender%20Antivirus%20Updates%20-%20Ring%202%20-%20UAT.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/SettingsCatalog/BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D.json",
+      "code": "Windows-748a73f782cc",
+      "name": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "platform": "Windows",
+      "package": "E5",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4-%20Windows%20-%20Defender%20Antivirus%20Updates%20-%20%20Ring%203%20-%20Production%20-%20D.json"
+    },
+    {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/E5/SettingsCatalog/BP – ALSO – MI – Adv – v3.6 - Windows - Defender Antivirus   -  Additional Configuration - D.json",
       "code": "Windows-ef071307ae27",
       "name": "BP – ALSO – MI – Adv – v3.6 - Windows - Defender Antivirus   -  Additional Configuration - D",
@@ -1112,6 +1907,51 @@ export default {
         "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename"
       ],
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/E5/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20MI%20%E2%80%93%20Basic%20%E2%80%93%20v3.6%20%E2%80%93%20Windows%2011%2024H2%20%E2%80%93%20Windows%20LAPS%20-%20LAPS%20Configuration%20(24H2%2B)%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/CompliancePolicies/ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U.json",
+      "code": "Windows-7422a279ca96",
+      "name": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
+      "settingCount": 1,
+      "definitionIds": [
+        "defenderEnabled"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/CompliancePolicies/ALSO%20-%20Compliance%20-%20Windows%20-%20Defender%20for%20Endpoint%20-%20v3.1%20-%20U.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/CompliancePolicies/ALSO - Compliance - Windows - Device Risk Score Defender Compliance.json",
+      "code": "Windows-aa8879734a30",
+      "name": "ALSO - Compliance - Windows - Device Risk Score Defender Compliance",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "ALSO - Compliance - Windows -",
+      "settingCount": 1,
+      "definitionIds": [
+        "deviceThreatProtectionRequiredSecurityLevel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/CompliancePolicies/ALSO%20-%20Compliance%20-%20Windows%20-%20Device%20Risk%20Score%20Defender%20Compliance.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/DeviceConfiguration/BP – ALSO – LI – Basic – NEW - Turn network protection ON.json",
+      "code": "Windows-56aba815b167",
+      "name": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-defender",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – NEW - Turn network protection ON",
+      "settingCount": 1,
+      "definitionIds": [
+        "defenderNetworkProtectionType"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/DeviceConfiguration/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20NEW%20-%20Turn%20network%20protection%20ON.json"
     },
     {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/SettingsCatalog/ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D.json",
@@ -1443,6 +2283,57 @@ export default {
         "vendor_msft_firewall_mdmstore_publicprofile_allowlocalipsecpolicymerge"
       ],
       "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.1-%20Windows%20-%20Windows%20Firewall%20%20-%20Firewall%20Configuration%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D.json",
+      "code": "Windows-d7c1ad22f24c",
+      "name": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20-%20Windows%20-%20Defender%20Antivirus%20Updates%20%20-%20Ring%201%20-%20Pilot%20-%20D.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/SettingsCatalog/BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT.json",
+      "code": "Windows-aa053f844caa",
+      "name": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4 – Windows – Defender Antivirus Updates - Ring 2 - UAT",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4%20%E2%80%93%20Windows%20%E2%80%93%20Defender%20Antivirus%20Updates%20-%20Ring%202%20-%20UAT.json"
+    },
+    {
+      "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/SettingsCatalog/BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D.json",
+      "code": "Windows-748a73f782cc",
+      "name": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "platform": "Windows",
+      "package": "Full",
+      "group": "endpoint-av",
+      "auditOnly": false,
+      "description": "BP – ALSO – LI – Basic – v3.4- Windows - Defender Antivirus Updates -  Ring 3 - Production - D",
+      "settingCount": 3,
+      "definitionIds": [
+        "device_vendor_msft_defender_configuration_engineupdateschannel",
+        "device_vendor_msft_defender_configuration_platformupdateschannel",
+        "device_vendor_msft_defender_configuration_securityintelligenceupdateschannel"
+      ],
+      "url": "https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/7fc459b8cfe08c1784885f140de255ca49f817aa/Windows/Full/SettingsCatalog/BP%20%E2%80%93%20ALSO%20%E2%80%93%20LI%20%E2%80%93%20Basic%20%E2%80%93%20v3.4-%20Windows%20-%20Defender%20Antivirus%20Updates%20-%20%20Ring%203%20-%20Production%20-%20D.json"
     },
     {
       "key": "CoC-MS/ALSO-Microsoft-Security-Windows/Windows/Full/SettingsCatalog/BP – ALSO – MI – Adv – v3.6 - Windows - Defender Antivirus   -  Additional Configuration - D.json",

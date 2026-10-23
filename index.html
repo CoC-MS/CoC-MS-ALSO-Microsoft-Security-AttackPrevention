@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Map existing ALSO Security identity, Windows, Windows Server, and Linux templates to common attack scenarios. Select an attack and find the relevant policies.">
+  <meta name="description" content="Map existing ALSO Security Conditional Access and cross-platform endpoint templates to common attack scenarios. Select an attack and find the relevant policies by operating system.">
   <title>MITRE ATT&amp;CK to ALSO Microsoft Security Policy Template Mapper</title>
   <link rel="icon" href="assets/also-logo.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
@@ -24,7 +24,7 @@
   <main id="main">
     <section class="hero">
       <h1>MITRE ATT&amp;CK to ALSO Microsoft<br> Security Policy Template Mapper</h1>
-      <p class="lead">Map ALSO Security template policies to well-known attack scenarios.<br class="desktop-break"> Identity, Windows, Windows Server, and Linux policies in one place.</p>
+      <p class="lead">Map ALSO Security template policies to well-known attack scenarios.<br class="desktop-break"> Conditional Access (CA) controls sign-ins. Operating-system policies protect devices.</p>
     </section>
 
     <div id="load-error" class="error" role="alert" hidden>The mapper could not load. Reload this page or check that all site files are served over HTTP.</div>
@@ -47,6 +47,10 @@
         <div id="policy-groups" class="policy-groups"></div>
       </article>
     </section>
+    <aside class="scope-note" aria-label="Policy deployment guidance">
+      <strong>A starting point, not a complete security solution.</strong>
+      <p>These recommended templates are a good starting point. Protection depends on enabling and enforcing them across all intended users, resources, and devices, not just a small pilot group. A limited assignment only protects that group. Test and roll out in stages, then expand to the full appropriate scope. Keep admin-only policies targeted to admins, review exclusions and emergency-access accounts, and check licensing, prerequisites, and policy conflicts.</p>
+    </aside>
     <p class="sr-only" id="results-status" role="status"></p>
 
     <footer>
