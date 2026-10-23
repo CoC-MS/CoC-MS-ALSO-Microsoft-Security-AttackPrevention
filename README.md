@@ -5,3 +5,5 @@ Map **existing ALSO Security Conditional Access templates** to well-known attack
 **Live site:** [ALSO MITRE ATT&CK to CA Policy Mapper](https://coc-ms.github.io/CoC-MS-ALSO-Microsoft-Security-AttackPrevention/)
 
 The policy inventory comes from [CoC-MS/ALSO-Microsoft-Security-Conditional-Access](https://github.com/CoC-MS/ALSO-Microsoft-Security-Conditional-Access), including Business Premium, E5, and E7 source packages. Each policy links to its original JSON at a pinned commit.
+
+GitHub Pages publishes `npm run build` output from `_site`, using content-hashed scripts and styles to prevent mixed-version browser caches. Node.js 24 is required; no dependency installation is needed.
