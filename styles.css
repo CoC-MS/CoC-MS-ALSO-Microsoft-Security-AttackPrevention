@@ -23,11 +23,8 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid
 .brand-logo { width: 112px; height: auto; display: block; flex: 0 0 auto; }
 .brand-divider { width: 1px; height: 24px; margin: 0 12px; background: var(--line); flex: 0 0 auto; }
 .brand-copy { font-size: 14px; font-weight: 650; line-height: 1.5; }
-.repo-link { font-size: 12px; color: var(--muted); text-decoration: none; white-space: nowrap; margin-left: auto; }
-.repo-link:hover { color: var(--blue); text-decoration: underline; }
 main { max-width: 1220px; margin: auto; padding: 32px 30px 20px; }
 .hero { padding: 7px 0 25px; }
-.eyebrow { font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: .12em; color: var(--blue); margin: 0 0 10px; }
 h1 { font-size: clamp(26px, 3.6vw, 38px); font-weight: 750; line-height: 1.15; letter-spacing: -.035em; margin: 0 0 13px; }
 h1 br { display: none; }
 .lead { font-size: 14px; color: var(--muted); line-height: 1.7; margin: 0; }
@@ -87,7 +84,6 @@ footer a { color: #687991; }
   .brand-logo { width: 72px; }
   .brand-divider { margin: 0 9px; }
   .brand-copy { font-size: 11px; }
-  .repo-link { display: none; }
   h1 { font-size: 29px; }
   h1 br { display: block; }
   .lead { font-size: 13px; }
