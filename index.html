@@ -3,286 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101b2d">
-  <meta name="description" content="Explore how Conditional Access policy patterns can help reduce exposure to common attack techniques.">
-  <title>ALSO Security | Policy Navigator</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #17263d;
-      --muted: #66758a;
-      --line: #dce3eb;
-      --panel: #fff;
-      --canvas: #f4f7fa;
-      --navy: #101b2d;
-      --blue: #2864dc;
-      --blue-light: #edf3ff;
-      --teal: #138a82;
-      --amber: #aa6b0a;
-      --red: #b34c4c;
-      --shadow: 0 12px 32px rgb(19 36 58 / 7%);
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--canvas); color: var(--ink); }
-    button, input { font: inherit; }
-    button { color: inherit; }
-    a { color: inherit; }
-    .topbar {
-      align-items: center; background: var(--navy); color: #f8fbff; display: flex;
-      gap: 32px; height: 72px; justify-content: space-between; padding: 0 max(28px, calc((100vw - 1280px) / 2));
-    }
-    .brand { align-items: center; display: flex; gap: 12px; min-width: 250px; }
-    .brand-mark {
-      align-items: center; background: #d9eeeb; border-radius: 12px; color: #116f69;
-      display: flex; height: 38px; justify-content: center; width: 38px;
-    }
-    .brand-mark svg { height: 23px; width: 23px; }
-    .brand-name { font-size: 14px; font-weight: 750; letter-spacing: .08em; }
-    .brand-sub { color: #aebbd0; font-size: 11px; margin-top: 3px; }
-    .topnav { display: flex; gap: 28px; }
-    .topnav a { color: #c6d0df; font-size: 13px; text-decoration: none; }
-    .topnav a:hover, .topnav a:focus-visible { color: white; }
-    .top-status { align-items: center; color: #c6d0df; display: flex; font-size: 12px; gap: 9px; white-space: nowrap; }
-    .status-dot { background: #57c5a8; border-radius: 50%; height: 8px; width: 8px; }
-    main { margin: 0 auto; max-width: 1280px; padding: 36px 28px 56px; }
-    .eyebrow { color: var(--blue); font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { font-size: clamp(28px, 4vw, 38px); letter-spacing: -.04em; margin: 10px 0 8px; }
-    .intro { color: var(--muted); font-size: 15px; line-height: 1.6; margin: 0; max-width: 760px; }
-    .intro a { color: var(--blue); font-weight: 650; text-decoration: none; }
-    .intro a:hover { text-decoration: underline; }
-    .summary-grid { display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 28px 0 20px; }
-    .metric { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 17px 19px; }
-    .metric-label { color: var(--muted); font-size: 12px; }
-    .metric-value { font-size: 25px; font-weight: 740; letter-spacing: -.04em; margin-top: 7px; }
-    .metric-note { color: var(--muted); font-size: 11px; margin-top: 3px; }
-    .notice {
-      align-items: flex-start; background: #fff8e9; border: 1px solid #f0dba9; border-radius: 10px;
-      color: #684c1d; display: flex; font-size: 12px; gap: 10px; line-height: 1.5; margin: 0 0 22px; padding: 12px 15px;
-    }
-    .notice strong { color: #573d13; }
-    .notice-icon { font-size: 15px; font-weight: 800; line-height: 1.2; }
-    .workspace { display: grid; gap: 18px; grid-template-columns: minmax(300px, .92fr) minmax(0, 1.55fr); }
-    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); min-width: 0; }
-    .panel-head { align-items: center; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding: 18px 20px; }
-    .panel-title { font-size: 14px; font-weight: 720; }
-    .panel-subtitle { color: var(--muted); font-size: 11px; margin-top: 4px; }
-    .scenario-count { background: #edf1f6; border-radius: 20px; color: #526178; font-size: 11px; padding: 5px 9px; }
-    .search-wrap { padding: 14px 16px 7px; }
-    .search-wrap input {
-      background: #fafbfd; border: 1px solid var(--line); border-radius: 8px; color: var(--ink);
-      min-height: 39px; outline: none; padding: 0 12px; width: 100%;
-    }
-    .search-wrap input:focus { border-color: #7da0ed; box-shadow: 0 0 0 3px rgb(40 100 220 / 11%); }
-    .scenario-list { display: grid; gap: 8px; padding: 10px 12px 14px; }
-    .scenario-button {
-      background: transparent; border: 1px solid transparent; border-radius: 10px; cursor: pointer;
-      display: flex; gap: 11px; padding: 13px 12px; text-align: left; width: 100%;
-    }
-    .scenario-button:hover { background: #f8fafd; border-color: #e6ebf1; }
-    .scenario-button[aria-pressed="true"] { background: var(--blue-light); border-color: #cddcff; }
-    .scenario-icon {
-      align-items: center; background: #f0f3f7; border-radius: 9px; color: #52647c; display: flex;
-      flex: 0 0 34px; font-size: 15px; font-weight: 750; height: 34px; justify-content: center;
-    }
-    [aria-pressed="true"] .scenario-icon { background: #dce8ff; color: var(--blue); }
-    .scenario-copy { min-width: 0; }
-    .scenario-name { font-size: 13px; font-weight: 700; }
-    .scenario-desc { color: var(--muted); display: block; font-size: 11px; line-height: 1.45; margin-top: 4px; }
-    .scenario-meta { align-items: center; color: #748197; display: flex; font-size: 10px; gap: 6px; margin-top: 8px; }
-    .meta-sep { background: #b5c0ce; border-radius: 50%; height: 3px; width: 3px; }
-    .detail-panel { overflow: hidden; }
-    .detail-top { padding: 21px 22px 18px; }
-    .detail-heading { align-items: flex-start; display: flex; justify-content: space-between; gap: 20px; }
-    .detail-heading h2 { font-size: 21px; letter-spacing: -.025em; margin: 0; }
-    .detail-summary { color: var(--muted); font-size: 12px; line-height: 1.55; margin: 8px 0 0; max-width: 660px; }
-    .coverage-tag {
-      border-radius: 20px; flex: 0 0 auto; font-size: 10px; font-weight: 750; letter-spacing: .04em;
-      padding: 7px 10px; text-transform: uppercase;
-    }
-    .coverage-tag.partial { background: #fff2d9; color: #8b5d0d; }
-    .coverage-tag.limited { background: #fce9e9; color: #a34646; }
-    .coverage-tag.review { background: #e9f4f1; color: #167469; }
-    .section { border-top: 1px solid var(--line); padding: 18px 22px; }
-    .section-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 13px; }
-    .section-heading h3 { font-size: 12px; margin: 0; }
-    .section-heading span { color: var(--muted); font-size: 10px; }
-    .technique-list { display: grid; gap: 8px; }
-    .technique {
-      align-items: center; background: #f8fafc; border: 1px solid #e8edf2; border-radius: 8px;
-      display: flex; gap: 10px; justify-content: space-between; padding: 10px 12px;
-    }
-    .technique-info { min-width: 0; }
-    .technique-name { font-size: 11px; font-weight: 650; }
-    .technique-link { color: var(--blue); font-size: 10px; font-weight: 700; margin-left: 6px; text-decoration: none; white-space: nowrap; }
-    .technique-link:hover { text-decoration: underline; }
-    .technique-tactic { color: var(--muted); font-size: 10px; margin-top: 3px; }
-    .impact { color: var(--muted); flex: 0 0 auto; font-size: 10px; }
-    .impact.controlled { color: var(--teal); }
-    .impact.partial { color: var(--amber); }
-    .impact.outside { color: var(--red); }
-    .policy-list { display: grid; gap: 9px; }
-    .policy {
-      border: 1px solid #e6ebf1; border-radius: 9px; display: grid; gap: 9px; grid-template-columns: 1fr auto;
-      padding: 12px;
-    }
-    .policy-name { font-size: 11px; font-weight: 700; }
-    .policy-description { color: var(--muted); font-size: 10px; line-height: 1.5; margin-top: 4px; }
-    .policy-badge { align-self: start; background: #edf3ff; border-radius: 12px; color: #345fb1; font-size: 9px; font-weight: 700; padding: 5px 7px; white-space: nowrap; }
-    .scope-note { background: #f7f9fb; border-radius: 8px; color: var(--muted); font-size: 10px; line-height: 1.5; margin-top: 12px; padding: 10px 11px; }
-    .toolbar { align-items: center; display: flex; gap: 12px; justify-content: space-between; }
-    .toolbar-copy { color: var(--muted); font-size: 10px; line-height: 1.5; }
-    .export-button {
-      background: white; border: 1px solid #cfd9e6; border-radius: 7px; cursor: pointer;
-      font-size: 10px; font-weight: 700; padding: 8px 10px; white-space: nowrap;
-    }
-    .export-button:hover { background: #f4f7fb; }
-    .empty-state { color: var(--muted); font-size: 12px; line-height: 1.5; padding: 26px 18px; text-align: center; }
-    .footer { color: #78869a; display: flex; font-size: 10px; justify-content: space-between; margin-top: 18px; }
-    .footer a { color: var(--blue); text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
-    select { background: white; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); font: inherit; padding: 8px; }
-    .filters { align-items: center; display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
-    .filters label { color: var(--muted); font-size: 12px; }
-    .filters select { margin-left: 6px; }
-    .tactic-grid { display: grid; gap: 9px; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); margin: 15px 0 22px; }
-    .tactic-button { background: white; border: 1px solid var(--line); border-radius: 9px; cursor: pointer; min-height: 64px; padding: 12px; text-align: left; }
-    .tactic-button[aria-pressed="true"] { background: var(--blue-light); border-color: #9db8ef; }
-    .tactic-button strong { display: block; font-size: 12px; }
-    .tactic-button span { color: var(--muted); display: block; font-size: 10px; margin-top: 7px; }
-    .policy-name { overflow-wrap: anywhere; }
-    .policy-name a { color: var(--blue); text-decoration: none; }
-    .policy-name a:hover { text-decoration: underline; }
-    .policy-list { max-height: 600px; overflow-y: auto; }
-    .policy details { grid-column: 1 / -1; font-size: 11px; }
-    .policy summary { color: var(--blue); cursor: pointer; }
-    .policy pre { background: #f5f7fa; font-size: 10px; max-height: 320px; overflow: auto; padding: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
-    .mapping-item { border-top: 1px solid var(--line); color: var(--muted); line-height: 1.5; margin-top: 9px; padding-top: 9px; }
-    .mapping-item strong { color: var(--ink); }
-    .catalog { margin-top: 20px; }
-    .catalog > .policy-list { padding: 16px; }
-    .methodology { color: var(--muted); font-size: 12px; line-height: 1.7; margin: 24px 0; }
-    .methodology h2 { color: var(--ink); font-size: 17px; }
-    .load-error { background: #fce9e9; border: 1px solid #efbebe; border-radius: 9px; color: #912f2f; padding: 16px; }
-    button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #75a1ef; outline-offset: 3px; }
-    @media (max-width: 850px) {
-      .topbar { gap: 16px; padding: 0 20px; }
-      .topnav { gap: 14px; }
-      .brand { min-width: 0; }
-      .top-status { display: none; }
-      main { padding: 28px 20px 42px; }
-      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .workspace { grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr); }
-    }
-    @media (max-width: 620px) {
-      .topbar { height: 62px; }
-      .topnav { display: none; }
-      main { padding: 24px 14px 36px; }
-      .summary-grid { gap: 9px; }
-      .metric { padding: 13px; }
-      .metric-value { font-size: 22px; }
-      .workspace { grid-template-columns: 1fr; }
-      .scenario-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .scenario-button { align-items: flex-start; flex-direction: column; }
-      .detail-heading { flex-direction: column; gap: 10px; }
-      .footer { flex-direction: column; gap: 7px; }
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .scenario-button, .export-button { transition: background-color .15s ease, border-color .15s ease; }
-    }
-  </style>
+  <meta name="theme-color" content="#101d31">
+  <meta name="description" content="Map existing ALSO Security Conditional Access templates to common attack scenarios. Select an attack, find the relevant policies, and understand what they protect.">
+  <title>ALSO MITRE ATT&amp;CK to CA Policy Mapper</title>
+  <link rel="icon" href="assets/also-logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="ALSO Security Policy Navigator home" style="color:inherit;text-decoration:none">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 20 6v5.5c0 5-3.2 8.2-8 10.1-4.8-1.9-8-5.1-8-10.1V6l8-3.2Z" stroke="currentColor" stroke-width="1.7"/><path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
-      </span>
-      <span><span class="brand-name">ALSO SECURITY</span><span class="brand-sub" style="display:block">Policy Navigator</span></span>
-    </a>
-    <nav class="topnav" aria-label="Main navigation">
-      <a href="#coverage">Coverage map</a>
-      <a href="#scenarios">Threat scenarios</a>
-      <a href="#catalog">Policy catalog</a>
-      <a href="#method">Methodology</a>
-    </nav>
-    <div class="top-status"><span class="status-dot" aria-hidden="true"></span> ATT&amp;CK mapping view</div>
+  <a href="#main" class="skip-link">Skip to mapper</a>
+  <header class="header">
+    <div class="header-inner">
+      <a href="#main" class="brand" aria-label="ALSO MITRE ATT&CK to CA Policy Mapper home">
+        <span class="logo-box"><img src="assets/also-logo.png" alt="ALSO" width="104"></span>
+        <span class="brand-copy">Security templates<span>MITRE ATT&amp;CK to CA Policy Mapper</span></span>
+      </a>
+      <a class="repo-link" href="https://github.com/CoC-MS/ALSO-Microsoft-Security-Conditional-Access" target="_blank" rel="noreferrer">Browse CA templates <span aria-hidden="true">↗</span></a>
+    </div>
   </header>
 
-  <main id="top">
-    <div class="eyebrow">Identity protection · Conditional Access</div>
-    <h1>Security Policy Navigator</h1>
-    <p class="intro">Your existing ALSO Conditional Access policies, mapped to MITRE ATT&amp;CK tactics and techniques. Explore attack scenarios, inspect the actual JSON controls, and open the source templates. No policy builder, no tenant connection.</p>
-    <div id="load-error" class="load-error" role="alert" hidden>Unable to load the policy inventory. Reload the page or check that all site files are served over HTTP.</div>
-    <noscript><p class="load-error">JavaScript is required to display the policy inventory and coverage mappings.</p></noscript>
-
-    <section class="summary-grid" id="coverage" aria-label="Coverage overview">
-      <article class="metric"><div class="metric-label">Threat scenarios</div><div class="metric-value" id="scenario-total">5</div><div class="metric-note">From this repository's README</div></article>
-      <article class="metric"><div class="metric-label">Techniques with policy associations</div><div class="metric-value" id="technique-total">—</div><div class="metric-note">Supporting controls, not prevention scores</div></article>
-      <article class="metric"><div class="metric-label">Existing CA policy templates</div><div class="metric-value" id="policy-total">—</div><div class="metric-note" id="policy-note">From the ALSO Conditional Access repository</div></article>
-      <article class="metric"><div class="metric-label">Source snapshot</div><div class="metric-value" id="snapshot-date" style="font-size:18px;letter-spacing:0">—</div><div class="metric-note" id="snapshot-revision">Pinned source revision</div></article>
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">Existing policies. Clear protection.</p>
+      <h1>ALSO MITRE ATT&amp;CK<br> to CA Policy Mapper</h1>
+      <p class="lead">Map ALSO Security template policies to well-known attack scenarios.<br class="desktop-break"> Choose an attack. Find the right policies. Understand the protection.</p>
     </section>
 
-    <aside class="notice" role="note">
-      <span class="notice-icon" aria-hidden="true">!</span>
-      <span><strong>Real templates. Not a tenant assessment.</strong> These are existing policies from <a href="https://github.com/CoC-MS/ALSO-Microsoft-Security-Conditional-Access" target="_blank" rel="noreferrer">the ALSO Conditional Access repository</a>. A policy association means a relevant control exists in its JSON—not that the policy is deployed, enabled, or prevents every part of a technique. Template state, targeting, exclusions, and limitations are shown below.</span>
-    </aside>
+    <div id="load-error" class="error" role="alert" hidden>The mapper could not load. Reload this page or check that all site files are served over HTTP.</div>
+    <noscript><p class="error">Enable JavaScript to see the policy mapper.</p></noscript>
 
-    <div class="filters">
-      <label for="package-filter">Policy package <select id="package-filter"><option value="BP">Business Premium (BP)</option><option value="E5">E5</option><option value="E7">E7</option><option value="all">All packages</option></select></label>
-      <button class="export-button" id="clear-tactic" type="button">All tactics</button>
-      <span class="toolbar-copy" id="active-filter" role="status">Showing all tactics</span>
-    </div>
-    <div class="tactic-grid" id="tactic-grid" role="group" aria-label="Filter by MITRE ATT&CK tactic"></div>
-
-    <section class="workspace" id="scenarios" aria-label="Scenario coverage navigator">
-      <div class="panel">
-        <div class="panel-head">
-          <div><div class="panel-title">Threat scenarios</div><div class="panel-subtitle">Choose a scenario to inspect coverage</div></div>
-          <span class="scenario-count" id="visible-count">5 scenarios</span>
+    <section class="mapper" aria-label="Attack scenario to policy mapper">
+      <aside class="scenario-panel">
+        <div class="step"><span>1</span> Choose an attack</div>
+        <div class="scenario-list" id="scenario-list" role="group" aria-label="Attack scenarios"></div>
+        <div class="package-control">
+          <label for="package-filter">Your policy package</label>
+          <select id="package-filter">
+            <option value="all">All packages</option>
+            <option value="BP">Business Premium (BP)</option>
+            <option value="E5">E5</option>
+            <option value="E7">E7</option>
+          </select>
+          <p>Matching policies only. No builder or tenant connection.</p>
         </div>
-        <div class="search-wrap"><label for="scenario-search" class="eyebrow" style="display:block;margin:0 0 7px">Search scenarios and techniques</label><input id="scenario-search" type="search" placeholder="Try ransomware or T1486" autocomplete="off"></div>
-        <div class="scenario-list" id="scenario-list" role="group" aria-label="Available scenarios"></div>
-      </div>
+      </aside>
 
-      <article class="panel detail-panel" aria-live="polite" aria-atomic="true" id="scenario-detail">
-        <div class="detail-top">
-          <div class="detail-heading"><div><div class="eyebrow" id="detail-category"></div><h2 id="detail-name"></h2><p class="detail-summary" id="detail-summary"></p></div><span class="coverage-tag" id="detail-tag"></span></div>
+      <article class="results" id="scenario-detail" aria-labelledby="scenario-name">
+        <div class="result-header">
+          <div class="step"><span>2</span> Find your policies</div>
+          <div class="result-title"><h2 id="scenario-name">Loading scenarios…</h2><span class="count" id="policy-count"></span></div>
+          <p id="scenario-summary" class="summary"></p>
+          <div id="technique-links" class="technique-links" aria-label="Related MITRE ATT&CK techniques"></div>
         </div>
-        <section class="section">
-          <div class="section-heading"><h3>MITRE ATT&amp;CK techniques</h3><span id="technique-count"></span></div>
-          <div class="technique-list" id="technique-list"></div>
-        </section>
-        <section class="section">
-          <div class="section-heading"><h3>Existing policies for this scenario</h3><span id="mapped-policy-count"></span></div>
-          <div class="policy-list" id="policy-list"></div>
-          <div class="scope-note" id="scope-note"></div>
-        </section>
-        <section class="section toolbar">
-          <div class="toolbar-copy">Mappings are qualitative, scenario-level associations—not a compliance score or proof of prevention.</div>
-          <button class="export-button" id="export-button" type="button">Export all mappings · CSV</button>
-        </section>
-        <section class="panel catalog" id="catalog" aria-label="Full policy catalog">
-          <div class="panel-head"><div><div class="panel-title">Existing policy catalog</div><div class="panel-subtitle">Includes policies with no reviewed ATT&amp;CK association</div></div><span class="scenario-count" id="catalog-count"></span></div>
-          <div class="search-wrap"><label for="policy-search" class="eyebrow" style="display:block;margin:0 0 7px">Search source policy name, control, or technique</label><input id="policy-search" type="search" placeholder="Try CA004, phishing, or T1078.004"></div>
-          <div class="policy-list" id="catalog-list"></div>
-        </section>
-        <section class="methodology" id="method">
-          <h2>How to read this map</h2>
-          <p>Each association is derived from the actual grant controls, authentication-flow conditions, risk levels, locations, or session settings in a pinned source snapshot. Expand a policy to see the evidence, rationale, and original targeting. Names alone never establish coverage. Templates without a reviewed association stay visible in the catalog; they are not assumed ineffective.</p>
-          <p>Technique-to-tactic classifications follow the linked MITRE ATT&amp;CK references. Tactic totals count distinct policy codes with at least one association, not a percentage of ATT&amp;CK coverage. A scenario describes a possible attack path, not an assertion that every attack uses every listed technique. There is no direct CA association here for encryption, compute hijacking, phishing delivery, or arbitrary RDP lateral movement.</p>
-          <p>Package labels identify source folders, not independent licensing advice. Check the source repository guidance and Microsoft requirements. Review emergency access accounts, exclusions, named locations, groups, grant operators, and application scope before deploying templates. This navigator never creates, edits, enables, or deploys policies.</p>
+        <div class="protection-note"><span class="shield" aria-hidden="true">✓</span><div><strong id="protection-title"></strong><p id="scenario-limitation"></p></div></div>
+        <div id="policy-groups" class="policy-groups"></div>
+        <section class="risk-note" aria-labelledby="risk-title">
+          <div><h3 id="risk-title">Scenario risk reduction</h3><span class="risk-label">Not quantified</span></div>
+          <p id="risk-description"></p>
+          <a href="#research">See the published MFA percentages below <span aria-hidden="true">↓</span></a>
         </section>
       </article>
     </section>
-    <footer class="footer"><span>ALSO Security · Policy Navigator · <a href="data/SOURCE_LICENSE.txt">Policy source licenses</a></span><span>Technique references: <a href="https://attack.mitre.org/" target="_blank" rel="noreferrer">MITRE ATT&amp;CK®</a></span></footer>
+    <p class="template-note">These are source templates, not a scan of your tenant. A listed policy reduces risk only when correctly configured and enforced for the intended users and resources. Review exclusions, licensing, and emergency access before deployment.</p>
+    <p class="sr-only" id="results-status" role="status"></p>
+
+    <section class="research" id="research" aria-labelledby="research-title">
+      <div class="research-intro">
+        <p class="eyebrow">Evidence, not estimates</p>
+        <h2 id="research-title">How much risk can MFA reduce?</h2>
+        <p>Microsoft research found significantly lower account-compromise risk with MFA. These figures are useful context—not a promised reduction for any attack above.</p>
+        <a id="research-link" href="https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks/" target="_blank" rel="noreferrer">Read the Microsoft Research study (2023) <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="research-stat"><strong id="population-reduction">99.22%</strong><h3>Lower account-compromise risk</h3><p>Across the study population using MFA, compared with no MFA.</p></div>
+      <div class="research-stat"><strong id="leaked-reduction">98.56%</strong><h3>Lower risk with leaked credentials</h3><p>For accounts with known credential leaks, using MFA compared with no MFA.</p></div>
+      <p class="research-caveat" id="research-scope"></p>
+    </section>
+
+    <footer>
+      <span>ALSO Security · <span id="snapshot-info">Pinned policy source</span></span>
+      <div><a href="https://attack.mitre.org/" target="_blank" rel="noreferrer">MITRE ATT&amp;CK</a><a href="data/SOURCE_LICENSE.txt">Source licenses</a><a href="https://github.com/CoC-MS/ALSO-security-policy-templates-navigator" target="_blank" rel="noreferrer">ALSO logo source</a></div>
+    </footer>
   </main>
 
   <script type="module">
     import("./app.js").catch((error) => {
       document.getElementById("load-error").hidden = false;
-      console.error("ALSO policy navigator failed to initialize:", error);
+      console.error("ALSO policy mapper failed to initialize:", error);
     });
   </script>
 </body>

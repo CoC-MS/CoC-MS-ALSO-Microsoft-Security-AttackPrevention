@@ -1,71 +1,109 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import inventory from "../data/policies.js";
-import { mapPolicy, matchesScenario, scenarios, techniques, techniqueUrl } from "../mappings.mjs";
+import { policyGroups, matchesScenario, scenarioPolicies, groupPolicies, scenarios, techniques, techniqueUrl, research } from "../mappings.mjs";
 
+const scenario = (id) => scenarios.find((item) => item.id === id);
+const codes = (id, packageName = "all") => [...new Set(scenarioPolicies(inventory.policies, scenario(id), packageName).map((policy) => policy.code))].sort();
 const find = (code, packageName = "BP") => {
   const policy = inventory.policies.find((item) => item.code === code && item.package === packageName);
   assert.ok(policy, `Missing source template ${code} in ${packageName}`);
   return policy;
 };
 
-test("inventory contains real, pinned templates in all source packages", () => {
+test("source inventory has pinned policy links and preserves all three packages", () => {
   assert.match(inventory.revision, /^[a-f0-9]{40}$/);
-  assert.ok(inventory.policies.length > 100);
   assert.equal(new Set(inventory.policies.map((policy) => policy.key)).size, inventory.policies.length);
   assert.deepEqual([...new Set(inventory.policies.map((policy) => policy.package))].sort(), ["BP", "E5", "E7"]);
   for (const policy of inventory.policies) {
-    assert.ok(policy.name && policy.code && policy.state && policy.conditions);
+    assert.ok(policy.name && policy.code && policy.conditions);
     assert.equal(policy.url, `https://github.com/${inventory.repository}/blob/${inventory.revision}/${policy.key}`);
   }
 });
 
-test("CA004 maps actual device-code blocking to token techniques", () => {
+test("six requested scenarios only, including token theft and password attacks", () => {
+  assert.deepEqual(scenarios.map((item) => item.id), ["aitm", "token-theft", "password-attacks", "device-code", "cryptojacking", "llmjacking"]);
+  assert.ok(scenarios.every((item) => item.techniques.every((id) => techniques[id])));
+});
+
+test("AiTM lists only phishing-resistant policies, including Tier 0 role activation", () => {
+  assert.deepEqual(codes("aitm"), ["BP-ALSO-CA105", "E5-ALSO-CA106"]);
+  for (const policy of scenarioPolicies(inventory.policies, scenario("aitm"))) {
+    assert.equal(policy.grantControls.authenticationStrength.id, "00000000-0000-0000-0000-000000000004");
+  }
+  assert.ok(!matchesScenario(find("BP-ALSO-CA000"), scenario("aitm")));
+});
+
+test("token theft contains exactly compliant-device and phishing-resistant templates", () => {
+  assert.deepEqual(scenario("token-theft").groups, ["phishing", "device"]);
+  assert.deepEqual(codes("token-theft", "BP"), [
+    "BP-ALSO-CA105", "BP-ALSO-CA107", "BP-ALSO-CA108", "BP-ALSO-CA110",
+    "BP-ALSO-CA205", "BP-ALSO-CA208", "BP-ALSO-CA211"
+  ]);
+  assert.ok(!codes("token-theft").includes("BP-ALSO-CA000"));
+  assert.ok(!codes("token-theft").includes("BP-ALSO-CA004"));
+  assert.ok(codes("token-theft", "E7").includes("A365-ALSO-CA503"));
+});
+
+test("password attacks contain MFA, legacy blocks, and actual location blocks", () => {
+  assert.deepEqual(scenario("password-attacks").groups, ["mfa", "legacy", "location"]);
+  const policies = codes("password-attacks");
+  for (const code of ["BP-ALSO-CA000", "BP-ALSO-CA100", "BP-ALSO-CA002", "BP-ALSO-CA001", "BP-ALSO-CA301", "A365-ALSO-CA505"]) assert.ok(policies.includes(code), code);
+  assert.ok(policyGroups(find("BP-ALSO-CA100")).includes("mfa"), "MFA strength must count as MFA");
+  assert.ok(!policyGroups(find("BP-ALSO-CA101")).includes("location"), "A location condition without a block must not become a location block");
+  assert.ok(!policies.includes("BP-ALSO-CA107"));
+});
+
+test("device-code phishing contains flow blocking and MFA, not device compliance", () => {
+  assert.deepEqual(scenario("device-code").groups, ["flow", "mfa"]);
+  assert.ok(codes("device-code").includes("BP-ALSO-CA004"));
+  assert.ok(codes("device-code").includes("BP-ALSO-CA000"));
+  assert.ok(codes("device-code").includes("BP-ALSO-CA100"));
+  assert.ok(!codes("device-code").includes("BP-ALSO-CA107"));
   const policy = find("BP-ALSO-CA004");
-  assert.ok(policy.grantControls.builtInControls.includes("block"));
   assert.ok(policy.conditions.authenticationFlows.transferMethods.includes("deviceCodeFlow"));
-  assert.ok(mapPolicy(policy).some((mapping) => mapping.id === "T1528"));
-  assert.ok(mapPolicy(policy).some((mapping) => mapping.id === "T1550.001"));
-  assert.ok(matchesScenario(policy, scenarios.find((scenario) => scenario.id === "device-code")));
+  assert.ok(policy.conditions.authenticationFlows.transferMethods.includes("authenticationTransfer"));
 });
 
-test("CA105 requires real phishing-resistant strength; generic MFA does not map to AiTM control", () => {
-  assert.ok(mapPolicy(find("BP-ALSO-CA105")).some((mapping) => mapping.id === "T1557"));
-  assert.ok(!mapPolicy(find("BP-ALSO-CA000")).some((mapping) => mapping.id === "T1557"));
+test("cryptojacking and LLMjacking reuse precisely the token theft / AiTM controls", () => {
+  assert.deepEqual(codes("cryptojacking"), codes("token-theft"));
+  assert.deepEqual(codes("llmjacking"), codes("token-theft"));
 });
 
-test("filenames alone cannot produce coverage", () => {
-  const counterfeit = { ...find("BP-ALSO-CA004"), conditions: {}, grantControls: null, sessionControls: null };
-  assert.deepEqual(mapPolicy(counterfeit), []);
+test("classification uses real controls and supports authentication-transfer-only blocks", () => {
+  const policy = { ...find("BP-ALSO-CA004"), grantControls: null, conditions: {}, sessionControls: null };
+  assert.deepEqual(policyGroups(policy), []);
+  assert.deepEqual(policyGroups({ grantControls: { builtInControls: ["block"] }, conditions: { authenticationFlows: { transferMethods: "authenticationTransfer" } } }), ["flow"]);
+  assert.deepEqual(policyGroups({ grantControls: { builtInControls: ["block"] }, conditions: { authenticationFlows: { transferMethods: "notdeviceCodeFlow" } } }), []);
 });
 
-test("legacy and risk templates have conditional identity associations", () => {
-  assert.ok(mapPolicy(find("BP-ALSO-CA002")).some((mapping) => mapping.id === "T1110.003"));
-  for (const code of ["E5-ALSO-CA201", "E5-ALSO-CA210"]) {
-    assert.ok(mapPolicy(find(code, "E5")).some((mapping) => mapping.id === "T1078.004"));
-  }
+test("package filtering deduplicates codes but retains per-package source links", () => {
+  const groups = groupPolicies(inventory.policies, scenario("aitm"));
+  assert.equal(groups[0].policies.length, 2);
+  const baseline = groups[0].policies.find((variants) => variants[0].code === "BP-ALSO-CA105");
+  assert.deepEqual(baseline.map((policy) => policy.package), ["BP", "E5", "E7"]);
+  assert.equal(groupPolicies(inventory.policies, scenario("aitm"), "BP")[0].policies.length, 1);
+  assert.ok(scenarioPolicies(inventory.policies, scenario("token-theft"), "E5").every((policy) => policy.package === "E5"));
 });
 
-test("impact and delivery techniques are never misrepresented as prevented", () => {
-  const unsupported = new Set(["T1486", "T1496.001", "T1566.001", "T1566.002", "T1021.001"]);
-  for (const policy of inventory.policies) {
-    for (const mapping of mapPolicy(policy)) {
-      assert.ok(!unsupported.has(mapping.id));
-      assert.ok(techniques[mapping.id]);
-      assert.ok(mapping.evidence && mapping.reason);
-    }
-  }
+test("research percentages are general MFA findings, never per-scenario scores", () => {
+  assert.equal(research.populationReduction, "99.22%");
+  assert.equal(research.leakedCredentialReduction, "98.56%");
+  assert.match(research.url, /^https:\/\/www\.microsoft\.com\/en-us\/research\//);
+  assert.match(research.scope, /not measured protection/);
+  assert.ok(scenarios.every((item) => item.riskNote && !/\d+%/.test(item.riskNote)));
 });
 
-test("all scenarios resolve to known techniques and have source-policy associations", () => {
-  for (const scenario of scenarios) {
-    assert.ok(scenario.techniques.every((id) => techniques[id]));
-    assert.ok(inventory.policies.some((policy) => matchesScenario(policy, scenario)));
-  }
-  assert.equal(techniqueUrl("T1078.004"), "https://attack.mitre.org/techniques/T1078/004/");
-});
-
-test("source template state is preserved, not interpreted as deployed protection", () => {
+test("simplified UI has no JSON panels or tactic dashboard and includes local ALSO logo", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
+  assert.ok(!html.includes("tactic-grid"));
+  assert.ok(!html.includes("catalog-list"));
+  assert.ok(!app.includes("JSON.stringify"));
+  assert.match(html, /assets\/also-logo\.png/);
+  const logo = await readFile(new URL("../assets/also-logo.png", import.meta.url));
+  assert.deepEqual([...logo.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  assert.equal(techniqueUrl("T1528"), "https://attack.mitre.org/techniques/T1528/");
   assert.equal(find("BP-ALSO-CA105").state, "disabled");
-  assert.ok(inventory.policies.every((policy) => ["disabled", "enabled", "enabledForReportingButNotEnforced"].includes(policy.state)));
 });

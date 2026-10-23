@@ -1,102 +1,190 @@
 export const techniques = {
-  "T1557": { name: "Adversary-in-the-Middle", tactics: ["Credential Access", "Collection"] },
-  "T1566.002": { name: "Spearphishing Link", tactics: ["Initial Access"] },
-  "T1528": { name: "Steal Application Access Token", tactics: ["Credential Access"] },
-  "T1550.001": { name: "Application Access Token", tactics: ["Defense Evasion", "Lateral Movement"] },
-  "T1550.004": { name: "Web Session Cookie", tactics: ["Defense Evasion", "Lateral Movement"] },
-  "T1078.004": { name: "Cloud Accounts", tactics: ["Initial Access", "Persistence", "Privilege Escalation", "Defense Evasion"] },
-  "T1110.003": { name: "Password Spraying", tactics: ["Credential Access"] },
-  "T1496.001": { name: "Compute Hijacking", tactics: ["Impact"] },
-  "T1486": { name: "Data Encrypted for Impact", tactics: ["Impact"] },
-  "T1566.001": { name: "Spearphishing Attachment", tactics: ["Initial Access"] },
-  "T1021.001": { name: "Remote Desktop Protocol", tactics: ["Lateral Movement"] }
+  "T1557": { name: "Adversary-in-the-Middle", tactic: "Credential Access" },
+  "T1539": { name: "Steal Web Session Cookie", tactic: "Credential Access" },
+  "T1528": { name: "Steal Application Access Token", tactic: "Credential Access" },
+  "T1110.001": { name: "Password Guessing", tactic: "Credential Access" },
+  "T1110.003": { name: "Password Spraying", tactic: "Credential Access" },
+  "T1078.004": { name: "Cloud Accounts", tactic: "Initial Access" },
+  "T1496.001": { name: "Compute Hijacking", tactic: "Impact" }
+};
+
+export const research = {
+  url: "https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks/",
+  title: "How effective is multifactor authentication at deterring cyberattacks?",
+  publisher: "Microsoft Research, 2023",
+  populationReduction: "99.22%",
+  leakedCredentialReduction: "98.56%",
+  scope: "Observed reduction in account-compromise risk with MFA compared with no MFA in the study population. These are general research findings, not measured protection from these templates, scenario-specific percentages, or figures that can be added together."
+};
+
+export const controlGroups = {
+  phishing: {
+    title: "Phishing-resistant MFA",
+    description: "Requires phishing-resistant authentication, such as FIDO2, Windows Hello for Business, or certificate-based MFA.",
+    reason: "Stops the credential-relay authentication path used by common AiTM phishing proxies when the requirement is enforced.",
+    source: "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-strengths"
+  },
+  device: {
+    title: "Require a compliant device",
+    description: "Requires devices to meet your organization's compliance requirements before allowing access.",
+    reason: "Adds a device trust check to protected access. It does not bind every session token to a device or prevent every replay.",
+    source: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-compliance"
+  },
+  mfa: {
+    title: "Require MFA",
+    description: "Requires a second factor or an MFA authentication strength instead of a password alone.",
+    reason: "A guessed or stolen password alone is not enough to satisfy this access requirement. Standard MFA can still be phished.",
+    source: research.url
+  },
+  legacy: {
+    title: "Block legacy authentication",
+    description: "Blocks legacy clients that cannot meet modern authentication requirements.",
+    reason: "Closes a common password-only sign-in route. It does not stop password guessing against other endpoints.",
+    source: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-legacy-authentication"
+  },
+  location: {
+    title: "Block countries / untrusted locations",
+    description: "Blocks access outside the allowed named locations defined in the template.",
+    reason: "Limits where sign-ins can originate. An attacker in an allowed location or using a proxy may still get through.",
+    source: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/location-condition"
+  },
+  flow: {
+    title: "Block device code & authentication transfer",
+    description: "Blocks the configured device-code and authentication-transfer flows.",
+    reason: "Closes the device-code authorization path for targeted users and resources. Check legitimate clients before enabling.",
+    source: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-authentication-flows"
+  }
 };
 
 export const scenarios = [
   {
-    id: "aitm", icon: "A", name: "Adversary-in-the-Middle (AiTM)",
-    short: "Credential phishing through an attacker-controlled proxy.",
-    summary: "Explore actual ALSO policies that reduce exposure to identity compromise associated with AiTM phishing. Authentication strength, device conditions, and session controls have different scopes and limitations.",
-    techniques: ["T1557", "T1566.002", "T1078.004", "T1550.004"],
-    scope: "CA105 targets the administrative roles listed in the template, not every user. Generic MFA is not phishing-resistant. Conditional Access does not block delivery of phishing links or guarantee that a stolen session cookie cannot be replayed."
+    id: "aitm", icon: "A", name: "AiTM phishing",
+    short: "An attacker proxies a sign-in to capture credentials and sessions.",
+    summary: "Use phishing-resistant authentication to give strong protection against common adversary-in-the-middle phishing proxies.",
+    groups: ["phishing"],
+    techniques: ["T1557"],
+    protection: "Strong protection at sign-in",
+    limitation: "These templates protect their targeted administrators or authentication contexts, not automatically every user. They do not remove already-stolen tokens or prevent every form of session theft.",
+    riskNote: "The cited MFA study does not quantify AiTM-specific protection. Its general MFA percentage must not be presented as an AiTM success rate."
   },
   {
-    id: "device-code", icon: "D", name: "Device Code Phishing",
-    short: "Trick a user into authorizing an attacker-controlled session.",
-    summary: "CA004 actually blocks device-code flow and authentication transfer in its JSON conditions. Other linked policies provide supporting identity controls, not an equivalent device-code block.",
-    techniques: ["T1566.002", "T1528", "T1550.001", "T1078.004"],
-    scope: "Review legitimate device-code clients and exclusions before enabling CA004. Token theft and token replay are separate ATT&CK behaviors; controls here do not revoke previously issued access tokens."
+    id: "token-theft", icon: "T", name: "Token theft",
+    short: "An attacker steals a sign-in token or browser session cookie.",
+    summary: "Combine compliant-device requirements with phishing-resistant MFA to reduce identity and device-related exposure.",
+    groups: ["phishing", "device"],
+    techniques: ["T1539", "T1528"],
+    protection: "Layered identity protection",
+    limitation: "Device compliance is not token binding. These policies cannot guarantee that every stolen token is unusable. Add supported token protection, endpoint protection, and session revocation.",
+    riskNote: "No token-theft reduction percentage is established by the cited sources. General MFA research is not a measure of stolen-token replay protection."
   },
   {
-    id: "llmjacking", icon: "L", name: "LLMJacking",
-    short: "Abuse cloud identities or tokens to consume hosted AI resources.",
-    summary: "Existing ALSO identity policies can reduce compromised-account access to protected AI resources. AI agent policies are included only when their actual conditions match a documented mapping rule.",
-    techniques: ["T1496.001", "T1078.004", "T1528", "T1550.001"],
-    scope: "No Conditional Access template here is mapped as directly preventing compute hijacking. API keys, service principals, AI usage quotas, billing alerts, and provider-side controls require separate assessment."
+    id: "password-attacks", icon: "P", name: "Password spraying & brute force",
+    short: "An attacker repeatedly tries passwords to take over an account.",
+    summary: "Require MFA, block legacy authentication, and restrict sign-ins from untrusted countries or locations.",
+    groups: ["mfa", "legacy", "location"],
+    techniques: ["T1110.003", "T1110.001"],
+    protection: "Protect password-based entry points",
+    limitation: "These controls reduce successful access, not the number of password attempts. Keep smart lockout enabled and review exclusions. Location restrictions can be bypassed from allowed locations.",
+    riskNote: "Microsoft's MFA study reports account-compromise risk, not a password-spray-specific prevention rate. It supports using MFA, but does not measure this policy combination."
+  },
+  {
+    id: "device-code", icon: "D", name: "Device code phishing",
+    short: "An attacker tricks a user into approving a device-code sign-in.",
+    summary: "Block device-code flow and authentication transfer. Keep MFA as a supporting access control.",
+    groups: ["flow", "mfa"],
+    techniques: ["T1528", "T1078.004"],
+    protection: "Block the abused sign-in flow",
+    limitation: "Standard MFA alone does not stop device-code phishing: the victim may complete MFA for the attacker. The flow-blocking policy is the key control. Review legitimate device-code clients first.",
+    riskNote: "The cited sources do not quantify device-code phishing risk reduction. The general MFA percentage does not describe protection against this attack."
   },
   {
     id: "cryptojacking", icon: "C", name: "Cryptojacking",
-    short: "Hijack cloud compute for unauthorized cryptocurrency mining.",
-    summary: "Map the identity entry point to the existing policy catalog without treating sign-in controls as workload or runtime protection.",
+    short: "An attacker uses your compute resources to mine cryptocurrency.",
+    summary: "Use the same phishing-resistant and compliant-device policies as AiTM and token theft to protect the identity entry points.",
+    groups: ["phishing", "device"],
     techniques: ["T1496.001", "T1078.004"],
-    scope: "Compute hijacking remains outside direct Conditional Access coverage. Use workload protection, least privilege, resource quotas, and spend monitoring in addition to these identity templates."
+    protection: "Protect identity entry points",
+    limitation: "These user access policies do not directly stop mining or secure API keys and service principals. Add workload protection, least privilege, quotas, and spend alerts.",
+    riskNote: "No cryptojacking reduction percentage is established by the cited sources. Identity hardening is not a measured reduction in unauthorized mining."
   },
   {
-    id: "ransomware", icon: "R", name: "Ransomware",
-    short: "Compromise identities, move laterally, and encrypt data for impact.",
-    summary: "The mapped templates address cloud identity access associated with a ransomware attack path. They do not claim to prevent file encryption, phishing attachments, or arbitrary RDP lateral movement.",
-    techniques: ["T1486", "T1078.004", "T1566.001", "T1021.001"],
-    scope: "CA does not stop local encryption or govern arbitrary RDP sessions. Endpoint detection and response, segmentation, privileged access controls, and tested backups remain necessary."
+    id: "llmjacking", icon: "L", name: "LLMjacking",
+    short: "An attacker abuses your AI services and runs up usage costs.",
+    summary: "Use the same phishing-resistant and compliant-device policies as AiTM and token theft to protect interactive access to AI resources.",
+    groups: ["phishing", "device"],
+    techniques: ["T1496.001", "T1078.004", "T1528"],
+    protection: "Protect identity entry points",
+    limitation: "These policies do not directly control AI consumption or every API credential. Protect keys and workloads, restrict permissions, and set service quotas and cost alerts. Compute hijacking is an indicative resource-abuse association, not an exact match for every LLM attack.",
+    riskNote: "No LLMjacking reduction percentage is established by the cited sources. General MFA research does not quantify prevention of AI-resource abuse."
   }
 ];
 
-// Map verified JSON controls, never policy filenames alone.
-export function mapPolicy(policy) {
+export function policyGroups(policy) {
   const grants = policy.grantControls;
-  const conditions = policy.conditions;
-  const session = policy.sessionControls;
+  const conditions = policy.conditions ?? {};
   const controls = grants?.builtInControls ?? [];
-  const mappings = [];
-  const add = (ids, evidence, reason) => ids.forEach((id) => mappings.push({ id, evidence, reason }));
-  const blocks = controls.includes("block");
-
-  if (grants?.authenticationStrength?.id === "00000000-0000-0000-0000-000000000004") {
-    add(["T1557", "T1078.004"], "Phishing-resistant authentication strength",
-      "Requires the built-in phishing-resistant authentication strength for the template's targeted identities and resources. Does not protect every user or prevent all token theft.");
+  const strength = grants?.authenticationStrength;
+  const groups = [];
+  if (strength?.id === "00000000-0000-0000-0000-000000000004") groups.push("phishing");
+  if (controls.includes("compliantDevice")) groups.push("device");
+  if (controls.includes("mfa") || strength?.requirementsSatisfied === "mfa") groups.push("mfa");
+  if (controls.includes("block")) {
+    if (conditions.clientAppTypes?.some((client) => ["exchangeActiveSync", "other"].includes(client))) groups.push("legacy");
+    const locations = conditions.locations;
+    if (locations?.includeLocations?.length && locations?.excludeLocations?.length) groups.push("location");
+    const flows = (conditions.authenticationFlows?.transferMethods ?? "").split(",").map((flow) => flow.trim());
+    if (flows.some((flow) => ["deviceCodeFlow", "authenticationTransfer"].includes(flow))) groups.push("flow");
   }
-  if (controls.includes("mfa")) {
-    add(["T1078.004"], "MFA grant control",
-      "Adds an authentication requirement to targeted sign-ins. Generic MFA can still be phished; this is supporting identity protection, not complete technique prevention.");
-  }
-  if (controls.includes("compliantDevice")) {
-    add(["T1078.004"], "Compliant-device grant control",
-      "Requires device compliance within the template's configured scope. Coverage depends on platform support, device registration, grant operator, and exclusions.");
-  }
-  if (blocks && conditions.authenticationFlows?.transferMethods?.includes("deviceCodeFlow")) {
-    add(["T1528", "T1550.001", "T1078.004"], "Block + deviceCodeFlow condition",
-      "Blocks new device-code authorizations within scope, reducing this token acquisition path. Does not stop every method of stealing or replaying an application token.");
-  }
-  if (blocks && conditions.clientAppTypes?.some((client) => ["exchangeActiveSync", "other"].includes(client))) {
-    add(["T1110.003", "T1078.004"], "Block + legacy-client condition",
-      "Denies configured legacy-client sign-ins, reducing legacy authentication access paths. Does not prevent password-spray attempts against other endpoints.");
-  }
-  if (blocks && [...(conditions.userRiskLevels ?? []), ...(conditions.signInRiskLevels ?? [])].length) {
-    add(["T1078.004"], "Block + identity-risk condition",
-      "Blocks sign-ins when the configured user or sign-in risk is detected. Detection-dependent; requires applicable Entra ID Protection licensing.");
-  }
-  if (blocks && conditions.locations) {
-    add(["T1078.004"], "Block + location condition",
-      "Restricts sign-ins using the configured included and excluded locations. Location alone is not proof of a trusted identity and may be bypassed by an attacker in an allowed location.");
-  }
-  if (session?.signInFrequency?.isEnabled || session?.persistentBrowser?.isEnabled) {
-    add(["T1550.004"], "Sign-in frequency / browser persistence control",
-      "Limits session persistence within supported flows. Supporting session hygiene only: not token binding, immediate revocation, or proof that cookie replay is blocked.");
-  }
-  return mappings;
+  return groups;
 }
 
 export function matchesScenario(policy, scenario) {
-  return mapPolicy(policy).some((mapping) => scenario.techniques.includes(mapping.id));
+  return policyGroups(policy).some((group) => scenario.groups.includes(group));
+}
+
+export function scenarioPolicies(policies, scenario, packageName = "all") {
+  return policies.filter((policy) => (packageName === "all" || policy.package === packageName) && matchesScenario(policy, scenario));
+}
+
+export function groupPolicies(policies, scenario, packageName = "all") {
+  const relevant = scenarioPolicies(policies, scenario, packageName);
+  return scenario.groups.map((group) => {
+    const byCode = new Map();
+    relevant.filter((policy) => policyGroups(policy).includes(group)).forEach((policy) => {
+      if (!byCode.has(policy.code)) byCode.set(policy.code, []);
+      byCode.get(policy.code).push(policy);
+    });
+    return { id: group, ...controlGroups[group], policies: [...byCode.values()] };
+  });
+}
+
+export function policyLabel(policy, group) {
+  const code = policy.code.match(/CA\d+/)?.[0];
+  const labels = {
+    CA000: "All users · require MFA",
+    CA001: "All users · block outside allowed countries",
+    CA002: "All users · block legacy authentication",
+    CA003: "Device registration & join · require MFA",
+    CA004: "All users · block device code & authentication transfer",
+    CA100: "Administrators · require MFA for admin portals",
+    CA101: "Administrators · require MFA",
+    CA105: "Administrators · require phishing-resistant MFA",
+    CA106: "Tier 0 administrators · phishing-resistant MFA on role activation",
+    CA107: "Administrators · compliant Windows device",
+    CA108: "Administrators · compliant macOS device",
+    CA110: "Administrators · compliant iOS / Android device",
+    CA200: "Internal users · require MFA",
+    CA203: "Intune enrollment · require MFA",
+    CA205: "Internal users · compliant Windows device",
+    CA208: "Internal users · compliant macOS device",
+    CA211: "Internal users · compliant iOS / Android device",
+    CA300: "Service accounts · require MFA",
+    CA301: "Service accounts · block untrusted locations",
+    CA400: "Guest users · require MFA",
+    CA503: "Agent users · require a compliant device",
+    CA505: "Agent users · block outside the approved network"
+  };
+  return labels[code] ?? controlGroups[group].title;
 }
 
 export function techniqueUrl(id) {
