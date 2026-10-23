@@ -17,15 +17,14 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid
 [hidden] { display: none !important; }
 .sr-only, .skip-link:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skip-link:focus { position: fixed; top: 12px; left: 12px; z-index: 10; background: white; padding: 12px; }
-.header { background: #101d31; color: white; }
-.header-inner { max-width: 1220px; margin: auto; padding: 18px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.brand { color: white; display: flex; align-items: center; gap: 17px; text-decoration: none; }
-.logo-box { background: white; border-radius: 5px; padding: 9px 12px; display: flex; flex: 0 0 auto; }
-.logo-box img { width: 104px; height: auto; display: block; }
-.brand-copy { font-size: 13px; font-weight: 650; letter-spacing: .01em; }
-.brand-copy > span { display: block; color: #b6c4d9; font-size: 11px; font-weight: 400; margin-top: 3px; }
-.repo-link { font-size: 12px; color: #d6e1f1; text-decoration: none; white-space: nowrap; }
-.repo-link:hover { color: white; text-decoration: underline; }
+.header { background: rgb(255 255 255 / 92%); border-bottom: 1px solid var(--line); backdrop-filter: blur(16px); }
+.header-inner { width: 100%; min-height: 72px; padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 20px; }
+.brand { color: #172033; display: flex; align-items: center; text-decoration: none; min-width: 0; }
+.brand-logo { width: 112px; height: auto; display: block; flex: 0 0 auto; }
+.brand-divider { width: 1px; height: 24px; margin: 0 12px; background: var(--line); flex: 0 0 auto; }
+.brand-copy { font-size: 14px; font-weight: 650; line-height: 1.5; }
+.repo-link { font-size: 12px; color: var(--muted); text-decoration: none; white-space: nowrap; margin-left: auto; }
+.repo-link:hover { color: var(--blue); text-decoration: underline; }
 main { max-width: 1220px; margin: auto; padding: 32px 30px 20px; }
 .hero { padding: 7px 0 25px; }
 .eyebrow { font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: .12em; color: var(--blue); margin: 0 0 10px; }
@@ -66,7 +65,7 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .policy-title { font-size: 12px; font-weight: 650; line-height: 1.5; margin: 0; }
 .policy-meta { font-size: 10px; color: #687991; margin-top: 5px; display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
 .policy-code { font-family: Consolas, monospace; color: #5b6f8b; }
-.policy-links { display: flex; gap: 5px; flex: 0 0 auto; }
+.policy-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; flex: 0 1 auto; }
 .policy-links a { border: 1px solid #d9e3f4; border-radius: 5px; color: var(--blue); background: #f8faff; font-size: 10px; padding: 6px 7px; text-decoration: none; }
 .policy-links a:hover { background: #eaf1ff; }
 .state { border-radius: 4px; background: #f1f4f7; padding: 2px 5px; font-size: 9px; }
@@ -76,7 +75,7 @@ footer a { color: #687991; }
 .error { color: #9e2727; background: #fff1f1; border: 1px solid #e8bbbb; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
 .empty { color: var(--muted); font-size: 12px; padding: 14px; background: #f6f8fb; border-radius: 8px; line-height: 1.6; }
 @media (max-width: 850px) {
-  .header-inner, main { padding-left: 20px; padding-right: 20px; }
+  main { padding-left: 20px; padding-right: 20px; }
   .mapper { grid-template-columns: 240px minmax(0, 1fr); }
   .results { padding: 22px 18px; }
   .policy { align-items: flex-start; flex-direction: column; gap: 9px; }
@@ -84,12 +83,10 @@ footer a { color: #687991; }
 }
 @media (max-width: 620px) {
   main { padding: 24px 14px 16px; }
-  .header-inner { padding: 15px; }
-  .brand { gap: 10px; }
-  .logo-box { padding: 7px 9px; }
-  .logo-box img { width: 80px; }
-  .brand-copy { font-size: 12px; }
-  .brand-copy > span { font-size: 10px; max-width: 160px; line-height: 1.5; }
+  .header-inner { padding: 8px; min-height: 64px; }
+  .brand-logo { width: 72px; }
+  .brand-divider { margin: 0 9px; }
+  .brand-copy { font-size: 11px; }
   .repo-link { display: none; }
   h1 { font-size: 29px; }
   h1 br { display: block; }

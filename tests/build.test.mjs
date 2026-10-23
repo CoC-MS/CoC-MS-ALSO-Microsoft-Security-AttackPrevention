@@ -21,8 +21,10 @@ test("production HTML and every module dependency use content-hashed assets", as
     assert.ok(html.includes(`href="${manifest.cssName}"`));
     assert.ok(!html.includes('import("./app.js")'));
     assert.ok(app.includes(`"./${manifest.policiesName}"`));
+    assert.ok(app.includes(`"./${manifest.endpointsName}"`));
     assert.ok(app.includes(`"./${manifest.mappingsName}"`));
     assert.ok(!app.includes('"./data/policies.js"'));
+    assert.ok(!app.includes('"./data/endpoint-policies.js"'));
     assert.ok(!app.includes('"./mappings.mjs"'));
     for (const name of Object.values(manifest)) {
       const content = await readFile(join(output, name), "utf8");

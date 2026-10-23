@@ -22,8 +22,8 @@ test("source inventory has pinned policy links and preserves all three packages"
   }
 });
 
-test("six requested scenarios only, including token theft and password attacks", () => {
-  assert.deepEqual(scenarios.map((item) => item.id), ["aitm", "token-theft", "password-attacks", "device-code", "cryptojacking", "llmjacking"]);
+test("eight scenarios include ransomware and ClickFix", () => {
+  assert.deepEqual(scenarios.map((item) => item.id), ["aitm", "token-theft", "password-attacks", "device-code", "cryptojacking", "llmjacking", "ransomware", "clickfix"]);
   assert.ok(scenarios.every((item) => item.techniques.every((id) => techniques[id])));
 });
 
@@ -57,7 +57,7 @@ test("AiTM lists only phishing-resistant policies, including Tier 0 role activat
 });
 
 test("token theft contains exactly compliant-device and phishing-resistant templates", () => {
-  assert.deepEqual(scenario("token-theft").groups, ["phishing", "device"]);
+  assert.deepEqual(scenario("token-theft").groups, ["phishing", "device", "endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender"]);
   assert.deepEqual(codes("token-theft", "BP"), [
     "BP-ALSO-CA105", "BP-ALSO-CA107", "BP-ALSO-CA108", "BP-ALSO-CA110",
     "BP-ALSO-CA205", "BP-ALSO-CA208", "BP-ALSO-CA211"
@@ -113,7 +113,7 @@ test("research percentages are general MFA findings, never per-scenario scores",
   assert.equal(research.leakedCredentialReduction, "98.56%");
   assert.match(research.url, /^https:\/\/www\.microsoft\.com\/en-us\/research\//);
   assert.match(research.scope, /not measured protection/);
-  assert.ok(scenarios.every((item) => item.riskNote && !/\d+%/.test(item.riskNote)));
+  assert.ok(scenarios.every((item) => !/\d+%/.test(item.riskNote ?? "")));
 });
 
 test("simplified UI has no JSON panels or tactic dashboard and includes local ALSO logo", async () => {

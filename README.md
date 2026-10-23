@@ -6,6 +6,10 @@ Map **existing ALSO Security Conditional Access templates** to well-known attack
 
 The policy inventory comes from [CoC-MS/ALSO-Microsoft-Security-Conditional-Access](https://github.com/CoC-MS/ALSO-Microsoft-Security-Conditional-Access), including Business Premium, E5, and E7 source packages. Each policy links to its original JSON at a pinned commit.
 
+Endpoint templates come from the ALSO [Windows](https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows), [Windows Server](https://github.com/CoC-MS/ALSO-Microsoft-Security-WindowsServer), and [Linux](https://github.com/CoC-MS/ALSO-Microsoft-Security-Linux) repositories. Token theft adds Windows LAPS/EPM, antivirus, firewall, and Defender controls. Ransomware includes AV across all three platforms, available host firewalls, and Defender/ASR. ClickFix adds Windows LAPS/EPM, AV, firewall, Defender/ASR, and Edge security.
+
+Refresh endpoint metadata with `npm run sync:endpoints` (Node.js 24 and authenticated GitHub CLI). Categories are checked against actual setting identifiers; original names, descriptions, package links, and licenses are retained. Audit-only ASR templates are labeled as monitoring, not blocking. EPM defaults require review. Linux currently has an AV template but no firewall template in the source repository. Source licenses are retained in `data/endpoint-licenses/`.
+
 The cloud token-theft scenario distinguishes stealing application tokens ([T1528](https://attack.mitre.org/techniques/T1528/)) or browser cookies ([T1539](https://attack.mitre.org/techniques/T1539/)) from using them ([T1550.001](https://attack.mitre.org/techniques/T1550/001/) / [T1550.004](https://attack.mitre.org/techniques/T1550/004/)). Phishing-resistant MFA does not itself prevent replay of tokens already stolen by malware.
 
 GitHub Pages publishes `npm run build` output from `_site`, using content-hashed scripts and styles to prevent mixed-version browser caches. Node.js 24 is required; no dependency installation is needed.

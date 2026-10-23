@@ -8,7 +8,11 @@ export const techniques = {
   "T1110.001": { name: "Password Guessing", tactic: "Credential Access" },
   "T1110.003": { name: "Password Spraying", tactic: "Credential Access" },
   "T1078.004": { name: "Cloud Accounts", tactic: "Initial Access" },
-  "T1496.001": { name: "Compute Hijacking", tactic: "Impact" }
+  "T1496.001": { name: "Compute Hijacking", tactic: "Impact" },
+  "T1486": { name: "Data Encrypted for Impact", tactic: "Impact" },
+  "T1204.002": { name: "Malicious File", tactic: "Execution" },
+  "T1204.004": { name: "Malicious Copy and Paste", tactic: "Execution" },
+  "T1059.001": { name: "PowerShell", tactic: "Execution" }
 };
 
 export const research = {
@@ -56,6 +60,26 @@ export const controlGroups = {
     description: "Blocks the configured device-code and authentication-transfer flows.",
     reason: "Closes the device-code authorization path for targeted users and resources. Check legitimate clients before enabling.",
     source: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-block-authentication-flows"
+  },
+  "endpoint-privilege": {
+    title: "Windows LAPS & Endpoint Privilege Management",
+    description: "Manage local administrator passwords and elevation settings to limit privilege abuse. EPM templates require review of the configured elevation response; the supplied profile is intended for users who already have local admin.",
+  },
+  "endpoint-av": {
+    title: "Defender Antivirus",
+    description: "Existing antivirus configurations for malware detection and endpoint protection.",
+  },
+  "endpoint-firewall": {
+    title: "Host firewall",
+    description: "Existing host firewall configurations to restrict network access and help limit lateral movement. A firewall does not block every token-exfiltration or ransomware path.",
+  },
+  "endpoint-defender": {
+    title: "Defender & attack surface reduction",
+    description: "Defender enrollment, tamper protection, and attack surface reduction templates. Audit-only profiles monitor behavior; they do not block it.",
+  },
+  "endpoint-edge": {
+    title: "Microsoft Edge security",
+    description: "Existing browser security settings, including download and SmartScreen-related controls, to help reduce exposure to malicious sites and files. Browser policies do not guarantee prevention of commands a user copies and runs.",
   }
 };
 
@@ -74,10 +98,11 @@ export const scenarios = [
     id: "token-theft", icon: "T", name: "Token theft",
     short: "Malware steals Entra cloud tokens or browser session cookies from a user's device.",
     summary: "An attacker steals application access or refresh tokens, or browser session cookies, from a compromised device and uses them to access cloud services as the user. T1528 and T1539 describe theft; T1550.001 and T1550.004 describe subsequent use.",
-    groups: ["phishing", "device"],
+    groups: ["phishing", "device", "endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender"],
+    endpointPlatforms: ["Windows"],
     techniques: ["T1528", "T1539", "T1550.001", "T1550.004"],
     protection: "Layered protection for cloud access",
-    limitation: "Compliant-device policies add device checks; phishing-resistant MFA protects new authentication, not tokens already stolen by malware. Neither guarantees replay prevention. Use endpoint protection, supported token protection, and session revocation. These references concern cloud tokens and web sessions, not Windows access-token impersonation.",
+    limitation: "Compliant-device policies add device checks; phishing-resistant MFA protects new authentication, not tokens already stolen by malware. Windows LAPS, EPM, Defender, and firewall policies add endpoint protection, but do not guarantee replay prevention. Use supported token protection and session revocation as well.",
     riskNote: "No token-theft reduction percentage is established by the cited sources. General MFA research is not a measure of stolen-token replay protection."
   },
   {
@@ -119,10 +144,31 @@ export const scenarios = [
     protection: "Protect identity entry points",
     limitation: "These policies do not directly control AI consumption or every API credential. Protect keys and workloads, restrict permissions, and set service quotas and cost alerts. Compute hijacking is an indicative resource-abuse association, not an exact match for every LLM attack.",
     riskNote: "No LLMjacking reduction percentage is established by the cited sources. General MFA research does not quantify prevention of AI-resource abuse."
+  },
+  {
+    id: "ransomware", icon: "R", name: "Ransomware",
+    short: "Malware encrypts files and disrupts endpoints and servers.",
+    summary: "Find antivirus, host firewall, and Defender templates from the Windows, Windows Server, and Linux repositories.",
+    groups: ["endpoint-av", "endpoint-firewall", "endpoint-defender"],
+    endpointPlatforms: ["Windows", "Windows Server", "Linux"],
+    techniques: ["T1486", "T1204.002"],
+    protection: "Protect endpoints and servers",
+    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. The Linux repository currently provides Defender Antivirus, but no host firewall template."
+  },
+  {
+    id: "clickfix", icon: "F", name: "ClickFix",
+    short: "A fake verification or fix prompt tricks a user into running a malicious command.",
+    summary: "Use Windows LAPS, EPM, antivirus, firewall, Defender, and Microsoft Edge security templates to harden the device and browser.",
+    groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
+    endpointPlatforms: ["Windows"],
+    techniques: ["T1204.004", "T1059.001"],
+    protection: "Reduce browser and endpoint exposure",
+    limitation: "ClickFix relies on user-executed commands. Browser and endpoint controls provide defense in depth, not a guaranteed block. Keep users out of local admin where possible and review EPM elevation rules before assigning the supplied profile."
   }
 ];
 
 export function policyGroups(policy) {
+  if (policy.platform && policy.group?.startsWith("endpoint-")) return [policy.group];
   const grants = policy.grantControls;
   const conditions = policy.conditions ?? {};
   const controls = grants?.builtInControls ?? [];
@@ -146,7 +192,9 @@ export function matchesScenario(policy, scenario) {
 }
 
 export function scenarioPolicies(policies, scenario, packageName = "all") {
-  return policies.filter((policy) => (packageName === "all" || policy.package === packageName) && matchesScenario(policy, scenario));
+  return policies.filter((policy) => (packageName === "all" || policy.package === packageName)
+    && (!policy.platform || scenario.endpointPlatforms?.includes(policy.platform))
+    && matchesScenario(policy, scenario));
 }
 
 export function groupPolicies(policies, scenario, packageName = "all") {
@@ -162,6 +210,20 @@ export function groupPolicies(policies, scenario, packageName = "all") {
 }
 
 export function policyLabel(policy, group) {
+  if (policy.platform) {
+    if (group === "endpoint-privilege") {
+      if (/EPM/i.test(policy.name)) return "Windows · Endpoint Privilege Management elevation settings";
+      return /24H2/i.test(policy.name) ? "Windows 11 24H2+ · LAPS configuration" : "Windows · LAPS configuration";
+    }
+    if (group === "endpoint-edge") return "Windows · Microsoft Edge security";
+    if (group === "endpoint-firewall") return `${policy.platform} · Firewall configuration`;
+    if (group === "endpoint-av") return `${policy.platform} · Defender Antivirus${/Additional/i.test(policy.name) ? " additional configuration" : " configuration"}${/v1\.0/i.test(policy.name) ? " (v1.0)" : ""}`;
+    if (/Tamper/i.test(policy.name)) return `${policy.platform} · Defender tamper protection`;
+    if (/Enrollment/i.test(policy.name)) return `${policy.platform} · Defender for Endpoint enrollment`;
+    if (policy.auditOnly) return `${policy.platform} · Attack surface reduction (audit only)`;
+    if (/Office/i.test(policy.name)) return `${policy.platform} · Office attack surface reduction`;
+    return `${policy.platform} · Attack surface reduction${/L2/i.test(policy.name) ? " (L2)" : " (low impact)"}`;
+  }
   const code = policy.code.match(/CA\d+/)?.[0];
   const labels = {
     CA000: "All users · require MFA",
