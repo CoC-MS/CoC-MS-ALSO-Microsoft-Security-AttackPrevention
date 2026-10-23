@@ -27,6 +27,16 @@ test("six requested scenarios only, including token theft and password attacks",
   assert.ok(scenarios.every((item) => item.techniques.every((id) => techniques[id])));
 });
 
+test("token theft and device-code phishing use the requested ATT&CK references", () => {
+  assert.deepEqual(scenario("token-theft").techniques, ["T1134.001"]);
+  assert.equal(techniques["T1134.001"].name, "Token Impersonation/Theft (Windows access tokens)");
+  assert.equal(techniqueUrl("T1134.001"), "https://attack.mitre.org/techniques/T1134/001/");
+  assert.match(scenario("token-theft").limitation, /do not directly prevent local Windows token impersonation/);
+  assert.deepEqual(scenario("device-code").techniques, ["T1566.002"]);
+  assert.equal(techniques["T1566.002"].name, "Spearphishing Link");
+  assert.equal(techniqueUrl("T1566.002"), "https://attack.mitre.org/techniques/T1566/002/");
+});
+
 test("AiTM lists only phishing-resistant policies, including Tier 0 role activation", () => {
   assert.deepEqual(codes("aitm"), ["BP-ALSO-CA105", "E5-ALSO-CA106"]);
   for (const policy of scenarioPolicies(inventory.policies, scenario("aitm"))) {

@@ -1,6 +1,7 @@
 export const techniques = {
   "T1557": { name: "Adversary-in-the-Middle", tactic: "Credential Access" },
-  "T1539": { name: "Steal Web Session Cookie", tactic: "Credential Access" },
+  "T1134.001": { name: "Token Impersonation/Theft (Windows access tokens)", tactic: "Defense Evasion / Privilege Escalation" },
+  "T1566.002": { name: "Spearphishing Link", tactic: "Initial Access" },
   "T1528": { name: "Steal Application Access Token", tactic: "Credential Access" },
   "T1110.001": { name: "Password Guessing", tactic: "Credential Access" },
   "T1110.003": { name: "Password Spraying", tactic: "Credential Access" },
@@ -69,12 +70,12 @@ export const scenarios = [
   },
   {
     id: "token-theft", icon: "T", name: "Token theft",
-    short: "An attacker steals a sign-in token or browser session cookie.",
+    short: "An attacker steals or impersonates a Windows access token.",
     summary: "Combine compliant-device requirements with phishing-resistant MFA to reduce identity and device-related exposure.",
     groups: ["phishing", "device"],
-    techniques: ["T1539", "T1528"],
+    techniques: ["T1134.001"],
     protection: "Layered identity protection",
-    limitation: "Device compliance is not token binding. These policies cannot guarantee that every stolen token is unusable. Add supported token protection, endpoint protection, and session revocation.",
+    limitation: "T1134.001 concerns Windows access tokens, not cloud access tokens or browser cookies. These Conditional Access policies protect cloud access entry points; they do not directly prevent local Windows token impersonation. Use endpoint protection and least privilege for that behavior.",
     riskNote: "No token-theft reduction percentage is established by the cited sources. General MFA research is not a measure of stolen-token replay protection."
   },
   {
@@ -92,7 +93,7 @@ export const scenarios = [
     short: "An attacker tricks a user into approving a device-code sign-in.",
     summary: "Block device-code flow and authentication transfer. Keep MFA as a supporting access control.",
     groups: ["flow", "mfa"],
-    techniques: ["T1528", "T1078.004"],
+    techniques: ["T1566.002"],
     protection: "Block the abused sign-in flow",
     limitation: "Standard MFA alone does not stop device-code phishing: the victim may complete MFA for the attacker. The flow-blocking policy is the key control. Review legitimate device-code clients first.",
     riskNote: "The cited sources do not quantify device-code phishing risk reduction. The general MFA percentage does not describe protection against this attack."
