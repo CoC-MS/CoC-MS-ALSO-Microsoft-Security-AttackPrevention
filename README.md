@@ -14,7 +14,6 @@ Source attribution and Apache/MIT license terms are retained in `data/SOURCE_LIC
 - Readable policy names grouped by protection type, with direct BP, E5, and E7 source links.
 - One row per policy code; shared variants are not repeated.
 - Short explanations of protection and limitations, without embedded JSON or a tactic dashboard.
-- Published MFA research figures with their actual scope and source.
 
 ## Scenarios covered
 
@@ -51,6 +50,6 @@ Generic MFA is not treated as phishing-resistant. Device-code blocking is the pr
 
 ### Risk-reduction percentages
 
-[Microsoft Research (2023)](https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks/) reports **99.22%** lower account-compromise risk with MFA across its study population, and **98.56%** lower risk for accounts with known credential leaks, compared with no MFA. These are general observational research findings, not measured reductions for the ALSO templates or the six individual scenarios. The site therefore labels scenario-specific risk reduction **Not quantified**, rather than inventing percentages or reusing a general MFA number as an AiTM/token-theft prevention rate.
+[Microsoft Research (2023)](https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks/) reports **99.22%** lower account-compromise risk with MFA across its study population, and **98.56%** lower risk for accounts with known credential leaks, compared with no MFA. These are general observational research findings, not measured reductions for the ALSO templates or the six individual scenarios. Risk-reduction messages, percentage cards, and the template disclaimer are omitted from the site to keep it focused on scenario-to-policy navigation; this background remains here for reference.
 
 Validate tenant configuration, supported flows, grant operators, emergency access, exclusions, licensing, and current MITRE ATT&CK references before using a mapping for assurance or deployment. Original template content and licensing are maintained in the linked source repository.

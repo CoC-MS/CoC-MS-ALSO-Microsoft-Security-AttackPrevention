@@ -1,5 +1,5 @@
 import inventory from "./data/policies.js";
-import { scenarios, techniques, techniqueUrl, groupPolicies, policyLabel, research } from "./mappings.mjs";
+import { scenarios, techniques, techniqueUrl, groupPolicies, policyLabel } from "./mappings.mjs";
 
 const byId = (id) => document.getElementById(id);
 let selectedId = scenarios[0].id;
@@ -74,7 +74,6 @@ function renderScenario() {
   byId("policy-count").textContent = `${count} ${count === 1 ? "policy" : "policies"}`;
   byId("protection-title").textContent = scenario.protection;
   byId("scenario-limitation").textContent = scenario.limitation;
-  byId("risk-description").textContent = scenario.riskNote;
 
   const links = byId("technique-links");
   links.replaceChildren(...scenario.techniques.map((id) => {
@@ -105,10 +104,6 @@ function renderScenario() {
   byId("results-status").textContent = `${scenario.name}: ${count} policies in ${byId("package-filter").selectedOptions[0].textContent}.`;
 }
 
-byId("population-reduction").textContent = research.populationReduction;
-byId("leaked-reduction").textContent = research.leakedCredentialReduction;
-byId("research-scope").textContent = research.scope;
-byId("research-link").href = research.url;
 byId("snapshot-info").replaceChildren(document.createTextNode(`Source snapshot ${inventory.fetchedAt.slice(0, 10)} · `),
   externalLink(inventory.revision.slice(0, 7), `https://github.com/${inventory.repository}/tree/${inventory.revision}`));
 byId("package-filter").addEventListener("change", renderScenario);
