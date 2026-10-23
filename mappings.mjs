@@ -1,6 +1,8 @@
 export const techniques = {
   "T1557": { name: "Adversary-in-the-Middle", tactic: "Credential Access" },
-  "T1134.001": { name: "Token Impersonation/Theft (Windows access tokens)", tactic: "Defense Evasion / Privilege Escalation" },
+  "T1539": { name: "Steal Web Session Cookie", tactic: "Credential Access" },
+  "T1550.001": { name: "Application Access Token", tactic: "Defense Evasion / Lateral Movement" },
+  "T1550.004": { name: "Web Session Cookie", tactic: "Defense Evasion / Lateral Movement" },
   "T1566.002": { name: "Spearphishing Link", tactic: "Initial Access" },
   "T1528": { name: "Steal Application Access Token", tactic: "Credential Access" },
   "T1110.001": { name: "Password Guessing", tactic: "Credential Access" },
@@ -70,12 +72,12 @@ export const scenarios = [
   },
   {
     id: "token-theft", icon: "T", name: "Token theft",
-    short: "An attacker steals or impersonates a Windows access token.",
-    summary: "Combine compliant-device requirements with phishing-resistant MFA to reduce identity and device-related exposure.",
+    short: "Malware steals Entra cloud tokens or browser session cookies from a user's device.",
+    summary: "An attacker steals application access or refresh tokens, or browser session cookies, from a compromised device and uses them to access cloud services as the user. T1528 and T1539 describe theft; T1550.001 and T1550.004 describe subsequent use.",
     groups: ["phishing", "device"],
-    techniques: ["T1134.001"],
-    protection: "Layered identity protection",
-    limitation: "T1134.001 concerns Windows access tokens, not cloud access tokens or browser cookies. These Conditional Access policies protect cloud access entry points; they do not directly prevent local Windows token impersonation. Use endpoint protection and least privilege for that behavior.",
+    techniques: ["T1528", "T1539", "T1550.001", "T1550.004"],
+    protection: "Layered protection for cloud access",
+    limitation: "Compliant-device policies add device checks; phishing-resistant MFA protects new authentication, not tokens already stolen by malware. Neither guarantees replay prevention. Use endpoint protection, supported token protection, and session revocation. These references concern cloud tokens and web sessions, not Windows access-token impersonation.",
     riskNote: "No token-theft reduction percentage is established by the cited sources. General MFA research is not a measure of stolen-token replay protection."
   },
   {

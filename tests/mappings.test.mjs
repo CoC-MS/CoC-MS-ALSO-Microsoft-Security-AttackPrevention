@@ -27,11 +27,22 @@ test("six requested scenarios only, including token theft and password attacks",
   assert.ok(scenarios.every((item) => item.techniques.every((id) => techniques[id])));
 });
 
-test("token theft and device-code phishing use the requested ATT&CK references", () => {
-  assert.deepEqual(scenario("token-theft").techniques, ["T1134.001"]);
-  assert.equal(techniques["T1134.001"].name, "Token Impersonation/Theft (Windows access tokens)");
-  assert.equal(techniqueUrl("T1134.001"), "https://attack.mitre.org/techniques/T1134/001/");
-  assert.match(scenario("token-theft").limitation, /do not directly prevent local Windows token impersonation/);
+test("cloud token theft distinguishes token and cookie acquisition from subsequent use", () => {
+  const theft = scenario("token-theft");
+  assert.deepEqual(theft.techniques, ["T1528", "T1539", "T1550.001", "T1550.004"]);
+  assert.equal(techniques["T1528"].name, "Steal Application Access Token");
+  assert.equal(techniques["T1539"].name, "Steal Web Session Cookie");
+  assert.equal(techniques["T1550.001"].name, "Application Access Token");
+  assert.equal(techniques["T1550.004"].name, "Web Session Cookie");
+  assert.equal(techniqueUrl("T1550.001"), "https://attack.mitre.org/techniques/T1550/001/");
+  assert.equal(techniqueUrl("T1550.004"), "https://attack.mitre.org/techniques/T1550/004/");
+  assert.ok(!theft.techniques.includes("T1134.001"));
+  assert.match(theft.short, /Malware steals Entra cloud tokens/);
+  assert.match(theft.summary, /T1528 and T1539 describe theft/);
+  assert.match(theft.limitation, /not tokens already stolen by malware/);
+});
+
+test("device-code phishing retains the requested spearphishing link reference", () => {
   assert.deepEqual(scenario("device-code").techniques, ["T1566.002"]);
   assert.equal(techniques["T1566.002"].name, "Spearphishing Link");
   assert.equal(techniqueUrl("T1566.002"), "https://attack.mitre.org/techniques/T1566/002/");
