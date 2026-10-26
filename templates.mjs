@@ -28,7 +28,7 @@ export function templateStrength(template, scenarioId) {
   if (template.section === "SettingsCatalog" && endpointScenarios.has(scenarioId)) {
     if (/ASR Rules\s*\(L2\)|Attack Surface Reduction.*\(L2\)|WDAC|AppControl|Auto Enrollment to MDE|AV Configuration|Firewall/i.test(template.name)) return "strong";
     if (["clickfix", "infostealers"].includes(scenarioId) && /Run Command.*Disable/i.test(template.name)) return "strong";
-    if (scenarioId === "infostealers" && /Edge|BitLocker|Defender Antivirus Updates|LAPS/i.test(template.name)) return "strong";
+    if (["token-theft", "infostealers"].includes(scenarioId) && /Edge|BitLocker|Defender Antivirus Updates|LAPS/i.test(template.name)) return "strong";
   }
   return "supporting";
 }

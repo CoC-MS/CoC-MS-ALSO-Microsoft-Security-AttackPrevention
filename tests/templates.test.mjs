@@ -54,9 +54,11 @@ test("token theft promotes identity requirements and only the requested endpoint
   const own = templateData.templates.filter((item) => item.folder === "TOKEN THEFT");
   const strong = own.filter((item) => templateStrength(item, "token-theft") === "strong");
   assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 11);
-  assert.equal(strong.filter((item) => item.section === "SettingsCatalog").length, 5);
-  for (const item of own.filter((item) => /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name))) {
-    assert.equal(templateStrength(item, "token-theft"), "supporting", item.name);
+  assert.equal(strong.filter((item) => item.section === "SettingsCatalog").length, 13);
+  const promoted = own.filter((item) => item.section === "SettingsCatalog" && /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name));
+  assert.equal(promoted.length, 8);
+  for (const item of promoted) {
+    assert.equal(templateStrength(item, "token-theft"), "strong", item.name);
   }
   assert.ok(own.filter((item) => item.section === "CompliancePolicies").every((item) => templateStrength(item, "token-theft") === "supporting"));
 });
@@ -108,7 +110,7 @@ test("classification does not promote prerequisites or generic MFA for AiTM", ()
   assert.equal(templateStrength({ section: "AuthenticationContext", name: "PhishingResistantMFA" }, "aitm"), "supporting");
   assert.equal(templateStrength({ section: "ConditionalAccess", controls: ["mfa"] }, "aitm"), "supporting");
   assert.equal(templateStrength({ section: "SettingsCatalog", name: "ASR Rules (L1)" }, "token-theft"), "supporting");
-  assert.equal(templateStrength({ section: "SettingsCatalog", name: "Defender Antivirus Updates Ring 1" }, "token-theft"), "supporting");
+  assert.equal(templateStrength({ section: "SettingsCatalog", name: "Defender Antivirus Updates Ring 1" }, "clickfix"), "supporting");
 });
 
 test("every displayed policy has an explanation and links into its own scenario's repo folder", async () => {
