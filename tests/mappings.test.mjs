@@ -184,3 +184,12 @@ test("screenshotted messages are removed without removing attack descriptions or
   assert.match(app, /byId\("scenario-summary"\)\.textContent = scenario\.summary/);
   assert.match(app, /indicators\[item\.strength\]/);
 });
+
+test("technique tags are plain text and header/footer show preview and copyright", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
+  assert.match(app, /element\("span", "technique-tag",/);
+  assert.ok(!app.includes("techniqueUrl"));
+  assert.match(html, /class="brand-preview">Public Preview<\/span>/);
+  assert.match(html, /&copy; 2026 ALSO Security\. All rights reserved\./);
+});

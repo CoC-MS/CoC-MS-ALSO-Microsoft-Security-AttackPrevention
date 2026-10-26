@@ -1,5 +1,5 @@
 import templateData from "./data/templates.js";
-import { scenarios, techniques, techniqueUrl } from "./mappings.mjs";
+import { scenarios, techniques } from "./mappings.mjs";
 import { tiersForScenario, scenarioFolderUrl, indicators } from "./templates.mjs";
 
 const byId = (id) => document.getElementById(id);
@@ -71,9 +71,7 @@ function renderScenario() {
 
   const links = byId("technique-links");
   links.replaceChildren(...scenario.techniques.map((id) => {
-    const link = externalLink(`${id} · ${techniques[id].name}`, techniqueUrl(id));
-    link.title = `Related ATT&CK behavior · ${techniques[id].tactic}. Not a claim of full technique prevention.`;
-    return link;
+    return element("span", "technique-tag", `${id} · ${techniques[id].name}`);
   }));
   const packageLink = externalLink("Get package ↗", scenarioFolderUrl(scenario.id));
   packageLink.className = "package-button";
