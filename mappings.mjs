@@ -119,7 +119,7 @@ export const scenarios = [
   {
     id: "device-code", icon: "D", name: "Device code phishing",
     short: "An attacker tricks a user into approving a device-code sign-in.",
-    summary: "Block device-code flow and authentication transfer. Keep MFA as a supporting access control.",
+    summary: "Block device-code flow and authentication transfer, and require MFA as an additional access requirement.",
     groups: ["flow", "mfa"],
     techniques: ["T1566.002"],
     protection: "Block the abused sign-in flow",
@@ -164,12 +164,12 @@ export const scenarios = [
     endpointPlatforms: ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"],
     techniques: ["T1486", "T1204.002"],
     protection: "Protect endpoints and servers",
-    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. This scenario is still under review.",
+    limitation: "All policies in this scenario's folder are marked Strong as deployment priorities, not guarantees of ransomware prevention. Combine endpoint controls with tested backups and least privilege. The supplied ASR profiles mix block, warn, or audit rules; audit rules do not block.",
   },
   {
     id: "clickfix", icon: "F", name: "ClickFix",
     short: "A fake verification or fix prompt tricks a user into running a malicious command.",
-    summary: "Windows hardening templates, including disabling the Run dialog (Win+R) that ClickFix lures abuse.",
+    summary: "Disable the Run dialog (Win+R) and use ASR L2, App Control, Defender onboarding, antivirus configuration, and firewall policies to reduce ClickFix exposure.",
     groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
     endpointPlatforms: ["Windows"],
     techniques: ["T1204.004", "T1059.001"],

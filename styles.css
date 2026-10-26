@@ -56,7 +56,7 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .category-description { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 6px 0 17px; }
 .policy-group + .policy-group { margin-top: 23px; }
 .group-header { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
-.group-header h4 { font-size: 14px; margin: 0; letter-spacing: -.01em; }
+.group-header h5 { font-size: 14px; margin: 0; letter-spacing: -.01em; }
 .group-header > span { color: var(--muted); font-size: 11px; white-space: nowrap; }
 .group-description { font-size: 11px; line-height: 1.6; color: var(--muted); margin: 6px 0 11px; }
 .policy-list { display: grid; gap: 7px; }
@@ -70,7 +70,12 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .policy-links a:hover { background: #eaf1ff; }
 .state { border-radius: 4px; background: #f1f4f7; padding: 2px 5px; font-size: 9px; }
 .policy-text { font-size: 11px; line-height: 1.6; color: var(--muted); margin: 3px 0 0; }
-.indicator { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: #e6f6ec; color: #17653a; font-size: 11px; font-weight: 650; vertical-align: middle; }
+.indicator { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #e6f6ec; color: #17653a; font-size: 11px; font-weight: 650; vertical-align: middle; }
+.indicator-supporting { background: #eaf1ff; color: #194c95; }
+.priority-tier + .priority-tier { margin-top: 30px; padding-top: 22px; border-top: 2px solid var(--line); }
+.priority-title { margin: 0 0 18px; font-size: 18px; color: #17653a; }
+.priority-supporting .priority-title { color: #194c95; }
+.priority-guide { color: var(--muted); font-size: 12px; line-height: 1.65; margin: 0 0 22px; }
 .scope-note { margin-top: 20px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .scope-note strong { color: #34435a; }
 .scope-note p { margin: 5px 0 0; }

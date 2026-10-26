@@ -1,12 +1,11 @@
 # MITRE ATT&CK to ALSO Microsoft Security Policy Template Mapper
 
-Map **existing ALSO Security Conditional Access and endpoint templates** to well-known attack scenarios. Choose an attack, find policies categorized by CA or operating system, and open the source template. Ransomware includes the available Defender, antivirus, and firewall profiles from Windows, Windows Server, macOS, Linux, Android, and iOS / iPadOS; mobile setup policies are supporting controls, not desktop-style ransomware prevention. No policy builder or tenant connection.
+Map **existing ALSO Security templates** to attack scenarios. Each scenario lists the policies in its own `templates/` folder, explains their purpose, and links to the repository copies. No policy builder or tenant connection.
 
-Templates are a starting point: test in stages, then enforce across the full appropriate scope of users, resources, and devices. A small pilot only protects its assigned group. Review exclusions, emergency access, prerequisites, and policy conflicts.
+**Strong** policies appear before **Supporting** controls. Conditional Access comes before endpoint protection within each priority tier. Indicators express scenario-specific deployment priority, not measured effectiveness or guaranteed prevention.
 
-**Live site:** [MITRE ATT&CK to ALSO Microsoft Security Policy Template Mapper](https://coc-ms.github.io/CoC-MS-ALSO-Microsoft-Security-AttackPrevention/)
+Templates are a starting point: test in stages, then enforce across the full appropriate scope. Review exclusions, emergency access, prerequisites, and policy conflicts.
 
-## Templates folder
+**Live site:** [Open the mapper](https://coc-ms.github.io/CoC-MS-ALSO-Microsoft-Security-AttackPrevention/)
 
-The 	emplates/ folder holds one folder per attack scenario (AITM, TOKEN THEFT, PASSWORD SPRAYING-BRUTE FORCE, DEVICE CODE PHISHING, LLM-CRYPTOJACKING, INFOSTEALERS, RANSOMWARE, CLICKFIX). The site lists every template in the selected scenario's folder, with Conditional Access first (shown as 🟢 Strong, except for ransomware and ClickFix, which have no indicator yet) followed by endpoint protection. After adding or changing files, run `npm run sync:templates`. Tenant-specific exports (`Groups` and `MigrationTable.json`) are intentionally not published.
-
+After adding or changing templates, run `npm run sync:templates`. Groups and migration tables remain in the scenario folders as import support files, not standalone protection policies in the mapper.

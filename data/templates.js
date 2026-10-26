@@ -9,6 +9,7 @@ export default {
       "name": "ALSO-Tier0 Admins",
       "description": "All Tier 0 Admins",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.authenticationContextClassReference"
     },
     {
@@ -19,6 +20,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Device Properties Compliance",
       "description": "Android (AOSP) - Device Properties\nMin Version 12.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -29,6 +31,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Encryption Compliance",
       "description": "Android (AOSP) - System Security - Encryption Compliance\nEncryption Require",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -39,6 +42,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Password Compliance",
       "description": "Android (AOSP) - System Security - Password Compliance\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -49,6 +53,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) - Device Health Compliance",
       "description": "Android (AOSP) - Device Health\nRooted Device Block\n\nALSO - Compliance - Android (AOSP) -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -59,6 +64,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "description": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -69,6 +75,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - MDE risk level under Medium",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -79,6 +86,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Minimum OS version",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -89,6 +97,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - System Security settings",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -99,6 +108,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Health Compliance",
       "description": "Android Enterprise - Device Health Compliance\nRequire the device to be at or under the Device Threat Level Low\nPlay Integrity Verdict Check basic integrity & device integrity\nCheck strong integrity using hardware-backed security features Check strong integrity  ALSO - Compliance - Android Enterprise -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -109,6 +119,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Properties Compliance",
       "description": "Android Enterprise - Device Properties Compliance\nMin Version 14.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -119,6 +130,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Encryption Compliance",
       "description": "Android Enterprise - System Security - Encryption\nRequire Encryption",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -129,6 +141,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Intune app Integrity",
       "description": "Intune app runtime integrity\nRequire",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -139,6 +152,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Microsoft Defender for Endpoint Compliance",
       "description": "Android Enterprise - Microsoft Defender for endpoint Compliance\nLow Risk score",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -149,6 +163,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Password Compliance",
       "description": "Android Enterprise - System Security - Password\nRequire a password to unlock mobile devices\nRequire\nNot configured\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes\nNumber of days until password expires\n120\nNumber of passwords required before user can reuse a password\n5",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -159,6 +174,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -169,6 +185,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -179,6 +196,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Risk Score Defender Compliance",
       "description": "ALSO - Compliance - Windows -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -189,6 +207,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -199,6 +218,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -209,6 +229,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Device properties min. OS version 17 - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -219,6 +240,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Jailbroken status and Threat Status - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -229,6 +251,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - PIN and screen lock - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -239,6 +262,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - Corp - MDE- Risk score requirements - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -249,6 +273,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Health -System Integrity Required - D",
       "description": "Requiring System Integrity for compliance",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -259,6 +284,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Properties - Minimum OS Version - D",
       "description": "Requiring minium version 15",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -269,6 +295,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System Security - Allow only Mac App Store and identified developers - D",
       "description": "Only allowing Mac App Store and identified devs with GateKeeper.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -279,6 +306,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System and Device Security - Password and Encryption - D",
       "description": "Requires disk encryption and password of minimum 8 characters. enables firewall and disables incoming connections.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -289,6 +317,9 @@ export default {
       "name": "BP-ALSO-CA100-Admins-AdminPortals-AnyPlatform-Grant-RequireMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -299,6 +330,7 @@ export default {
       "name": "BP-ALSO-CA102-Admins-AllApps-AnyPlatform-Grant-RequireSigninFrequency4H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -309,6 +341,7 @@ export default {
       "name": "BP-ALSO-CA103-Admins-AllApps-AnyPlatform-Grant-DisablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -319,6 +352,10 @@ export default {
       "name": "BP-ALSO-CA105-Admins-AllApps-AnyPlatform-Grant-PhishingResistantMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -329,6 +366,9 @@ export default {
       "name": "BP-ALSO-CA107-Admins-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -339,6 +379,9 @@ export default {
       "name": "BP-ALSO-CA108-Admins-AllApps-MacOS-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -349,6 +392,7 @@ export default {
       "name": "BP-ALSO-CA109-Admins-AllApps-AnyPlatform-Block-UnknownPlatforms",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -359,6 +403,9 @@ export default {
       "name": "BP-ALSO-CA110-Admins-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -369,6 +416,7 @@ export default {
       "name": "BP-ALSO-CA202-Internals-AllApps-UnmanagedWindowsAndMacOs-Grant-RequireSigninFrequency12H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -379,6 +427,7 @@ export default {
       "name": "BP-ALSO-CA204-Internals-AllApps-AnyPlatform-Block-UnknownPlatforms",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -389,6 +438,9 @@ export default {
       "name": "BP-ALSO-CA205-Internals-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -399,6 +451,7 @@ export default {
       "name": "BP-ALSO-CA206-Internals-AllApps-AnyPlatform-Grant-DIsablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -409,6 +462,9 @@ export default {
       "name": "BP-ALSO-CA208-Internals-AllApps-MacOs-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -419,6 +475,9 @@ export default {
       "name": "BP-ALSO-CA211-Internals-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -429,6 +488,10 @@ export default {
       "name": "E5-ALSO-CA106-Tier0Admins-AllApps-AnyPlatform-Grant-RequirePhishingResistantMFAOnRoleActivation",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -439,6 +502,7 @@ export default {
       "name": "E5-ALSO-CA201-Internals-AllApps-AnyPlatform-Block-HighRiskUser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -449,7 +513,63 @@ export default {
       "name": "E5-ALSO-CA210-Internals-AllApps-AnyPlatform-Block-HighRiskSignIn",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
+    },
+    {
+      "folder": "CLICKFIX",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "CLICKFIX/SettingsCatalog/ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D .json",
+      "name": "ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D ",
+      "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE IN DEFENDER FIRST!\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize\n\nNS - ALSO – HI – BP – Basic – v3.3 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block Mode - D - R",
+      "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "CLICKFIX",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "CLICKFIX/SettingsCatalog/ALSO – HI – BP – Advanced – v1.0 - Windows -WDACAppControl- Trust apps from managed installer only - D.json",
+      "name": "ALSO – HI – BP – Advanced – v1.0 - Windows -WDAC/AppControl- Trust apps from managed installer only - D",
+      "description": "This policy only allows Microsoft's executable files and Intune pushed apps for users to run on their devices.",
+      "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "CLICKFIX",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "CLICKFIX/SettingsCatalog/ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D.json",
+      "name": "ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D",
+      "description": "Auto enrolls Windows devices to MDE ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus   - Auto Enrollment to MDE - D",
+      "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "CLICKFIX",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "CLICKFIX/SettingsCatalog/ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D.json",
+      "name": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
+      "description": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
+      "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "CLICKFIX",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "CLICKFIX/SettingsCatalog/ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D.json",
+      "name": "ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D",
+      "description": "Enables Network Protection and enforces block mode, enables Real Time Protection and Cloud Protection. This is required to use for example Cloud App block and monitoring functions with MDCA.",
+      "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
       "folder": "CLICKFIX",
@@ -459,7 +579,21 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Run Command - Disable - U",
       "description": "Disables Win + R command - reduces ClickFix attack rates.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "DEVICE CODE PHISHING",
+      "section": "ConditionalAccess",
+      "platformFolder": "",
+      "path": "DEVICE CODE PHISHING/ConditionalAccess/BP-ALSO-CA000-Global-AllApps-AnyPlatform-Grant-RequireMFA.json",
+      "name": "BP-ALSO-CA000-Global-AllApps-AnyPlatform-Grant-RequireMFA",
+      "description": "",
+      "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
+      "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
       "folder": "DEVICE CODE PHISHING",
@@ -469,6 +603,35 @@ export default {
       "name": "BP-ALSO-CA004-Global-AllApps-AnyPlatform-Block-AuthenticationFlowsAndDeviceCodeFlow",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "flow"
+      ],
+      "type": "#microsoft.graph.conditionalAccessPolicy"
+    },
+    {
+      "folder": "DEVICE CODE PHISHING",
+      "section": "ConditionalAccess",
+      "platformFolder": "",
+      "path": "DEVICE CODE PHISHING/ConditionalAccess/BP-ALSO-CA100-Admins-AdminPortals-AnyPlatform-Grant-RequireMFA.json",
+      "name": "BP-ALSO-CA100-Admins-AdminPortals-AnyPlatform-Grant-RequireMFA",
+      "description": "",
+      "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
+      "type": "#microsoft.graph.conditionalAccessPolicy"
+    },
+    {
+      "folder": "DEVICE CODE PHISHING",
+      "section": "ConditionalAccess",
+      "platformFolder": "",
+      "path": "DEVICE CODE PHISHING/ConditionalAccess/BP-ALSO-CA300-ServiceAccounts-AllApps-AnyPlatform-RequireMFA.json",
+      "name": "BP-ALSO-CA300-ServiceAccounts-AllApps-AnyPlatform-RequireMFA",
+      "description": "",
+      "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -479,6 +642,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - Microsoft Edge - Disable proxy settings - D",
       "description": "Locks down proxy settings in Edge",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -489,6 +653,7 @@ export default {
       "name": "ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D ",
       "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE IN DEFENDER FIRST!\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize\n\nNS - ALSO – HI – BP – Basic – v3.3 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block Mode - D - R",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -499,6 +664,7 @@ export default {
       "name": "ALSO – HI – BP – Advanced – v1.0 - Windows -WDAC/AppControl- Trust apps from managed installer only - D",
       "description": "This policy only allows Microsoft's executable files and Intune pushed apps for users to run on their devices.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -509,6 +675,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D",
       "description": "Auto enrolls Windows devices to MDE ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus   - Auto Enrollment to MDE - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -519,6 +686,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "description": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -529,6 +697,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "description": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -539,6 +708,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "description": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -549,6 +719,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D",
       "description": "Enables Network Protection and enforces block mode, enables Real Time Protection and Cloud Protection. This is required to use for example Cloud App block and monitoring functions with MDCA.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -559,6 +730,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  -   Security  - D",
       "description": "Security settings configuration for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -569,6 +741,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  - Password Management - U ",
       "description": "Password management settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -579,6 +752,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Profiles, Sign-In and Sync - U",
       "description": "Profile, Auto sign in and Sync settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -589,6 +763,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Updates - D",
       "description": "Updates settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -599,6 +774,18 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge - User Experience - U ",
       "description": "User experience settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
+      "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
+    },
+    {
+      "folder": "INFOSTEALERS",
+      "section": "SettingsCatalog",
+      "platformFolder": "",
+      "path": "INFOSTEALERS/SettingsCatalog/ALSO – MI – BP – Basic – v1.0 – Windows – Run Command - Disable - U.json",
+      "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Run Command - Disable - U",
+      "description": "Disables Win + R command - reduces ClickFix attack rates.",
+      "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -609,6 +796,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -619,6 +807,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security - D",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security   - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -629,6 +818,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "description": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -639,6 +829,7 @@ export default {
       "name": "ALSO-Tier0 Admins",
       "description": "All Tier 0 Admins",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.authenticationContextClassReference"
     },
     {
@@ -649,6 +840,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Device Properties Compliance",
       "description": "Android (AOSP) - Device Properties\nMin Version 12.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -659,6 +851,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Encryption Compliance",
       "description": "Android (AOSP) - System Security - Encryption Compliance\nEncryption Require",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -669,6 +862,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Password Compliance",
       "description": "Android (AOSP) - System Security - Password Compliance\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -679,6 +873,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) - Device Health Compliance",
       "description": "Android (AOSP) - Device Health\nRooted Device Block\n\nALSO - Compliance - Android (AOSP) -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -689,6 +884,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "description": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -699,6 +895,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - MDE risk level under Medium",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -709,6 +906,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Minimum OS version",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -719,6 +917,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - System Security settings",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -729,6 +928,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Health Compliance",
       "description": "Android Enterprise - Device Health Compliance\nRequire the device to be at or under the Device Threat Level Low\nPlay Integrity Verdict Check basic integrity & device integrity\nCheck strong integrity using hardware-backed security features Check strong integrity  ALSO - Compliance - Android Enterprise -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -739,6 +939,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Properties Compliance",
       "description": "Android Enterprise - Device Properties Compliance\nMin Version 14.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -749,6 +950,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Encryption Compliance",
       "description": "Android Enterprise - System Security - Encryption\nRequire Encryption",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -759,6 +961,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Intune app Integrity",
       "description": "Intune app runtime integrity\nRequire",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -769,6 +972,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Microsoft Defender for Endpoint Compliance",
       "description": "Android Enterprise - Microsoft Defender for endpoint Compliance\nLow Risk score",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -779,6 +983,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Password Compliance",
       "description": "Android Enterprise - System Security - Password\nRequire a password to unlock mobile devices\nRequire\nNot configured\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes\nNumber of days until password expires\n120\nNumber of passwords required before user can reuse a password\n5",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -789,6 +994,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -799,6 +1005,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -809,6 +1016,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Risk Score Defender Compliance",
       "description": "ALSO - Compliance - Windows -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -819,6 +1027,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -829,6 +1038,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -839,6 +1049,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Device properties min. OS version 17 - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -849,6 +1060,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Jailbroken status and Threat Status - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -859,6 +1071,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - PIN and screen lock - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -869,6 +1082,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - Corp - MDE- Risk score requirements - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -879,6 +1093,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Health -System Integrity Required - D",
       "description": "Requiring System Integrity for compliance",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -889,6 +1104,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Properties - Minimum OS Version - D",
       "description": "Requiring minium version 15",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -899,6 +1115,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System Security - Allow only Mac App Store and identified developers - D",
       "description": "Only allowing Mac App Store and identified devs with GateKeeper.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -909,6 +1126,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System and Device Security - Password and Encryption - D",
       "description": "Requires disk encryption and password of minimum 8 characters. enables firewall and disables incoming connections.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -919,6 +1137,9 @@ export default {
       "name": "BP-ALSO-CA100-Admins-AdminPortals-AnyPlatform-Grant-RequireMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -929,6 +1150,7 @@ export default {
       "name": "BP-ALSO-CA102-Admins-AllApps-AnyPlatform-Grant-RequireSigninFrequency4H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -939,6 +1161,7 @@ export default {
       "name": "BP-ALSO-CA103-Admins-AllApps-AnyPlatform-Grant-DisablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -949,6 +1172,10 @@ export default {
       "name": "BP-ALSO-CA105-Admins-AllApps-AnyPlatform-Grant-PhishingResistantMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -959,6 +1186,9 @@ export default {
       "name": "BP-ALSO-CA107-Admins-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -969,6 +1199,9 @@ export default {
       "name": "BP-ALSO-CA108-Admins-AllApps-MacOS-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -979,6 +1212,7 @@ export default {
       "name": "BP-ALSO-CA109-Admins-AllApps-AnyPlatform-Block-UnknownPlatforms",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -989,6 +1223,9 @@ export default {
       "name": "BP-ALSO-CA110-Admins-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -999,6 +1236,7 @@ export default {
       "name": "BP-ALSO-CA202-Internals-AllApps-UnmanagedWindowsAndMacOs-Grant-RequireSigninFrequency12H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1009,6 +1247,7 @@ export default {
       "name": "BP-ALSO-CA204-Internals-AllApps-AnyPlatform-Block-UnknownPlatforms",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1019,6 +1258,9 @@ export default {
       "name": "BP-ALSO-CA205-Internals-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1029,6 +1271,7 @@ export default {
       "name": "BP-ALSO-CA206-Internals-AllApps-AnyPlatform-Grant-DIsablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1039,6 +1282,9 @@ export default {
       "name": "BP-ALSO-CA208-Internals-AllApps-MacOs-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1049,6 +1295,9 @@ export default {
       "name": "BP-ALSO-CA211-Internals-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1059,6 +1308,10 @@ export default {
       "name": "E5-ALSO-CA106-Tier0Admins-AllApps-AnyPlatform-Grant-RequirePhishingResistantMFAOnRoleActivation",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1069,6 +1322,7 @@ export default {
       "name": "E5-ALSO-CA201-Internals-AllApps-AnyPlatform-Block-HighRiskUser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1079,6 +1333,7 @@ export default {
       "name": "E5-ALSO-CA210-Internals-AllApps-AnyPlatform-Block-HighRiskSignIn",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1089,6 +1344,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - Microsoft Edge - Disable proxy settings - D",
       "description": "Locks down proxy settings in Edge",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1099,6 +1355,7 @@ export default {
       "name": "ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D ",
       "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE IN DEFENDER FIRST!\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize\n\nNS - ALSO – HI – BP – Basic – v3.3 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block Mode - D - R",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1109,6 +1366,7 @@ export default {
       "name": "ALSO – HI – BP – Advanced – v1.0 - Windows -WDAC/AppControl- Trust apps from managed installer only - D",
       "description": "This policy only allows Microsoft's executable files and Intune pushed apps for users to run on their devices.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1119,6 +1377,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D",
       "description": "Auto enrolls Windows devices to MDE ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus   - Auto Enrollment to MDE - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1129,6 +1388,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "description": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1139,6 +1399,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "description": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1149,6 +1410,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "description": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1159,6 +1421,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D",
       "description": "Enables Network Protection and enforces block mode, enables Real Time Protection and Cloud Protection. This is required to use for example Cloud App block and monitoring functions with MDCA.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1169,6 +1432,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  -   Security  - D",
       "description": "Security settings configuration for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1179,6 +1443,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  - Password Management - U ",
       "description": "Password management settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1189,6 +1454,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Profiles, Sign-In and Sync - U",
       "description": "Profile, Auto sign in and Sync settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1199,6 +1465,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Updates - D",
       "description": "Updates settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1209,6 +1476,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge - User Experience - U ",
       "description": "User experience settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1219,6 +1487,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1229,6 +1498,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security - D",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security   - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1239,6 +1509,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "description": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1249,6 +1520,9 @@ export default {
       "name": "BP-ALSO-CA000-Global-AllApps-AnyPlatform-Grant-RequireMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1259,6 +1533,9 @@ export default {
       "name": "BP-ALSO-CA001-Global-AllApps-AnyPlatform-Block-ExceptWhitelListedCountries",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "location"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1269,6 +1546,9 @@ export default {
       "name": "BP-ALSO-CA002-Global-AllApps-AnyPlatform-Block-LegacyAuthentication",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "legacy"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1279,6 +1559,9 @@ export default {
       "name": "BP-ALSO-CA300-ServiceAccounts-AllApps-AnyPlatform-RequireMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1289,6 +1572,9 @@ export default {
       "name": "BP-ALSO-CA301-ServiceAccounts-AllApps-AnyPlatform-Block-UntrustedLocations",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "location"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1299,6 +1585,7 @@ export default {
       "name": "ALSO-Allowed countries for Service Accounts (NO)",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.countryNamedLocation"
     },
     {
@@ -1309,6 +1596,7 @@ export default {
       "name": "ALSO-Whitelisted countries (NO)",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.countryNamedLocation"
     },
     {
@@ -1319,6 +1607,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - Microsoft Edge - Disable proxy settings - D",
       "description": "Locks down proxy settings in Edge",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1329,6 +1618,7 @@ export default {
       "name": "ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D ",
       "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE IN DEFENDER FIRST!\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize\n\nNS - ALSO – HI – BP – Basic – v3.3 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block Mode - D - R",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1339,6 +1629,7 @@ export default {
       "name": "ALSO – HI – BP – Advanced – v1.0 - Windows -WDAC/AppControl- Trust apps from managed installer only - D",
       "description": "This policy only allows Microsoft's executable files and Intune pushed apps for users to run on their devices.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1349,6 +1640,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D",
       "description": "Auto enrolls Windows devices to MDE ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus   - Auto Enrollment to MDE - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1359,6 +1651,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "description": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1369,6 +1662,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "description": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1379,6 +1673,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "description": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1389,6 +1684,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D",
       "description": "Enables Network Protection and enforces block mode, enables Real Time Protection and Cloud Protection. This is required to use for example Cloud App block and monitoring functions with MDCA.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1399,6 +1695,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  -   Security  - D",
       "description": "Security settings configuration for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1409,6 +1706,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  - Password Management - U ",
       "description": "Password management settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1419,6 +1717,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Profiles, Sign-In and Sync - U",
       "description": "Profile, Auto sign in and Sync settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1429,6 +1728,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Updates - D",
       "description": "Updates settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1439,6 +1739,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge - User Experience - U ",
       "description": "User experience settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1449,6 +1750,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1459,6 +1761,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security - D",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security   - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1469,6 +1772,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "description": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1479,6 +1783,7 @@ export default {
       "name": "ALSO – HI – MDBS – Adv – v1.0 - Windows Server - Endpoint Security - ASR -  Configuration - Block and Audit Mode- D",
       "description": "Pre-configured ASR rules in Block and Audit Mode. Audit on Safe Mode reboot operations, everything else is on Block. Can be monitored in Defender portal.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1489,6 +1794,7 @@ export default {
       "name": "ALSO – MI – MDBS – Basic – v1.0 - Windows Server - Endpoint Security - Antivirus - AV Configuration - D",
       "description": "Turns on various Defender Antivirus settings like Tamper, Cloud Protection, Network Protection etc. ALWAYS double check policies before scoping them to all your servers to avoid conflicts, misconfigurations etc.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1499,6 +1805,7 @@ export default {
       "name": "ALSO – MI – MDBS – Basic – v1.0 - Windows Server - Endpoint Security - Firewall - Firewall Configuration - D",
       "description": "Turns on all Windows Firewalls with various configurations. ALWAYS double check settings before assigning policy to your servers to avoid conflicts and misconfigurations.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1509,6 +1816,7 @@ export default {
       "name": "ALSO-Tier0 Admins",
       "description": "All Tier 0 Admins",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.authenticationContextClassReference"
     },
     {
@@ -1519,6 +1827,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Device Properties Compliance",
       "description": "Android (AOSP) - Device Properties\nMin Version 12.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -1529,6 +1838,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Encryption Compliance",
       "description": "Android (AOSP) - System Security - Encryption Compliance\nEncryption Require",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -1539,6 +1849,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) -  Password Compliance",
       "description": "Android (AOSP) - System Security - Password Compliance\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -1549,6 +1860,7 @@ export default {
       "name": "ALSO - Compliance - Android (AOSP) - Device Health Compliance",
       "description": "Android (AOSP) - Device Health\nRooted Device Block\n\nALSO - Compliance - Android (AOSP) -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.aospDeviceOwnerCompliancePolicy"
     },
     {
@@ -1559,6 +1871,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "description": "ALSO - Compliance - Android - BYOD - Device Health Settings",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -1569,6 +1882,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - MDE risk level under Medium",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -1579,6 +1893,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - Minimum OS version",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -1589,6 +1904,7 @@ export default {
       "name": "ALSO - Compliance - Android - BYOD - System Security settings",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidWorkProfileCompliancePolicy"
     },
     {
@@ -1599,6 +1915,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Health Compliance",
       "description": "Android Enterprise - Device Health Compliance\nRequire the device to be at or under the Device Threat Level Low\nPlay Integrity Verdict Check basic integrity & device integrity\nCheck strong integrity using hardware-backed security features Check strong integrity  ALSO - Compliance - Android Enterprise -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1609,6 +1926,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Device Properties Compliance",
       "description": "Android Enterprise - Device Properties Compliance\nMin Version 14.0",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1619,6 +1937,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Encryption Compliance",
       "description": "Android Enterprise - System Security - Encryption\nRequire Encryption",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1629,6 +1948,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Intune app Integrity",
       "description": "Intune app runtime integrity\nRequire",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1639,6 +1959,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Microsoft Defender for Endpoint Compliance",
       "description": "Android Enterprise - Microsoft Defender for endpoint Compliance\nLow Risk score",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1649,6 +1970,7 @@ export default {
       "name": "ALSO - Compliance - Android Enterprise - Password Compliance",
       "description": "Android Enterprise - System Security - Password\nRequire a password to unlock mobile devices\nRequire\nNot configured\nRequired password type\nNumeric\nMinimum password length\n8\nMaximum minutes of inactivity before password is required\n5 minutes\nNumber of days until password expires\n120\nNumber of passwords required before user can reuse a password\n5",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy"
     },
     {
@@ -1659,6 +1981,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Defender for Endpoint - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -1669,6 +1992,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Health - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -1679,6 +2003,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Risk Score Defender Compliance",
       "description": "ALSO - Compliance - Windows -",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -1689,6 +2014,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Device Security - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -1699,6 +2025,7 @@ export default {
       "name": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "description": "ALSO - Compliance - Windows - Password  - v3.1 - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.windows10CompliancePolicy"
     },
     {
@@ -1709,6 +2036,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Device properties min. OS version 17 - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -1719,6 +2047,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - Jailbroken status and Threat Status - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -1729,6 +2058,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - BYOD - PIN and screen lock - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -1739,6 +2069,7 @@ export default {
       "name": "ALSO - Compliance - iOS/iPadOS - Corp - MDE- Risk score requirements - D",
       "description": "",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.iosCompliancePolicy"
     },
     {
@@ -1749,6 +2080,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Health -System Integrity Required - D",
       "description": "Requiring System Integrity for compliance",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -1759,6 +2091,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - Device Properties - Minimum OS Version - D",
       "description": "Requiring minium version 15",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -1769,6 +2102,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System Security - Allow only Mac App Store and identified developers - D",
       "description": "Only allowing Mac App Store and identified devs with GateKeeper.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -1779,6 +2113,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - v.1.0 - MacOS - Compliance - System and Device Security - Password and Encryption - D",
       "description": "Requires disk encryption and password of minimum 8 characters. enables firewall and disables incoming connections.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.macOSCompliancePolicy"
     },
     {
@@ -1789,6 +2124,9 @@ export default {
       "name": "BP-ALSO-CA100-Admins-AdminPortals-AnyPlatform-Grant-RequireMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1799,6 +2137,7 @@ export default {
       "name": "BP-ALSO-CA102-Admins-AllApps-AnyPlatform-Grant-RequireSigninFrequency4H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1809,6 +2148,7 @@ export default {
       "name": "BP-ALSO-CA103-Admins-AllApps-AnyPlatform-Grant-DisablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1819,6 +2159,10 @@ export default {
       "name": "BP-ALSO-CA105-Admins-AllApps-AnyPlatform-Grant-PhishingResistantMFA",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1829,6 +2173,9 @@ export default {
       "name": "BP-ALSO-CA107-Admins-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1839,6 +2186,9 @@ export default {
       "name": "BP-ALSO-CA108-Admins-AllApps-MacOS-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1849,6 +2199,9 @@ export default {
       "name": "BP-ALSO-CA110-Admins-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1859,6 +2212,7 @@ export default {
       "name": "BP-ALSO-CA202-Internals-AllApps-UnmanagedWindowsAndMacOs-Grant-RequireSigninFrequency12H",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1869,6 +2223,9 @@ export default {
       "name": "BP-ALSO-CA205-Internals-AllApps-Windows-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1879,6 +2236,7 @@ export default {
       "name": "BP-ALSO-CA206-Internals-AllApps-AnyPlatform-Grant-DIsablePersistentBrowser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1889,6 +2247,9 @@ export default {
       "name": "BP-ALSO-CA208-Internals-AllApps-MacOs-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1899,6 +2260,9 @@ export default {
       "name": "BP-ALSO-CA211-Internals-AllApps-iOSandAndroid-Grant-RequireCompliantDevice",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "device"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1909,6 +2273,10 @@ export default {
       "name": "E5-ALSO-CA106-Tier0Admins-AllApps-AnyPlatform-Grant-RequirePhishingResistantMFAOnRoleActivation",
       "description": "",
       "state": "disabled",
+      "controls": [
+        "phishing",
+        "mfa"
+      ],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1919,6 +2287,7 @@ export default {
       "name": "E5-ALSO-CA201-Internals-AllApps-AnyPlatform-Block-HighRiskUser",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1929,6 +2298,7 @@ export default {
       "name": "E5-ALSO-CA210-Internals-AllApps-AnyPlatform-Block-HighRiskSignIn",
       "description": "",
       "state": "disabled",
+      "controls": [],
       "type": "#microsoft.graph.conditionalAccessPolicy"
     },
     {
@@ -1939,6 +2309,7 @@ export default {
       "name": "ALSO - LI - BP - Basic - Microsoft Edge - Disable proxy settings - D",
       "description": "Locks down proxy settings in Edge",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1949,6 +2320,7 @@ export default {
       "name": "ALSO – BP – HI – Adv – v1.0 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block, Warn and Audit Mode - D ",
       "description": "DO NOT ASSIGN THIS POLICY WITHOUT VALIDATING VIA AUDIT MODE IN DEFENDER FIRST!\n\nhttps://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-deployment-operationalize\n\nNS - ALSO – HI – BP – Basic – v3.3 – Windows – Attack Surface Reduction -  ASR Rules (L2) Block Mode - D - R",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1959,6 +2331,7 @@ export default {
       "name": "ALSO – HI – BP – Advanced – v1.0 - Windows -WDAC/AppControl- Trust apps from managed installer only - D",
       "description": "This policy only allows Microsoft's executable files and Intune pushed apps for users to run on their devices.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1969,6 +2342,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus - Auto Enrollment to MDE - D",
       "description": "Auto enrolls Windows devices to MDE ALSO – LI – BP – Basic – v1.0 - Windows - Defender Antivirus   - Auto Enrollment to MDE - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1979,6 +2353,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "description": "ALSO – LI – BP – Basic – v3.0- Windows - Encryption  -  BitLocker (OS Disk) - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1989,6 +2364,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "description": "ALSO – LI – BP – Basic – v3.1- Windows - Windows Firewall  - Firewall Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -1999,6 +2375,7 @@ export default {
       "name": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "description": "ALSO – LI – BP – Basic – v3.4 - Windows - Defender Antivirus Updates  - Ring 1 - Pilot - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2009,6 +2386,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 - Windows - Defender Antivirus   -  AV Configuration - D",
       "description": "Enables Network Protection and enforces block mode, enables Real Time Protection and Cloud Protection. This is required to use for example Cloud App block and monitoring functions with MDCA.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2019,6 +2397,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  -   Security  - D",
       "description": "Security settings configuration for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2029,6 +2408,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge  - Password Management - U ",
       "description": "Password management settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2039,6 +2419,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Profiles, Sign-In and Sync - U",
       "description": "Profile, Auto sign in and Sync settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2049,6 +2430,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge -  Updates - D",
       "description": "Updates settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2059,6 +2441,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0 – Windows – Microsoft Edge - User Experience - U ",
       "description": "User experience settings for Microsoft Edge.",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2069,6 +2452,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Extensions  - U",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2079,6 +2463,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security - D",
       "description": "ALSO – MI – BP – Basic – v1.0– MacOS – Microsoft Edge  - Security   - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     },
     {
@@ -2089,6 +2474,7 @@ export default {
       "name": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "description": "ALSO – MI – BP – Basic – v3.1- Windows - LAPS - Configuration - D",
       "state": null,
+      "controls": [],
       "type": "#microsoft.graph.deviceManagementConfigurationPolicy"
     }
   ]

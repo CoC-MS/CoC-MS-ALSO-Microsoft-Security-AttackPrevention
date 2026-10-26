@@ -11,20 +11,36 @@ export const scenarioFolders = {
   clickfix: "CLICKFIX"
 };
 
-// Ransomware and ClickFix are still under review, so they show no strength indicator.
-export const indicatorScenarios = new Set(Object.keys(scenarioFolders).filter((id) => !["ransomware", "clickfix"].includes(id)));
+export const indicators = { strong: "🟢 Strong", supporting: "🔵 Supporting" };
 
-export const FIRST_LAYER_INDICATOR = "🟢 Strong";
+const identityScenarios = new Set(["aitm", "token-theft", "cryptojacking", "llmjacking"]);
+const endpointScenarios = new Set(["token-theft", "clickfix", "infostealers"]);
+
+export function templateStrength(template, scenarioId) {
+  if (scenarioId === "ransomware") return "strong";
+  if (template.section === "ConditionalAccess") {
+    const controls = template.controls ?? [];
+    if (identityScenarios.has(scenarioId) && controls.some((control) => ["phishing", "device"].includes(control))) return "strong";
+    if (scenarioId === "device-code" && controls.some((control) => ["flow", "mfa"].includes(control))) return "strong";
+    if (scenarioId === "password-attacks" && controls.some((control) => ["mfa", "legacy", "location"].includes(control))) return "strong";
+  }
+  if (template.section === "SettingsCatalog" && endpointScenarios.has(scenarioId)) {
+    if (/ASR Rules\s*\(L2\)|Attack Surface Reduction.*\(L2\)|WDAC|AppControl|Auto Enrollment to MDE|AV Configuration|Firewall/i.test(template.name)) return "strong";
+    if (["clickfix", "infostealers"].includes(scenarioId) && /Run Command.*Disable/i.test(template.name)) return "strong";
+    if (scenarioId === "infostealers" && /Edge/i.test(template.name)) return "strong";
+  }
+  return "supporting";
+}
 
 export const layers = [
   {
     id: "ca", title: "Layer 1 · Conditional Access",
-    description: "Sign-in and access rules in Microsoft Entra. These are the first line of defense and are applied before any endpoint control.",
+    description: "Microsoft Entra sign-in rules and their prerequisites. Listed before endpoint policies within each priority tier.",
     sections: ["ConditionalAccess", "NamedLocations", "AuthenticationContext"]
   },
   {
     id: "endpoint", title: "Layer 2 · Endpoint protection",
-    description: "Intune device configuration and compliance that harden the device after sign-in rules are in place.",
+    description: "Device configuration and compliance that support access requirements and harden endpoints.",
     sections: ["CompliancePolicies", "SettingsCatalog"]
   }
 ];
@@ -69,7 +85,7 @@ const endpointRules = [
   [/Disable proxy/i, "Microsoft Edge · lock proxy settings", "Locks Edge proxy settings so malware cannot reroute browser traffic through an attacker proxy."],
   [/Attack Surface Reduction.*L2|ASR Rules \(L2\)/i, "Windows · Attack surface reduction (L2)", "Blocks, warns on, or audits risky behavior such as credential theft from LSASS and obfuscated scripts. Validate in audit mode before enforcing."],
   [/Windows Server.*ASR|ASR.*Server/i, "Windows Server · Attack surface reduction", "Pre-configured ASR rules in block and audit mode for servers. Review audit results before enforcing."],
-  [/WDAC|AppControl/i, "Windows · App Control (WDAC) managed installer", "Only allows Microsoft binaries and Intune-deployed apps to run, which stops most unapproved malware and info-stealers."],
+  [/WDAC|AppControl/i, "Windows · App Control (WDAC) managed installer", "Restricts execution using App Control trust rules and managed-installer trust. Review allowed applications and enforcement mode; it does not guarantee that all malware is blocked."],
   [/Auto Enrollment to MDE/i, "Windows · Defender for Endpoint auto-enrollment", "Automatically onboards Windows devices to Microsoft Defender for Endpoint so detection and device risk are available."],
   [/BitLocker/i, "Windows · BitLocker OS disk encryption", "Encrypts the OS drive so data on a lost or stolen device cannot be read."],
   [/Server.*Firewall|Firewall.*Server/i, "Windows Server · Firewall configuration", "Turns on Windows Firewall for all profiles with restrictive defaults to limit lateral movement. Verify required server ports first."],
@@ -135,16 +151,35 @@ export function layersForScenario(templates, scenarioId) {
   const own = templatesForScenario(templates, scenarioId);
   return layers.map((layer) => ({
     ...layer,
-    indicator: layer.id === "ca" && indicatorScenarios.has(scenarioId) ? FIRST_LAYER_INDICATOR : null,
     sections: layer.sections.map((section) => ({
       id: section,
       title: sectionTitle(section),
       items: own.filter((template) => template.section === section)
-        .map((template) => ({ ...template, ...explainTemplate(template) }))
+        .map((template) => ({ ...template, ...explainTemplate(template), strength: templateStrength(template, scenarioId) }))
+        .sort((a, b) => Number(b.strength === "strong") - Number(a.strength === "strong") || a.name.localeCompare(b.name))
     })).filter((section) => section.items.length)
   })).filter((layer) => layer.sections.length);
 }
 
+export function tiersForScenario(templates, scenarioId) {
+  const scenarioLayers = layersForScenario(templates, scenarioId);
+  return Object.entries(indicators).map(([id, title]) => ({
+    id, title,
+    layers: scenarioLayers.map((layer) => ({
+      ...layer,
+      sections: layer.sections.map((section) => ({
+        ...section, items: section.items.filter((item) => item.strength === id)
+      })).filter((section) => section.items.length)
+    })).filter((layer) => layer.sections.length)
+  })).filter((tier) => tier.layers.length);
+}
+
+export function scenarioFolderUrl(scenarioId) {
+  const folder = scenarioFolders[scenarioId];
+  if (!folder) throw new Error(`Unknown scenario: ${scenarioId}`);
+  return `https://github.com/CoC-MS/CoC-MS-ALSO-Microsoft-Security-AttackPrevention/tree/main/templates/${encodeURIComponent(folder)}`;
+}
+
 export function templateUrl(path) {
-  return `templates/${path.split("/").map(encodeURIComponent).join("/")}`;
+  return `https://github.com/CoC-MS/CoC-MS-ALSO-Microsoft-Security-AttackPrevention/blob/main/templates/${path.split("/").map(encodeURIComponent).join("/")}`;
 }

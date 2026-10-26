@@ -1,6 +1,7 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { policyGroups } from "../mappings.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const templatesDir = join(root, "templates");
@@ -29,6 +30,7 @@ export async function collectTemplates() {
       name: json.displayName ?? json.name ?? parts.at(-1).replace(/\.json$/, ""),
       description: (json.description ?? "").trim(),
       state: json.state ?? null,
+      controls: parts.at(-2) === "ConditionalAccess" ? policyGroups(json) : [],
       type: json["@odata.type"] ?? null
     });
   }
