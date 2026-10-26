@@ -13,6 +13,15 @@ export const scenarioFolders = {
 
 export const indicators = { strong: "🟢 Strong", supporting: "🔵 Supporting" };
 
+export const preventionGuidePages = {
+  aitm: 1, "token-theft": 1, "password-attacks": 2, "device-code": 3,
+  cryptojacking: 5, llmjacking: 5, infostealers: 6, clickfix: 6, ransomware: 7
+};
+
+export function preventionGuideUrl(scenarioId) {
+  return `./assets/ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf#page=${preventionGuidePages[scenarioId]}`;
+}
+
 const identityScenarios = new Set(["aitm", "token-theft", "cryptojacking", "llmjacking"]);
 const endpointScenarios = new Set(["token-theft", "clickfix", "infostealers"]);
 

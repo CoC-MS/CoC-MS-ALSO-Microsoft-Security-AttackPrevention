@@ -2,6 +2,8 @@
 
 Choose one scenario folder. Each package contains the policies displayed by the mapper plus any import dependencies included with that scenario.
 
+Additional documentation on preventing these attacks is available in the [ALSO Microsoft Security Attack Prevention Quick Tips (PDF)](../assets/ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf): AiTM and token theft (page 1), password spraying and brute force (page 2), device code phishing (page 3), LLMjacking and cryptojacking (page 5), infostealers and ClickFix (page 6), and ransomware (page 7). The guide also covers OAuth consent attacks on page 4. Some measures require manual setup beyond these templates; independently verify licensing and prerequisites.
+
 | Scenario | Package |
 | --- | --- |
 | AiTM phishing | [AITM](AITM) |

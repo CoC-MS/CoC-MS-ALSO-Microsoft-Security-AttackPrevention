@@ -5,7 +5,7 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import templateData from "../data/templates.js";
 import { scenarios } from "../mappings.mjs";
-import { layersForScenario, tiersForScenario, scenarioFolders, templateUrl, scenarioFolderUrl, templateStrength } from "../templates.mjs";
+import { layersForScenario, tiersForScenario, scenarioFolders, templateUrl, scenarioFolderUrl, templateStrength, preventionGuidePages, preventionGuideUrl } from "../templates.mjs";
 import { collectTemplates, endpointPlatform } from "../scripts/sync-templates.mjs";
 
 test("generated template data matches the templates folder", async () => {
@@ -17,6 +17,17 @@ test("every scenario maps to a folder with templates", () => {
     assert.ok(scenarioFolders[scenario.id], scenario.id);
     const count = layersForScenario(templateData.templates, scenario.id).flatMap((l) => l.sections).length;
     assert.ok(count > 0, scenario.id);
+  }
+});
+
+test("every scenario links to the matching PDF prevention advisory", () => {
+  assert.deepEqual(preventionGuidePages, {
+    aitm: 1, "token-theft": 1, "password-attacks": 2, "device-code": 3,
+    cryptojacking: 5, llmjacking: 5, infostealers: 6, clickfix: 6, ransomware: 7
+  });
+  for (const scenario of scenarios) {
+    assert.equal(preventionGuideUrl(scenario.id),
+      `./assets/ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf#page=${preventionGuidePages[scenario.id]}`);
   }
 });
 

@@ -1,6 +1,6 @@
 import templateData from "./data/templates.js";
 import { scenarios, techniques } from "./mappings.mjs";
-import { tiersForScenario, scenarioFolderUrl, indicators } from "./templates.mjs";
+import { tiersForScenario, scenarioFolderUrl, indicators, preventionGuideUrl, preventionGuidePages } from "./templates.mjs";
 
 const byId = (id) => document.getElementById(id);
 let selectedId = scenarios[0].id;
@@ -73,6 +73,12 @@ function renderScenario() {
   packageLink.className = "package-button";
   packageLink.setAttribute("aria-label", `Get ${scenario.name} package and import instructions (opens in a new tab)`);
   byId("package-actions").replaceChildren(packageLink);
+  const guideLink = externalLink(`ALSO Security Quick Tips (PDF, page ${preventionGuidePages[scenario.id]}) ↗`, preventionGuideUrl(scenario.id));
+  guideLink.setAttribute("aria-label", `Read prevention guidance for ${scenario.name} (PDF, opens in a new tab)`);
+  byId("prevention-guide").replaceChildren(
+    document.createTextNode("Additional documentation on how to prevent this type of attack can be found here: "),
+    guideLink
+  );
 
   const container = byId("policy-groups");
   container.replaceChildren();

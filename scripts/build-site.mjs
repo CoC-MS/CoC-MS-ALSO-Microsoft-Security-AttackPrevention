@@ -35,7 +35,7 @@ export async function buildSite(output = join(root, "_site")) {
     [templatesDataName, templates], [logicName, logic], [mappingsName, mappings],
     [cssName, css], [appName, app], ["index.html", html]
   ].map(([name, content]) => writeFile(join(output, name), content)));
-  await Promise.all(["assets/also-logo.png", "data/SOURCE_LICENSE.txt", "LICENSE"].map(async (path) => {
+  await Promise.all(["assets/also-logo.png", "assets/ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf", "data/SOURCE_LICENSE.txt", "LICENSE"].map(async (path) => {
     const destination = join(output, path);
     await mkdir(resolve(destination, ".."), { recursive: true });
     await copyFile(join(root, path), destination);

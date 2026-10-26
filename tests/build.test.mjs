@@ -35,6 +35,9 @@ test("production HTML and every module dependency use content-hashed assets", as
       assert.equal(name, assetName(sourceName, content));
     }
     assert.ok((await readFile(join(output, "assets", "also-logo.png"))).length);
+    const guide = await readFile(join(output, "assets", "ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf"));
+    assert.equal(guide.subarray(0, 5).toString(), "%PDF-");
+    assert.deepEqual(guide, await readFile(new URL("../assets/ALSO_Microsoft_Security_Attack_Prevention_Quick_Tips.pdf", import.meta.url)));
     assert.ok((await readFile(join(output, "data", "SOURCE_LICENSE.txt"))).length);
     assert.ok((await readFile(join(output, "data", "endpoint-licenses", "ALSO-Microsoft-Security-MacOS.txt"))).length);
     assert.ok((await readFile(join(output, "templates", "CLICKFIX", "SettingsCatalog", (await readdir(join(output, "templates", "CLICKFIX", "SettingsCatalog")))[0]))).length);
