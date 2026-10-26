@@ -13,7 +13,8 @@ async function walk(dir) {
 }
 
 export async function collectTemplates() {
-  const files = (await walk(templatesDir)).filter((file) => file.endsWith(".json")).sort();
+  const files = (await walk(templatesDir)).filter((file) => file.endsWith(".json")
+    && !/[\\/]Groups[\\/]/.test(file) && !file.endsWith("MigrationTable.json")).sort();
   const templates = [];
   for (const file of files) {
     const parts = relative(templatesDir, file).split(sep);
