@@ -79,7 +79,7 @@ test("device code phishing includes the flow block and MFA policies as Strong", 
   assert.ok(own.every((item) => templateStrength(item, "device-code") === "strong"));
 });
 
-test("ClickFix contains all six Strong endpoint controls and infostealers also promotes every Edge profile", () => {
+test("ClickFix contains all six Strong endpoint controls and infostealers promotes the requested Windows controls", () => {
   const clickfix = templateData.templates.filter((item) => item.folder === "CLICKFIX");
   assert.equal(clickfix.length, 6);
   assert.ok(clickfix.every((item) => templateStrength(item, "clickfix") === "strong"));
@@ -87,9 +87,13 @@ test("ClickFix contains all six Strong endpoint controls and infostealers also p
     assert.ok(clickfix.some((item) => pattern.test(item.name)), String(pattern));
   }
   const info = templateData.templates.filter((item) => item.folder === "INFOSTEALERS");
+  assert.equal(info.length, 14);
   assert.ok(info.some((item) => /Run Command/i.test(item.name)));
+  for (const pattern of [/BitLocker/i, /Defender Antivirus Updates/i, /LAPS/i]) {
+    assert.ok(info.some((item) => pattern.test(item.name)), String(pattern));
+  }
   for (const item of info) {
-    const expected = /Edge|Run Command|ASR.*L2|WDAC|Auto Enrollment|AV Configuration|Firewall/i.test(item.name);
+    const expected = /Edge|Run Command|ASR.*L2|WDAC|Auto Enrollment|AV Configuration|Firewall|BitLocker|Defender Antivirus Updates|LAPS/i.test(item.name);
     assert.equal(templateStrength(item, "infostealers"), expected ? "strong" : "supporting", item.name);
   }
 });
@@ -135,13 +139,22 @@ test("endpoint sections are separated by OS without changing priorities or losin
   for (const folder of ["TOKEN THEFT", "INFOSTEALERS", "LLM-CRYPTOJACKING"]) {
     const items = templateData.templates.filter((item) => item.folder === folder && item.section === "SettingsCatalog");
     assert.ok(items.some((item) => item.platform === "Windows"));
-    assert.ok(items.some((item) => item.platform === "macOS"));
+    assert.ok(items.every((item) => item.platform !== "macOS"));
   }
   assert.ok(templateData.templates.some((item) => item.platform === "Windows Server"));
   assert.equal(endpointPlatform({ platforms: "windows10" }, "Microsoft Edge - Disable proxy settings"), "Windows");
   assert.equal(endpointPlatform({ platforms: "macOS" }, "RANSOMWARE/WINDOWS 11/MacOS Edge"), "macOS");
   assert.equal(endpointPlatform({ platforms: "windows10" }, "Windows Server ASR"), "Windows Server");
   assert.throws(() => endpointPlatform({}, "Unknown policy"), /Unknown endpoint platform/);
+});
+
+test("macOS configuration profiles are removed from packages while all compliance policies remain", () => {
+  const mac = templateData.templates.filter((item) => item.platform === "macOS");
+  assert.equal(mac.length, 12);
+  assert.ok(mac.every((item) => item.section === "CompliancePolicies"));
+  for (const folder of ["AITM", "TOKEN THEFT", "LLM-CRYPTOJACKING"]) {
+    assert.equal(mac.filter((item) => item.folder === folder).length, 4, folder);
+  }
 });
 
 test("proxy-lock profiles are removed everywhere and ransomware has only Windows platforms", () => {

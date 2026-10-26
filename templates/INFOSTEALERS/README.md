@@ -2,11 +2,11 @@
 
 [All attack packages](../README.md) | [How to download and import](../README.md#download-and-prepare)
 
-Import only reviewed endpoint profiles, leaving **Import assignments** unchecked. Separate Windows and macOS targets before assigning. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
+Import only reviewed Windows endpoint profiles, leaving **Import assignments** unchecked. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
 
 ## Package folders
 
-- [Endpoint configuration: Windows and macOS](SettingsCatalog)
+- [Endpoint configuration: Windows](SettingsCatalog)
 
 ## Conditional Access import video
 

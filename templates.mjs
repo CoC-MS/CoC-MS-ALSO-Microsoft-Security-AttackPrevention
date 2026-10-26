@@ -28,7 +28,7 @@ export function templateStrength(template, scenarioId) {
   if (template.section === "SettingsCatalog" && endpointScenarios.has(scenarioId)) {
     if (/ASR Rules\s*\(L2\)|Attack Surface Reduction.*\(L2\)|WDAC|AppControl|Auto Enrollment to MDE|AV Configuration|Firewall/i.test(template.name)) return "strong";
     if (["clickfix", "infostealers"].includes(scenarioId) && /Run Command.*Disable/i.test(template.name)) return "strong";
-    if (scenarioId === "infostealers" && /Edge/i.test(template.name)) return "strong";
+    if (scenarioId === "infostealers" && /Edge|BitLocker|Defender Antivirus Updates|LAPS/i.test(template.name)) return "strong";
   }
   return "supporting";
 }
@@ -94,8 +94,6 @@ const endpointRules = [
   [/Defender Antivirus Updates/i, "Windows · Defender Antivirus updates", "Controls how quickly Defender Antivirus platform and signature updates roll out (ring-based)."],
   [/Server.*AV Configuration|Antivirus.*Server/i, "Windows Server · Defender Antivirus configuration", "Enables tamper protection, cloud protection, and network protection for servers."],
   [/AV Configuration/i, "Windows · Defender Antivirus configuration", "Enables real-time protection, cloud protection, and network protection in block mode."],
-  [/MacOS.*Edge.*Extensions/i, "macOS · Microsoft Edge extensions", "Controls which Edge extensions can be installed, limiting malicious extensions that steal data."],
-  [/MacOS.*Edge.*Security/i, "macOS · Microsoft Edge security", "Hardens Edge with SmartScreen and download protections on Mac."],
   [/Edge.*Password Management/i, "Windows · Microsoft Edge password management", "Controls saved passwords in Edge so credentials are not left in the browser for info-stealers to harvest."],
   [/Edge.*Profiles, Sign-In and Sync/i, "Windows · Microsoft Edge profiles, sign-in and sync", "Controls browser profiles, automatic sign-in and sync of data that attackers could steal."],
   [/Edge.*Security/i, "Windows · Microsoft Edge security", "Hardens Edge with SmartScreen and download protections against malicious sites and files."],
