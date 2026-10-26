@@ -192,9 +192,18 @@ test("technique tags are plain text and header/footer show preview and copyright
   assert.ok(!app.includes("techniqueUrl"));
   assert.match(html, /class="brand-preview">Public Preview<\/span>/);
   assert.match(html, /ALSO Microsoft Security Central Technical Team \(c\) 2026 All rights reserved/);
-  assert.match(html, /<link rel="icon" href="data:,">/);
+  assert.match(html, /rel="icon" type="image\/svg\+xml" href="data:image\/svg\+xml,/);
   assert.ok(!html.includes('rel="icon" href="assets/also-logo.png"'));
   const css = await readFile(new URL("../styles.css", import.meta.url), "utf8");
   assert.match(css, /--primary: hsl\(188\.64 100% 24\.51%\)/);
   assert.match(css, /border: 1px solid color-mix\(in srgb, var\(--primary\) 30%, var\(--border\)\)/);
+});
+
+test("policy state badges are hidden without changing source policy state", async () => {
+  const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
+  for (const label of ["Disabled template", "Enabled in source", "Report-only in source"]) {
+    assert.ok(!app.includes(label));
+  }
+  assert.ok(!app.includes('element("span", "state"'));
+  assert.equal(find("BP-ALSO-CA105").state, "disabled");
 });

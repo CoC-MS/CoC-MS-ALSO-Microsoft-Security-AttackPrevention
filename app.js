@@ -51,10 +51,6 @@ function policyRow(item) {
   const meta = element("div", "policy-meta");
   meta.append(element("span", `indicator indicator-${item.strength}`, indicators[item.strength]));
   meta.append(element("span", "policy-code", item.code ?? item.platform ?? "Template"));
-  if (item.state) {
-    const labels = { disabled: "Disabled template", enabled: "Enabled in source", enabledForReportingButNotEnforced: "Report-only in source" };
-    meta.append(element("span", "state", labels[item.state] ?? item.state));
-  }
   copy.append(meta);
   row.append(copy);
   return row;
