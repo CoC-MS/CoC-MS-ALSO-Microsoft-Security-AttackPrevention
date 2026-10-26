@@ -75,18 +75,18 @@ const caInfo = {
   CA102: ["Administrators · sign-in frequency", "Forces admins to sign in again regularly, shortening the life of a stolen admin session."],
   CA103: ["Administrators · no persistent browser session", "Stops browsers from keeping admins signed in, reducing the value of stolen session cookies."],
   CA105: ["Administrators · require phishing-resistant MFA", "Admins must use FIDO2, Windows Hello for Business, or certificate-based MFA, which an AiTM proxy cannot relay."],
-  CA106: ["Tier 0 administrators · phishing-resistant MFA on role activation", "Privileged role activation requires phishing-resistant MFA via the Tier 0 authentication context. Needs Entra ID P2 / E5."],
+  CA106: ["Tier 0 administrators · phishing-resistant MFA on role activation", "Privileged role activation requires phishing-resistant MFA via the Tier 0 authentication context."],
   CA107: ["Administrators · compliant Windows device", "Admins can only access resources from an Intune-compliant Windows device."],
   CA108: ["Administrators · compliant macOS device", "Admins can only access resources from an Intune-compliant Mac."],
   CA109: ["Administrators · block unknown platforms", "Blocks admin sign-ins from device platforms that are not recognized, closing a gap in the platform-based device policies."],
   CA110: ["Administrators · compliant iOS / Android device", "Admins on mobile can only access resources from a compliant iOS or Android device."],
-  CA201: ["Internal users · block high-risk users", "Blocks users Entra ID Protection rates as high risk, for example after leaked credentials or token anomalies. Needs Entra ID P2."],
+  CA201: ["Internal users · block high-risk users", "Blocks users Entra ID Protection rates as high risk, for example after leaked credentials or token anomalies."],
   CA202: ["Internal users · sign-in frequency on unmanaged devices", "Forces re-authentication on unmanaged Windows and macOS devices so stolen sessions expire sooner."],
   CA204: ["Internal users · block unknown platforms", "Blocks sign-ins from unrecognized device platforms."],
   CA205: ["Internal users · compliant Windows device", "Internal users can only access resources from an Intune-compliant Windows device."],
   CA206: ["Internal users · no persistent browser session", "Stops browsers from keeping users signed in, reducing the value of stolen session cookies."],
   CA208: ["Internal users · compliant macOS device", "Internal users can only access resources from an Intune-compliant Mac."],
-  CA210: ["Internal users · block high-risk sign-ins", "Blocks sign-ins that Entra ID Protection rates as high risk. Needs Entra ID P2."],
+  CA210: ["Internal users · block high-risk sign-ins", "Blocks sign-ins that Entra ID Protection rates as high risk."],
   CA211: ["Internal users · compliant iOS / Android device", "Internal users on mobile can only access resources from a compliant iOS or Android device."],
   CA300: ["Service accounts · require MFA", "Requires MFA for service accounts that sign in interactively."],
   CA301: ["Service accounts · block untrusted locations", "Service accounts can only sign in from approved locations."]
@@ -138,7 +138,10 @@ export function explainTemplate(template) {
   if (template.section === "ConditionalAccess") {
     const code = template.name.match(/CA\d+/)?.[0];
     const [title, text] = caInfo[code] ?? fallback;
-    return { title, text, code, state: template.state };
+    const licenseNote = ["CA106", "CA201", "CA210"].includes(code)
+      ? "Requires Microsoft Entra ID P2 for the users covered by this policy. Entra ID P1 / Microsoft 365 Business Premium alone is not sufficient."
+      : undefined;
+    return { title, text, code, state: template.state, licenseNote };
   }
   if (template.section === "NamedLocations") {
     return { title: template.name, text: "Country list that the location-based Conditional Access policies allow or block." };

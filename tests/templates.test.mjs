@@ -20,6 +20,21 @@ test("every scenario maps to a folder with templates", () => {
   }
 });
 
+test("CA106, CA201, and CA210 show an explicit Entra ID P2 licensing note in every scenario", () => {
+  for (const scenario of scenarios) {
+    const items = layersForScenario(templateData.templates, scenario.id)
+      .flatMap((layer) => layer.sections.flatMap((section) => section.items));
+    for (const item of items) {
+      if (["CA106", "CA201", "CA210"].includes(item.code)) {
+        assert.match(item.licenseNote, /Requires Microsoft Entra ID P2/);
+        assert.match(item.licenseNote, /Business Premium alone is not sufficient/);
+      } else {
+        assert.equal(item.licenseNote, undefined);
+      }
+    }
+  }
+});
+
 test("every scenario links to the matching PDF prevention advisory", () => {
   assert.deepEqual(preventionGuidePages, {
     aitm: 1, "token-theft": 1, "password-attacks": 2, "device-code": 3,

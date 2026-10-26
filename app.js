@@ -48,6 +48,7 @@ function policyRow(item) {
   row.dataset.strength = item.strength;
   const copy = element("div", "policy-copy");
   copy.append(element("h6", "policy-title", item.title), element("p", "policy-text", item.text));
+  if (item.licenseNote) copy.append(element("p", "license-note", item.licenseNote));
   const meta = element("div", "policy-meta");
   meta.append(element("span", `indicator indicator-${item.strength}`, indicators[item.strength]));
   meta.append(element("span", "policy-code", item.code ?? item.platform ?? "Template"));
