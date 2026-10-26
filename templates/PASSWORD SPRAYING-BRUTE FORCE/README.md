@@ -11,11 +11,11 @@ Import Conditional Access with state **OFF**. Review named locations, group mapp
 - [Supporting groups](Groups)
 - [Migration table](MigrationTable.json)
 
-## Conditional Access import video (BP example)
+## Conditional Access import video
 
 https://github.com/user-attachments/assets/88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42
 
-## Windows / Intune import video
+## Endpoint policies import video
 
 This package has no endpoint profiles; the video is provided for the other attack packages.
 

@@ -12,7 +12,7 @@ Import Conditional Access first, with state **OFF**, then reviewed endpoint poli
 - [Supporting groups](Groups)
 - [Migration table](MigrationTable.json)
 
-## Conditional Access import video 
+## Conditional Access import video
 
 https://github.com/user-attachments/assets/88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42
 

@@ -48,7 +48,7 @@ Follow the [Windows import guide](https://github.com/CoC-MS/ALSO-Microsoft-Secur
 3. Inspect import results and the resulting objects in Intune. Review update rings, Defender onboarding, application-control trust, ASR enforcement modes, and overlapping settings before assignment. Audit-only rules do not block.
 4. Assign reviewed policies to a pilot group, validate deployment and user impact, then expand to the full appropriate scope. Maintain rollback and emergency-access procedures.
 
-### Windows / Intune import video
+### Endpoint policies import video
 
 Original tutorial from the Windows repository:
 

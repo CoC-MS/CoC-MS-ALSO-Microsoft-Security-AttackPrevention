@@ -8,12 +8,12 @@ Import only reviewed endpoint profiles, leaving **Import assignments** unchecked
 
 - [Endpoint configuration: Windows and macOS](SettingsCatalog)
 
-## Conditional Access import video (BP example)
+## Conditional Access import video
 
 This package has no CA policies. Use the [AiTM](../AITM) or [Token theft](../TOKEN%20THEFT) package if those identity controls are also required; avoid duplicate imports.
 
 https://github.com/user-attachments/assets/88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42
 
-## Windows / Intune import video
+## Endpoint policies import video
 
 https://github.com/user-attachments/assets/524c9224-fedf-45b6-a9d1-462480dd0b82
