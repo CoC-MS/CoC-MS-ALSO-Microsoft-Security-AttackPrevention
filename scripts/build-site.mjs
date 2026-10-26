@@ -13,18 +13,18 @@ export function assetName(name, content) {
 
 export async function buildSite(output = join(root, "_site")) {
   const read = (path) => readFile(join(root, path), "utf8");
-  const policies = await read("data/policies.js");
-  const endpoints = await read("data/endpoint-policies.js");
+  const templates = await read("data/templates.js");
   const mappings = await read("mappings.mjs");
   const css = await read("styles.css");
-  const policiesName = assetName("policies.js", policies);
-  const endpointsName = assetName("endpoint-policies.js", endpoints);
+  const templatesDataName = assetName("templates.js", templates);
+  const logic = await read("templates.mjs");
+  const logicName = assetName("templates.mjs", logic);
   const mappingsName = assetName("mappings.mjs", mappings);
   const cssName = assetName("styles.css", css);
   const app = (await read("app.js"))
-    .replace('"./data/policies.js"', `"./${policiesName}"`)
-    .replace('"./data/endpoint-policies.js"', `"./${endpointsName}"`)
-    .replace('"./mappings.mjs"', `"./${mappingsName}"`);
+    .replace('"./data/templates.js"', `"./${templatesDataName}"`)
+    .replace('"./mappings.mjs"', `"./${mappingsName}"`)
+    .replace('"./templates.mjs"', `"./${logicName}"`);
   const appName = assetName("app.js", app);
   const html = (await read("index.html"))
     .replace('href="styles.css"', `href="${cssName}"`)
@@ -32,7 +32,7 @@ export async function buildSite(output = join(root, "_site")) {
 
   await mkdir(output, { recursive: true });
   await Promise.all([
-    [policiesName, policies], [endpointsName, endpoints], [mappingsName, mappings],
+    [templatesDataName, templates], [logicName, logic], [mappingsName, mappings],
     [cssName, css], [appName, app], ["index.html", html]
   ].map(([name, content]) => writeFile(join(output, name), content)));
   await Promise.all(["assets/also-logo.png", "data/SOURCE_LICENSE.txt", "LICENSE"].map(async (path) => {
@@ -41,7 +41,8 @@ export async function buildSite(output = join(root, "_site")) {
     await copyFile(join(root, path), destination);
   }));
   await cp(join(root, "data", "endpoint-licenses"), join(output, "data", "endpoint-licenses"), { recursive: true });
-  return { appName, policiesName, endpointsName, mappingsName, cssName };
+  await cp(join(root, "templates"), join(output, "templates"), { recursive: true });
+  return { appName, templatesDataName, logicName, mappingsName, cssName };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

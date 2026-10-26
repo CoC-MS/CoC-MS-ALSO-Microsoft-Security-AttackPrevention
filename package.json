@@ -5,6 +5,7 @@
   "scripts": {
     "build": "node scripts/build-site.mjs",
     "sync": "node scripts/sync-policies.mjs",
+    "sync:templates": "node scripts/sync-templates.mjs",
     "sync:endpoints": "node scripts/sync-endpoint-policies.mjs",
     "test": "node --test tests/*.test.mjs"
   }

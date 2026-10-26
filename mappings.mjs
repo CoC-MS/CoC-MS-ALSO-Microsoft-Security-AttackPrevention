@@ -1,6 +1,7 @@
 export const techniques = {
   "T1557": { name: "Adversary-in-the-Middle", tactic: "Credential Access" },
   "T1539": { name: "Steal Web Session Cookie", tactic: "Credential Access" },
+  "T1555.003": { name: "Credentials from Web Browsers", tactic: "Credential Access" },
   "T1550.001": { name: "Application Access Token", tactic: "Defense Evasion / Lateral Movement" },
   "T1550.004": { name: "Web Session Cookie", tactic: "Defense Evasion / Lateral Movement" },
   "T1566.002": { name: "Spearphishing Link", tactic: "Initial Access" },
@@ -146,19 +147,29 @@ export const scenarios = [
     riskNote: "No LLMjacking reduction percentage is established by the cited sources. General MFA research does not quantify prevention of AI-resource abuse."
   },
   {
+    id: "infostealers", icon: "I", name: "Infostealers",
+    short: "Malware harvests saved passwords, cookies, and tokens from a device.",
+    summary: "Infostealer malware steals browser-saved credentials, session cookies, and tokens, then replays them against cloud services. The supplied templates are endpoint and browser hardening.",
+    groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
+    endpointPlatforms: ["Windows"],
+    techniques: ["T1555.003", "T1539"],
+    protection: "Layered protection for stolen credentials and sessions",
+    limitation: "Policies reduce exposure and limit what stolen data can be used for, but do not guarantee that an infostealer cannot run or that already-stolen sessions are unusable. Revoke sessions and reset credentials after an incident."
+  },
+  {
     id: "ransomware", icon: "R", name: "Ransomware",
     short: "Malware encrypts files and disrupts endpoints and servers.",
-    summary: "Find antivirus, host firewall, and Defender templates by operating system: Windows, Windows Server, macOS, Linux, Android, and iOS / iPadOS.",
+    summary: "Endpoint templates for Windows 11 and Windows Server: Defender antivirus, ASR, firewall, app control, and Edge hardening.",
     groups: ["endpoint-av", "endpoint-firewall", "endpoint-defender"],
     endpointPlatforms: ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"],
     techniques: ["T1486", "T1204.002"],
     protection: "Protect endpoints and servers",
-    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. The Linux repository currently provides Defender Antivirus, but no host firewall template. Mobile Defender setup and device-risk policies are supporting controls, not desktop-style antivirus or a guarantee against file encryption."
+    limitation: "Combine malware protection and network restrictions with tested backups and least privilege. Server ASR is supplied in audit mode, not blocking mode. This scenario is still under review.",
   },
   {
     id: "clickfix", icon: "F", name: "ClickFix",
     short: "A fake verification or fix prompt tricks a user into running a malicious command.",
-    summary: "Use Windows LAPS, EPM, antivirus, firewall, Defender, and Microsoft Edge security templates to harden the device and browser.",
+    summary: "Windows hardening templates, including disabling the Run dialog (Win+R) that ClickFix lures abuse.",
     groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
     endpointPlatforms: ["Windows"],
     techniques: ["T1204.004", "T1059.001"],

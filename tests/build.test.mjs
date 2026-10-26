@@ -20,11 +20,11 @@ test("production HTML and every module dependency use content-hashed assets", as
     assert.ok(html.includes(`import("./${manifest.appName}")`));
     assert.ok(html.includes(`href="${manifest.cssName}"`));
     assert.ok(!html.includes('import("./app.js")'));
-    assert.ok(app.includes(`"./${manifest.policiesName}"`));
-    assert.ok(app.includes(`"./${manifest.endpointsName}"`));
+    assert.ok(app.includes(`"./${manifest.templatesDataName}"`));
+    assert.ok(app.includes(`"./${manifest.logicName}"`));
     assert.ok(app.includes(`"./${manifest.mappingsName}"`));
-    assert.ok(!app.includes('"./data/policies.js"'));
-    assert.ok(!app.includes('"./data/endpoint-policies.js"'));
+    assert.ok(!app.includes('"./data/templates.js"'));
+    assert.ok(!app.includes('"./templates.mjs"'));
     assert.ok(!app.includes('"./mappings.mjs"'));
     for (const name of Object.values(manifest)) {
       const content = await readFile(join(output, name), "utf8");
@@ -34,6 +34,7 @@ test("production HTML and every module dependency use content-hashed assets", as
     assert.ok((await readFile(join(output, "assets", "also-logo.png"))).length);
     assert.ok((await readFile(join(output, "data", "SOURCE_LICENSE.txt"))).length);
     assert.ok((await readFile(join(output, "data", "endpoint-licenses", "ALSO-Microsoft-Security-MacOS.txt"))).length);
+    assert.ok((await readFile(join(output, "templates", "CLICKFIX", "SettingsCatalog", (await readdir(join(output, "templates", "CLICKFIX", "SettingsCatalog")))[0]))).length);
     const files = await readdir(output);
     assert.ok(!files.includes("app.js"), "Unversioned scripts must not be published");
   } finally {
