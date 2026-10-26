@@ -6,6 +6,9 @@
   --muted: #5e6c81;
   --line: #e0e6ef;
   --blue: #2363ce;
+  --primary: hsl(188.64 100% 24.51%);
+  --border: #dbe1e8;
+  --text-muted: #5b6678;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 20px; }
@@ -24,7 +27,7 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid
 .brand-divider { width: 1px; height: 24px; margin: 0 12px; background: var(--line); flex: 0 0 auto; }
 .brand-copy { font-size: 14px; font-weight: 650; line-height: 1.5; }
 .brand-title-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.brand-preview { padding: 3px 7px; border: 1px solid #aec6eb; border-radius: 999px; color: var(--blue); font-size: 11px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.brand-preview { padding: 0.2rem 0.45rem; border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border)); border-radius: 999px; color: var(--primary); font-size: 0.7rem; font-weight: 700; line-height: 1.2; white-space: nowrap; }
 main { max-width: 1220px; margin: auto; padding: 32px 30px 20px; }
 .hero { padding: 7px 0 25px; }
 h1 { font-size: clamp(26px, 3.6vw, 38px); font-weight: 750; line-height: 1.15; letter-spacing: -.035em; margin: 0 0 13px; }
@@ -75,9 +78,8 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .scope-note { margin-top: 20px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .scope-note strong { color: #34435a; }
 .scope-note p { margin: 5px 0 0; }
-footer { display: flex; gap: 12px; justify-content: space-between; padding: 23px 0 8px; font-size: 10px; color: #687991; line-height: 1.6; }
-footer > div { display: flex; flex-wrap: wrap; gap: 14px; }
-footer a { color: #687991; }
+footer { padding: 1.5rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; text-align: center; }
+footer p { margin: 0; }
 .error { color: #9e2727; background: #fff1f1; border: 1px solid #e8bbbb; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
 .empty { color: var(--muted); font-size: 12px; padding: 14px; background: #f6f8fb; border-radius: 8px; line-height: 1.6; }
 @media (max-width: 850px) {
@@ -105,7 +107,6 @@ footer a { color: #687991; }
   h2 { font-size: 21px; }
   .result-title { align-items: flex-start; gap: 9px; }
   .count { font-size: 10px; }
-  footer { flex-direction: column; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -191,5 +191,10 @@ test("technique tags are plain text and header/footer show preview and copyright
   assert.match(app, /element\("span", "technique-tag",/);
   assert.ok(!app.includes("techniqueUrl"));
   assert.match(html, /class="brand-preview">Public Preview<\/span>/);
-  assert.match(html, /&copy; 2026 ALSO Security\. All rights reserved\./);
+  assert.match(html, /ALSO Microsoft Security Central Technical Team \(c\) 2026 All rights reserved/);
+  assert.match(html, /<link rel="icon" href="data:,">/);
+  assert.ok(!html.includes('rel="icon" href="assets/also-logo.png"'));
+  const css = await readFile(new URL("../styles.css", import.meta.url), "utf8");
+  assert.match(css, /--primary: hsl\(188\.64 100% 24\.51%\)/);
+  assert.match(css, /border: 1px solid color-mix\(in srgb, var\(--primary\) 30%, var\(--border\)\)/);
 });
