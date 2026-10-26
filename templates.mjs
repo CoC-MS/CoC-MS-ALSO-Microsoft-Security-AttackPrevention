@@ -53,6 +53,7 @@ const sectionTitles = {
   SettingsCatalog: "Endpoint configuration profiles"
 };
 export const sectionTitle = (section) => sectionTitles[section] ?? section;
+export const endpointPlatforms = ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"];
 
 const caInfo = {
   CA000: ["All users · require MFA", "Requires multifactor authentication for every user, so a guessed or leaked password alone cannot sign in."],
@@ -151,13 +152,14 @@ export function layersForScenario(templates, scenarioId) {
   const own = templatesForScenario(templates, scenarioId);
   return layers.map((layer) => ({
     ...layer,
-    sections: layer.sections.map((section) => ({
-      id: section,
-      title: sectionTitle(section),
-      items: own.filter((template) => template.section === section)
+    sections: (layer.id === "endpoint" ? endpointPlatforms : [null]).flatMap((platform) => layer.sections.map((section) => ({
+      id: platform ? `${section}-${platform}` : section,
+      platform,
+      title: platform ? `${platform} · ${sectionTitle(section)}` : sectionTitle(section),
+      items: own.filter((template) => template.section === section && (!platform || template.platform === platform))
         .map((template) => ({ ...template, ...explainTemplate(template), strength: templateStrength(template, scenarioId) }))
         .sort((a, b) => Number(b.strength === "strong") - Number(a.strength === "strong") || a.name.localeCompare(b.name))
-    })).filter((section) => section.items.length)
+    }))).filter((section) => section.items.length)
   })).filter((layer) => layer.sections.length);
 }
 

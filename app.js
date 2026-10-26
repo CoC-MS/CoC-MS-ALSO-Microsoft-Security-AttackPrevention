@@ -1,6 +1,6 @@
 import templateData from "./data/templates.js";
 import { scenarios, techniques, techniqueUrl } from "./mappings.mjs";
-import { tiersForScenario, templateUrl, scenarioFolderUrl, indicators } from "./templates.mjs";
+import { tiersForScenario, scenarioFolderUrl, indicators } from "./templates.mjs";
 
 const byId = (id) => document.getElementById(id);
 let selectedId = scenarios[0].id;
@@ -50,18 +50,13 @@ function policyRow(item) {
   copy.append(element("h6", "policy-title", item.title), element("p", "policy-text", item.text));
   const meta = element("div", "policy-meta");
   meta.append(element("span", `indicator indicator-${item.strength}`, indicators[item.strength]));
-  meta.append(element("span", "policy-code", item.code ?? item.platformFolder ?? "Template"));
+  meta.append(element("span", "policy-code", item.code ?? item.platform ?? "Template"));
   if (item.state) {
     const labels = { disabled: "Disabled template", enabled: "Enabled in source", enabledForReportingButNotEnforced: "Report-only in source" };
     meta.append(element("span", "state", labels[item.state] ?? item.state));
   }
   copy.append(meta);
-  const links = element("div", "policy-links");
-  const link = externalLink("Open template ↗", templateUrl(item.path));
-  link.setAttribute("aria-label", `Open ${item.name} (opens in a new tab)`);
-  link.title = item.name;
-  links.append(link);
-  row.append(copy, links);
+  row.append(copy);
   return row;
 }
 
@@ -80,7 +75,10 @@ function renderScenario() {
     link.title = `Related ATT&CK behavior · ${techniques[id].tactic}. Not a claim of full technique prevention.`;
     return link;
   }));
-  links.append(externalLink("Open scenario folder ↗", scenarioFolderUrl(scenario.id)));
+  const packageLink = externalLink("Get package ↗", scenarioFolderUrl(scenario.id));
+  packageLink.className = "package-button";
+  packageLink.setAttribute("aria-label", `Get ${scenario.name} package and import instructions (opens in a new tab)`);
+  byId("package-actions").replaceChildren(packageLink);
 
   const container = byId("policy-groups");
   container.replaceChildren();
@@ -96,6 +94,7 @@ function renderScenario() {
       layer.sections.forEach((section) => {
         const group = element("section", "policy-group");
         group.dataset.group = section.id;
+        if (section.platform) group.dataset.platform = section.platform;
         const header = element("div", "group-header");
         header.append(element("h5", "", section.title), element("span", "", `${section.items.length} ${section.items.length === 1 ? "policy" : "policies"}`));
         const list = element("div", "policy-list");

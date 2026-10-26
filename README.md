@@ -1,6 +1,6 @@
 # MITRE ATT&CK to ALSO Microsoft Security Policy Template Mapper
 
-Map **existing ALSO Security templates** to attack scenarios. Each scenario lists the policies in its own `templates/` folder, explains their purpose, and links to the repository copies. No policy builder or tenant connection.
+Map **existing ALSO Security templates** to attack scenarios. Each scenario explains its policies, separates endpoint protection by operating system, and provides a **Get package** button linking to its repository folder. [All packages, import instructions, and both tutorial videos](templates/README.md). No policy builder or tenant connection.
 
 Attack descriptions are adapted from the attack overviews in the supplied *ALSO Microsoft Security Attack Prevention Quick Tips* advisory (pages 1-3 and 5-7).
 

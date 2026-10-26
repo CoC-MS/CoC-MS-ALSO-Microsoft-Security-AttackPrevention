@@ -6,6 +6,17 @@ import { policyGroups } from "../mappings.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const templatesDir = join(root, "templates");
 
+export function endpointPlatform(policy, path) {
+  const evidence = `${path} ${policy.displayName ?? policy.name ?? ""} ${policy.platforms ?? ""} ${policy["@odata.type"] ?? ""}`;
+  if (/Windows Server/i.test(evidence)) return "Windows Server";
+  if (/macOS/i.test(evidence)) return "macOS";
+  if (/Android/i.test(evidence)) return "Android";
+  if (/iOS|iPadOS/i.test(evidence)) return "iOS / iPadOS";
+  if (/Windows/i.test(evidence)) return "Windows";
+  if (/Linux/i.test(evidence)) return "Linux";
+  throw new Error(`Unknown endpoint platform: ${path}`);
+}
+
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const nested = await Promise.all(entries.map((entry) => entry.isDirectory()
@@ -26,6 +37,7 @@ export async function collectTemplates() {
       folder: parts[0],
       section: parts.at(-2) === parts[0] ? "" : parts.at(-2),
       platformFolder: parts.slice(1, -2).join(" / "),
+      platform: ["CompliancePolicies", "SettingsCatalog"].includes(parts.at(-2)) ? endpointPlatform(json, parts.join("/")) : null,
       path: parts.join("/"),
       name: json.displayName ?? json.name ?? parts.at(-1).replace(/\.json$/, ""),
       description: (json.description ?? "").trim(),

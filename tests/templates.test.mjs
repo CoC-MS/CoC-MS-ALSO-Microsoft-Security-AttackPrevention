@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
+import { join, dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import templateData from "../data/templates.js";
 import { scenarios } from "../mappings.mjs";
 import { layersForScenario, tiersForScenario, scenarioFolders, templateUrl, scenarioFolderUrl, templateStrength } from "../templates.mjs";
-import { collectTemplates } from "../scripts/sync-templates.mjs";
+import { collectTemplates, endpointPlatform } from "../scripts/sync-templates.mjs";
 
 test("generated template data matches the templates folder", async () => {
   assert.deepEqual(templateData.templates, await collectTemplates());
@@ -106,4 +108,60 @@ test("every displayed policy has an explanation and links into its own scenario'
       }
     }
   }
+});
+
+test("endpoint sections are separated by OS without changing priorities or losing policies", () => {
+  for (const scenario of scenarios) {
+    for (const tier of tiersForScenario(templateData.templates, scenario.id)) {
+      const endpoint = tier.layers.find((layer) => layer.id === "endpoint");
+      for (const section of endpoint?.sections ?? []) {
+        assert.ok(section.platform);
+        assert.ok(section.title.startsWith(`${section.platform} · `));
+        assert.ok(section.items.every((item) => item.platform === section.platform));
+      }
+    }
+  }
+  for (const folder of ["TOKEN THEFT", "INFOSTEALERS", "LLM-CRYPTOJACKING", "RANSOMWARE"]) {
+    const items = templateData.templates.filter((item) => item.folder === folder && item.section === "SettingsCatalog");
+    assert.ok(items.some((item) => item.platform === "Windows"));
+    assert.ok(items.some((item) => item.platform === "macOS"));
+  }
+  assert.ok(templateData.templates.some((item) => item.platform === "Windows Server"));
+  assert.equal(endpointPlatform({ platforms: "windows10" }, "Microsoft Edge - Disable proxy settings"), "Windows");
+  assert.equal(endpointPlatform({ platforms: "macOS" }, "RANSOMWARE/WINDOWS 11/MacOS Edge"), "macOS");
+  assert.equal(endpointPlatform({ platforms: "windows10" }, "Windows Server ASR"), "Windows Server");
+  assert.throws(() => endpointPlatform({}, "Unknown policy"), /Unknown endpoint platform/);
+});
+
+test("site uses one Get package button instead of per-policy template links", async () => {
+  const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(!app.includes("Open template"));
+  assert.ok(!app.includes('"policy-links"'));
+  assert.match(app, /externalLink\("Get package ↗", scenarioFolderUrl\(scenario\.id\)\)/);
+  assert.match(app, /byId\("package-actions"\)\.replaceChildren\(packageLink\)/);
+  assert.ok(html.includes('id="package-actions"'));
+});
+
+test("every package landing page contains folder links, import guidance, and both original videos", async () => {
+  const root = fileURLToPath(new URL("../templates/", import.meta.url));
+  const videoIds = ["88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42", "524c9224-fedf-45b6-a9d1-462480dd0b82"];
+  const index = await readFile(join(root, "README.md"), "utf8");
+  assert.ok(index.includes("ALSO_CA_BP"));
+  assert.ok(index.includes("**Conditional Access state to OFF during import**"));
+  assert.ok(index.includes("**Import assignments** unchecked"));
+  for (const folder of new Set(Object.values(scenarioFolders))) {
+    assert.ok(index.includes(`](${encodeURIComponent(folder)})`), folder);
+    const file = join(root, folder, "README.md");
+    const content = await readFile(file, "utf8");
+    for (const video of videoIds) assert.ok(content.includes(`https://github.com/user-attachments/assets/${video}`), folder);
+    const links = [...content.matchAll(/\]\(([^)]+)\)/g)].map((match) => match[1]);
+    for (const link of links.filter((href) => !href.startsWith("https://"))) {
+      assert.ok(await stat(resolve(dirname(file), decodeURIComponent(link.split("#")[0]))), link);
+    }
+    for (const directory of (await readdir(join(root, folder), { withFileTypes: true })).filter((entry) => entry.isDirectory())) {
+      assert.ok(links.includes(encodeURIComponent(directory.name)), `${folder}/${directory.name}`);
+    }
+  }
+  for (const video of videoIds) assert.ok(index.includes(video));
 });
