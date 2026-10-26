@@ -17,6 +17,7 @@ const identityScenarios = new Set(["aitm", "token-theft", "cryptojacking", "llmj
 const endpointScenarios = new Set(["token-theft", "clickfix", "infostealers"]);
 
 export function templateStrength(template, scenarioId) {
+  if (["cryptojacking", "llmjacking"].includes(scenarioId)) scenarioId = "token-theft";
   if (scenarioId === "ransomware") return "strong";
   if (template.section === "ConditionalAccess") {
     const controls = template.controls ?? [];

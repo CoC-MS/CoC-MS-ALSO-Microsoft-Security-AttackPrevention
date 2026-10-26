@@ -37,8 +37,8 @@ test("Strong policies always precede Supporting, with CA before endpoints within
   }
 });
 
-test("AiTM and LLM/cryptojacking promote device, phishing-resistant, unsupported-platform, and admin-portal MFA policies", () => {
-  for (const id of ["aitm", "llmjacking", "cryptojacking"]) {
+test("AiTM promotes device, phishing-resistant, unsupported-platform, and admin-portal MFA policies", () => {
+  for (const id of ["aitm"]) {
     const own = templateData.templates.filter((item) => item.folder === scenarioFolders[id]);
     for (const item of own) {
       const expected = item.section === "ConditionalAccess" && (item.controls.some((control) => ["phishing", "device"].includes(control))
@@ -47,6 +47,22 @@ test("AiTM and LLM/cryptojacking promote device, phishing-resistant, unsupported
     }
     const strong = own.filter((item) => templateStrength(item, id) === "strong");
     assert.equal(strong.length, 11, id);
+  }
+});
+
+test("cryptojacking and LLMjacking have exactly the token theft policy set and priorities", () => {
+  const policies = (id) => templateData.templates
+    .filter((item) => item.folder === scenarioFolders[id])
+    .map((item) => ({
+      name: item.name, section: item.section, platform: item.platform,
+      controls: item.controls, strength: templateStrength(item, id)
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  for (const id of ["cryptojacking", "llmjacking"]) {
+    assert.deepEqual(policies(id), policies("token-theft"), id);
+    for (const item of templateData.templates) {
+      assert.equal(templateStrength(item, id), templateStrength(item, "token-theft"), item.name);
+    }
   }
 });
 
