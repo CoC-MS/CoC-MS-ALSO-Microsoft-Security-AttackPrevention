@@ -16,6 +16,6 @@ Import Conditional Access first, with state **OFF**, then reviewed endpoint poli
 
 https://github.com/user-attachments/assets/88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42
 
-## Windows / Intune import video
+## Endpoint policies import video
 
 https://github.com/user-attachments/assets/524c9224-fedf-45b6-a9d1-462480dd0b82
