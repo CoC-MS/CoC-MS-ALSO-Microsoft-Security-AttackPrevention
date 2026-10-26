@@ -83,7 +83,6 @@ const caInfo = {
 
 const endpointRules = [
   [/Run Command/i, "Windows · Disable the Run dialog (Win+R)", "Disables Win+R, a common place ClickFix lures tell users to paste commands."],
-  [/Disable proxy/i, "Microsoft Edge · lock proxy settings", "Locks Edge proxy settings so malware cannot reroute browser traffic through an attacker proxy."],
   [/Attack Surface Reduction.*L2|ASR Rules \(L2\)/i, "Windows · Attack surface reduction (L2)", "Blocks, warns on, or audits risky behavior such as credential theft from LSASS and obfuscated scripts. Validate in audit mode before enforcing."],
   [/Windows Server.*ASR|ASR.*Server/i, "Windows Server · Attack surface reduction", "Pre-configured ASR rules in block and audit mode for servers. Review audit results before enforcing."],
   [/WDAC|AppControl/i, "Windows · App Control (WDAC) managed installer", "Restricts execution using App Control trust rules and managed-installer trust. Review allowed applications and enforcement mode; it does not guarantee that all malware is blocked."],

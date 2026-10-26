@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm, mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { assetName, buildSite } from "../scripts/build-site.mjs";
@@ -14,7 +14,10 @@ test("asset URLs change with content and remain stable for unchanged content", (
 test("production HTML and every module dependency use content-hashed assets", async () => {
   const output = await mkdtemp(join(tmpdir(), "also-mapper-build-"));
   try {
+    await mkdir(join(output, "templates"), { recursive: true });
+    await writeFile(join(output, "templates", "removed-policy.json"), "{}");
     const manifest = await buildSite(output);
+    await assert.rejects(readFile(join(output, "templates", "removed-policy.json")), { code: "ENOENT" });
     const html = await readFile(join(output, "index.html"), "utf8");
     const app = await readFile(join(output, manifest.appName), "utf8");
     assert.ok(html.includes(`import("./${manifest.appName}")`));

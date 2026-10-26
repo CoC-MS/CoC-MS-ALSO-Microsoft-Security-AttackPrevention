@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { copyFile, cp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -41,6 +41,7 @@ export async function buildSite(output = join(root, "_site")) {
     await copyFile(join(root, path), destination);
   }));
   await cp(join(root, "data", "endpoint-licenses"), join(output, "data", "endpoint-licenses"), { recursive: true });
+  await rm(join(output, "templates"), { recursive: true, force: true });
   await cp(join(root, "templates"), join(output, "templates"), { recursive: true });
   return { appName, templatesDataName, logicName, mappingsName, cssName };
 }

@@ -121,7 +121,7 @@ test("endpoint sections are separated by OS without changing priorities or losin
       }
     }
   }
-  for (const folder of ["TOKEN THEFT", "INFOSTEALERS", "LLM-CRYPTOJACKING", "RANSOMWARE"]) {
+  for (const folder of ["TOKEN THEFT", "INFOSTEALERS", "LLM-CRYPTOJACKING"]) {
     const items = templateData.templates.filter((item) => item.folder === folder && item.section === "SettingsCatalog");
     assert.ok(items.some((item) => item.platform === "Windows"));
     assert.ok(items.some((item) => item.platform === "macOS"));
@@ -131,6 +131,13 @@ test("endpoint sections are separated by OS without changing priorities or losin
   assert.equal(endpointPlatform({ platforms: "macOS" }, "RANSOMWARE/WINDOWS 11/MacOS Edge"), "macOS");
   assert.equal(endpointPlatform({ platforms: "windows10" }, "Windows Server ASR"), "Windows Server");
   assert.throws(() => endpointPlatform({}, "Unknown policy"), /Unknown endpoint platform/);
+});
+
+test("proxy-lock profiles are removed everywhere and ransomware has only Windows platforms", () => {
+  assert.ok(templateData.templates.every((item) => !/Disable proxy/i.test(item.name)));
+  const ransomware = templateData.templates.filter((item) => item.folder === "RANSOMWARE");
+  assert.equal(ransomware.length, 16);
+  assert.deepEqual([...new Set(ransomware.map((item) => item.platform))].sort(), ["Windows", "Windows Server"]);
 });
 
 test("site uses one Get package button instead of per-policy template links", async () => {

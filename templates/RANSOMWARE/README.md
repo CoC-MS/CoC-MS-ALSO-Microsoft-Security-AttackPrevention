@@ -2,12 +2,12 @@
 
 [All attack packages](../README.md) | [How to download and import](../README.md#download-and-prepare)
 
-Import reviewed endpoint profiles without assignments. Select the Windows 11 or Windows Server subfolder as the package root for the corresponding import. The Windows 11 collection also contains macOS Edge profiles: assign these only to Macs. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
+Import reviewed endpoint profiles without assignments. Select the Windows 11 or Windows Server subfolder as the package root for the corresponding import. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
 
 ## Package folders
 
 - [Windows 11 collection](WINDOWS%2011)
-- [Client and macOS Edge configuration profiles](WINDOWS%2011/SettingsCatalog)
+- [Windows 11 configuration profiles](WINDOWS%2011/SettingsCatalog)
 - [Windows Server collection](WINDOWS%20SERVER)
 - [Windows Server configuration profiles](WINDOWS%20SERVER/SettingsCatalog)
 
