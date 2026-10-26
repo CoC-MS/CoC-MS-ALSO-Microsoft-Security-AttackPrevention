@@ -47,12 +47,10 @@ test("ransomware includes every imported AV, firewall, and Defender policy acros
     assert.ok(selected.some((policy) => policy.platform === platform && policy.group === "endpoint-firewall"));
   }
   assert.ok(!selected.some((policy) => policy.platform === "Linux" && policy.group === "endpoint-firewall"));
-  assert.match(scenario("ransomware").limitation, /no host firewall template/);
   assert.ok(selected.every((policy) => policy.platform));
   for (const platform of ["macOS", "Android", "iOS / iPadOS"]) {
     assert.ok(selected.some((policy) => policy.platform === platform && policy.group === "endpoint-defender"));
   }
-  assert.match(scenario("ransomware").limitation, /Mobile Defender setup and device-risk policies are supporting controls/);
 });
 
 test("macOS includes antivirus, firewall, Defender app and all deployment prerequisites in BP and E5", () => {

@@ -23,7 +23,7 @@ test("source inventory has pinned policy links and preserves all three packages"
 });
 
 test("eight scenarios include ransomware and ClickFix", () => {
-  assert.deepEqual(scenarios.map((item) => item.id), ["aitm", "token-theft", "password-attacks", "device-code", "cryptojacking", "llmjacking", "ransomware", "clickfix"]);
+  assert.deepEqual(scenarios.map((item) => item.id), ["aitm", "token-theft", "password-attacks", "device-code", "cryptojacking", "llmjacking", "infostealers", "ransomware", "clickfix"]);
   assert.ok(scenarios.every((item) => item.techniques.every((id) => techniques[id])));
 });
 

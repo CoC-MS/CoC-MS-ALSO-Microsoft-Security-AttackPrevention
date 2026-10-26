@@ -1,6 +1,6 @@
-import inventory from "./data/policies.js";
-import endpoints from "./data/endpoint-policies.js";
-import { scenarios, techniques, techniqueUrl, categorizePolicies, policyLabel } from "./mappings.mjs";
+import templateData from "./data/templates.js";
+import { scenarios, techniques, techniqueUrl } from "./mappings.mjs";
+import { layersForScenario, templateUrl } from "./templates.mjs";
 
 const byId = (id) => document.getElementById(id);
 let selectedId = scenarios[0].id;
@@ -42,44 +42,31 @@ function renderNavigation() {
   });
 }
 
-function policyRow(variants, group) {
-  const policy = variants[0];
+function policyRow(item) {
   const row = element("div", "policy");
-  row.dataset.policy = policy.code;
+  row.dataset.policy = item.path;
   const copy = element("div", "policy-copy");
-  copy.append(element("h5", "policy-title", policyLabel(policy, group)));
+  copy.append(element("h5", "policy-title", item.title), element("p", "policy-text", item.text));
   const meta = element("div", "policy-meta");
-  if (policy.platform) {
-    meta.append(element("span", "policy-code", policy.platform));
-    if (policy.auditOnly) meta.append(element("span", "state", "Audit only · does not block"));
-    if (group === "endpoint-privilege" && /EPM/i.test(policy.name)) {
-      meta.append(element("span", "state", "Review elevation settings"));
-    }
-  } else {
-    meta.append(element("span", "policy-code", policy.code));
-    const states = [...new Set(variants.map((variant) => variant.state))];
-    const stateLabels = { disabled: "Disabled template", enabled: "Enabled in source", enabledForReportingButNotEnforced: "Report-only in source" };
-    meta.append(element("span", "state", states.length === 1 ? stateLabels[states[0]] : "State varies by package"));
+  meta.append(element("span", "policy-code", item.code ?? item.platformFolder ?? "Template"));
+  if (item.state) {
+    const labels = { disabled: "Disabled template", enabled: "Enabled in source", enabledForReportingButNotEnforced: "Report-only in source" };
+    meta.append(element("span", "state", labels[item.state] ?? item.state));
   }
   copy.append(meta);
   const links = element("div", "policy-links");
-  variants.forEach((variant) => {
-    const samePackage = variants.filter((item) => item.package === variant.package);
-    const label = samePackage.length > 1 ? `${variant.package} · ${samePackage.indexOf(variant) + 1}` : variant.package;
-    const link = externalLink(`${label} ↗`, variant.url);
-    link.setAttribute("aria-label", `Open ${variant.name} in ${variant.package} (opens in a new tab)`);
-    link.title = variant.name;
-    links.append(link);
-  });
+  const link = externalLink("Open template ↗", templateUrl(item.path));
+  link.setAttribute("aria-label", `Open ${item.name} (opens in a new tab)`);
+  link.title = item.name;
+  links.append(link);
   row.append(copy, links);
   return row;
 }
 
 function renderScenario() {
   const scenario = scenarios.find((item) => item.id === selectedId);
-  const categories = categorizePolicies([...inventory.policies, ...endpoints.policies], scenario);
-  const groups = categories.flatMap((category) => category.groups);
-  const count = new Set(groups.flatMap((group) => group.policies.map((variants) => variants[0].code))).size;
+  const layers = layersForScenario(templateData.templates, scenario.id);
+  const count = layers.reduce((sum, layer) => sum + layer.sections.reduce((inner, section) => inner + section.items.length, 0), 0);
   byId("scenario-name").textContent = scenario.name;
   byId("scenario-summary").textContent = scenario.summary;
   byId("policy-count").textContent = `${count} ${count === 1 ? "policy" : "policies"}`;
@@ -95,23 +82,25 @@ function renderScenario() {
 
   const container = byId("policy-groups");
   container.replaceChildren();
-  categories.forEach((category) => {
-    const categorySection = element("section", "policy-category");
-    categorySection.dataset.category = category.id;
-    categorySection.append(element("h3", "category-title", category.title),
-      element("p", "category-description", category.description));
-    category.groups.forEach((group) => {
-      const section = element("section", "policy-group");
-      section.dataset.group = group.id;
+  layers.forEach((layer) => {
+    const layerSection = element("section", "policy-category");
+    layerSection.dataset.category = layer.id;
+    const heading = element("h3", "category-title", layer.title);
+    if (layer.indicator) {
+      heading.append(" ", element("span", "indicator", layer.indicator));
+    }
+    layerSection.append(heading, element("p", "category-description", layer.description));
+    layer.sections.forEach((section) => {
+      const group = element("section", "policy-group");
+      group.dataset.group = section.id;
       const header = element("div", "group-header");
-      header.append(element("h4", "", group.title), element("span", "", `${group.policies.length} ${group.policies.length === 1 ? "policy" : "policies"}`));
-      section.append(header, element("p", "group-description", group.description));
+      header.append(element("h4", "", section.title), element("span", "", `${section.items.length} ${section.items.length === 1 ? "policy" : "policies"}`));
       const list = element("div", "policy-list");
-      list.append(...group.policies.map((variants) => policyRow(variants, group.id)));
-      section.append(list);
-      categorySection.append(section);
+      list.append(...section.items.map(policyRow));
+      group.append(header, list);
+      layerSection.append(group);
     });
-    container.append(categorySection);
+    container.append(layerSection);
   });
   byId("results-status").textContent = `${scenario.name}: ${count} policies.`;
 }
