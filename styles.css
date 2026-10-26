@@ -47,10 +47,6 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .technique-links { display: flex; gap: 6px; flex-wrap: wrap; margin: 13px 0 18px; }
 .technique-links a { border: 1px solid #dce6f4; border-radius: 5px; background: #f6f9fe; color: #526987; padding: 5px 7px; font-size: 10px; text-decoration: none; }
 .technique-links a:hover { color: var(--blue); border-color: #a2bfea; }
-.protection-note { display: flex; gap: 11px; padding: 13px; background: #f0f8f6; border: 1px solid #d6e9e2; border-radius: 8px; margin-bottom: 22px; }
-.shield { color: #178166; font-weight: 750; }
-.protection-note strong { font-size: 12px; color: #24644f; }
-.protection-note p { color: #4e6b61; font-size: 11px; line-height: 1.65; margin: 5px 0 0; }
 .policy-category + .policy-category { margin-top: 30px; padding-top: 22px; border-top: 2px solid var(--line); }
 .category-title { color: #194c95; font-size: 17px; margin: 0; }
 .category-description { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 6px 0 17px; }
@@ -75,7 +71,6 @@ h2 { font-size: 23px; letter-spacing: -.025em; margin: 0; }
 .priority-tier + .priority-tier { margin-top: 30px; padding-top: 22px; border-top: 2px solid var(--line); }
 .priority-title { margin: 0 0 18px; font-size: 18px; color: #17653a; }
 .priority-supporting .priority-title { color: #194c95; }
-.priority-guide { color: var(--muted); font-size: 12px; line-height: 1.65; margin: 0 0 22px; }
 .scope-note { margin-top: 20px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); font-size: 12px; line-height: 1.7; }
 .scope-note strong { color: #34435a; }
 .scope-note p { margin: 5px 0 0; }

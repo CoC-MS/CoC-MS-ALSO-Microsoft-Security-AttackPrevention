@@ -2,6 +2,8 @@
 
 Map **existing ALSO Security templates** to attack scenarios. Each scenario lists the policies in its own `templates/` folder, explains their purpose, and links to the repository copies. No policy builder or tenant connection.
 
+Attack descriptions are adapted from the attack overviews in the supplied *ALSO Microsoft Security Attack Prevention Quick Tips* advisory (pages 1-3 and 5-7).
+
 **Strong** policies appear before **Supporting** controls. Conditional Access comes before endpoint protection within each priority tier. Indicators express scenario-specific deployment priority, not measured effectiveness or guaranteed prevention.
 
 Templates are a starting point: test in stages, then enforce across the full appropriate scope. Review exclusions, emergency access, prerequisites, and policy conflicts.

@@ -38,7 +38,7 @@ test("cloud token theft distinguishes token and cookie acquisition from subseque
   assert.equal(techniqueUrl("T1550.004"), "https://attack.mitre.org/techniques/T1550/004/");
   assert.ok(!theft.techniques.includes("T1134.001"));
   assert.match(theft.short, /Malware steals Entra cloud tokens/);
-  assert.match(theft.summary, /T1528 and T1539 describe theft/);
+  assert.match(theft.summary, /malware, compromised endpoints, browser data, or abused refresh tokens/);
   assert.match(theft.limitation, /not tokens already stolen by malware/);
 });
 
@@ -153,5 +153,34 @@ test("deployment guidance distinguishes broad appropriate scope from a limited p
     "not just a small pilot group", "Test and roll out in stages", "admin-only policies targeted to admins", "emergency-access accounts"]) {
     assert.ok(html.includes(text), text);
   }
-  assert.ok(html.includes("Conditional Access (CA) controls sign-ins."));
+});
+
+test("scenario descriptions use the supplied ALSO Security Quick Tips attack overviews", () => {
+  const expected = {
+    aitm: ["proxies the user's sign-in", "credentials, MFA responses, and session tokens"],
+    "token-theft": ["malware, compromised endpoints, browser data, or abused refresh tokens"],
+    "password-attacks": ["common passwords across many accounts to avoid lockouts", "Brute force repeatedly guesses", "Legacy protocols"],
+    "device-code": ["legitimate-looking code on Microsoft's sign-in page", "without ever seeing the password"],
+    cryptojacking: ["compromised cloud identities, subscriptions, API keys, service principals, or workloads", "paid compute capacity", "resource exhaustion"],
+    llmjacking: ["compromised cloud identities, subscriptions, API keys, service principals, or workloads", "paid AI capacity", "data exposure"],
+    infostealers: ["browser data, passwords, cookies, tokens, wallets, and files"],
+    ransomware: ["encrypts or steals data", "exposed remote services, unpatched vulnerabilities", "extortion, credential theft, and lateral movement"],
+    clickfix: ["running commands or pasted scripts", "Run, PowerShell, Terminal, or a fake troubleshooting prompt"]
+  };
+  for (const item of scenarios) {
+    for (const phrase of expected[item.id]) assert.ok(item.summary.includes(phrase), `${item.id}: ${phrase}`);
+  }
+});
+
+test("screenshotted messages are removed without removing attack descriptions or policy priorities", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
+  for (const removed of ["Conditional Access (CA) controls sign-ins.", "Operating-system policies protect devices.",
+    "protection-note", "protection-title", "scenario-limitation", "priority-guide", "Strong policies are listed first"]) {
+    assert.ok(!html.includes(removed), removed);
+    assert.ok(!app.includes(removed), removed);
+  }
+  assert.match(html, /id="scenario-summary"/);
+  assert.match(app, /byId\("scenario-summary"\)\.textContent = scenario\.summary/);
+  assert.match(app, /indicators\[item\.strength\]/);
 });

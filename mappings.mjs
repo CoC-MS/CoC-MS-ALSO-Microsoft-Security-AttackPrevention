@@ -88,7 +88,7 @@ export const scenarios = [
   {
     id: "aitm", icon: "A", name: "AiTM phishing",
     short: "An attacker proxies a sign-in to capture credentials and sessions.",
-    summary: "Use phishing-resistant authentication against common adversary-in-the-middle phishing proxies, and require compliant devices as an additional access check.",
+    summary: "Adversary-in-the-middle phishing proxies the user's sign-in and can capture credentials, MFA responses, and session tokens.",
     groups: ["phishing", "device"],
     techniques: ["T1557"],
     protection: "Strong protection at sign-in",
@@ -98,7 +98,7 @@ export const scenarios = [
   {
     id: "token-theft", icon: "T", name: "Token theft",
     short: "Malware steals Entra cloud tokens or browser session cookies from a user's device.",
-    summary: "An attacker steals application access or refresh tokens, or browser session cookies, from a compromised device and uses them to access cloud services as the user. T1528 and T1539 describe theft; T1550.001 and T1550.004 describe subsequent use.",
+    summary: "Token theft usually originates from malware, compromised endpoints, browser data, or abused refresh tokens.",
     groups: ["phishing", "device", "endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender"],
     endpointPlatforms: ["Windows"],
     techniques: ["T1528", "T1539", "T1550.001", "T1550.004"],
@@ -109,7 +109,7 @@ export const scenarios = [
   {
     id: "password-attacks", icon: "P", name: "Password spraying & brute force",
     short: "An attacker repeatedly tries passwords to take over an account.",
-    summary: "Require MFA, block legacy authentication, and restrict sign-ins from untrusted countries or locations.",
+    summary: "Password spraying tests a small set of common passwords across many accounts to avoid lockouts. Brute force repeatedly guesses passwords against one or more accounts. Legacy protocols are especially risky because they cannot satisfy modern MFA challenges.",
     groups: ["mfa", "legacy", "location"],
     techniques: ["T1110.003", "T1110.001"],
     protection: "Protect password-based entry points",
@@ -119,7 +119,7 @@ export const scenarios = [
   {
     id: "device-code", icon: "D", name: "Device code phishing",
     short: "An attacker tricks a user into approving a device-code sign-in.",
-    summary: "Block device-code flow and authentication transfer, and require MFA as an additional access requirement.",
+    summary: "Device code phishing tricks a user into entering a legitimate-looking code on Microsoft's sign-in page. The attacker receives the resulting token on another device without ever seeing the password.",
     groups: ["flow", "mfa"],
     techniques: ["T1566.002"],
     protection: "Block the abused sign-in flow",
@@ -129,7 +129,7 @@ export const scenarios = [
   {
     id: "cryptojacking", icon: "C", name: "Cryptojacking",
     short: "An attacker uses your compute resources to mine cryptocurrency.",
-    summary: "Use the same phishing-resistant and compliant-device policies as AiTM and token theft to protect the identity entry points.",
+    summary: "Cryptojacking abuses compromised cloud identities, subscriptions, API keys, service principals, or workloads to consume paid compute capacity. The result can include unexpected cost, resource exhaustion, and data exposure.",
     groups: ["phishing", "device"],
     techniques: ["T1496.001", "T1078.004"],
     protection: "Protect identity entry points",
@@ -139,7 +139,7 @@ export const scenarios = [
   {
     id: "llmjacking", icon: "L", name: "LLMjacking",
     short: "An attacker abuses your AI services and runs up usage costs.",
-    summary: "Use the same phishing-resistant and compliant-device policies as AiTM and token theft to protect interactive access to AI resources.",
+    summary: "LLMjacking abuses compromised cloud identities, subscriptions, API keys, service principals, or workloads to consume paid AI capacity. The result can include unexpected cost, resource exhaustion, and data exposure.",
     groups: ["phishing", "device"],
     techniques: ["T1496.001", "T1078.004", "T1528"],
     protection: "Protect identity entry points",
@@ -149,7 +149,7 @@ export const scenarios = [
   {
     id: "infostealers", icon: "I", name: "Infostealers",
     short: "Malware harvests saved passwords, cookies, and tokens from a device.",
-    summary: "Infostealer malware steals browser-saved credentials, session cookies, and tokens, then replays them against cloud services. The supplied templates are endpoint and browser hardening.",
+    summary: "Infostealers collect browser data, passwords, cookies, tokens, wallets, and files.",
     groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
     endpointPlatforms: ["Windows"],
     techniques: ["T1555.003", "T1539"],
@@ -159,7 +159,7 @@ export const scenarios = [
   {
     id: "ransomware", icon: "R", name: "Ransomware",
     short: "Malware encrypts files and disrupts endpoints and servers.",
-    summary: "Endpoint templates for Windows 11 and Windows Server: Defender antivirus, ASR, firewall, app control, and Edge hardening.",
+    summary: "Ransomware encrypts or steals data and frequently follows identity compromise, phishing, exposed remote services, unpatched vulnerabilities, or excessive privilege. Modern campaigns often combine extortion, credential theft, and lateral movement.",
     groups: ["endpoint-av", "endpoint-firewall", "endpoint-defender"],
     endpointPlatforms: ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"],
     techniques: ["T1486", "T1204.002"],
@@ -169,7 +169,7 @@ export const scenarios = [
   {
     id: "clickfix", icon: "F", name: "ClickFix",
     short: "A fake verification or fix prompt tricks a user into running a malicious command.",
-    summary: "Disable the Run dialog (Win+R) and use ASR L2, App Control, Defender onboarding, antivirus configuration, and firewall policies to reduce ClickFix exposure.",
+    summary: "ClickFix lures users into running commands or pasted scripts, often through Run, PowerShell, Terminal, or a fake troubleshooting prompt.",
     groups: ["endpoint-privilege", "endpoint-av", "endpoint-firewall", "endpoint-defender", "endpoint-edge"],
     endpointPlatforms: ["Windows"],
     techniques: ["T1204.004", "T1059.001"],

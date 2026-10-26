@@ -73,8 +73,6 @@ function renderScenario() {
   byId("scenario-name").textContent = scenario.name;
   byId("scenario-summary").textContent = scenario.summary;
   byId("policy-count").textContent = `${count} ${count === 1 ? "policy" : "policies"}`;
-  byId("protection-title").textContent = scenario.protection;
-  byId("scenario-limitation").textContent = scenario.limitation;
 
   const links = byId("technique-links");
   links.replaceChildren(...scenario.techniques.map((id) => {
