@@ -20,7 +20,8 @@ export function templateStrength(template, scenarioId) {
   if (scenarioId === "ransomware") return "strong";
   if (template.section === "ConditionalAccess") {
     const controls = template.controls ?? [];
-    if (identityScenarios.has(scenarioId) && controls.some((control) => ["phishing", "device"].includes(control))) return "strong";
+    if (identityScenarios.has(scenarioId) && (controls.some((control) => ["phishing", "device"].includes(control))
+      || /\bCA(?:100|109|204)\b/.test(template.name))) return "strong";
     if (scenarioId === "device-code" && controls.some((control) => ["flow", "mfa"].includes(control))) return "strong";
     if (scenarioId === "password-attacks" && controls.some((control) => ["mfa", "legacy", "location"].includes(control))) return "strong";
   }

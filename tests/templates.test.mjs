@@ -37,27 +37,38 @@ test("Strong policies always precede Supporting, with CA before endpoints within
   }
 });
 
-test("AiTM and LLM/cryptojacking mark only phishing-resistant and compliant-device CA as Strong", () => {
+test("AiTM and LLM/cryptojacking promote device, phishing-resistant, unsupported-platform, and admin-portal MFA policies", () => {
   for (const id of ["aitm", "llmjacking", "cryptojacking"]) {
     const own = templateData.templates.filter((item) => item.folder === scenarioFolders[id]);
     for (const item of own) {
-      const expected = item.section === "ConditionalAccess" && item.controls.some((control) => ["phishing", "device"].includes(control));
+      const expected = item.section === "ConditionalAccess" && (item.controls.some((control) => ["phishing", "device"].includes(control))
+        || /\bCA(?:100|109|204)\b/.test(item.name));
       assert.equal(templateStrength(item, id), expected ? "strong" : "supporting", `${id}: ${item.name}`);
     }
     const strong = own.filter((item) => templateStrength(item, id) === "strong");
-    assert.equal(strong.length, 8, id);
+    assert.equal(strong.length, 11, id);
   }
 });
 
 test("token theft promotes identity requirements and only the requested endpoint controls", () => {
   const own = templateData.templates.filter((item) => item.folder === "TOKEN THEFT");
   const strong = own.filter((item) => templateStrength(item, "token-theft") === "strong");
-  assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 8);
+  assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 11);
   assert.equal(strong.filter((item) => item.section === "SettingsCatalog").length, 5);
   for (const item of own.filter((item) => /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name))) {
     assert.equal(templateStrength(item, "token-theft"), "supporting", item.name);
   }
   assert.ok(own.filter((item) => item.section === "CompliancePolicies").every((item) => templateStrength(item, "token-theft") === "supporting"));
+});
+
+test("all four identity scenarios include both unsupported-platform blocks and admin-portal MFA as Strong CA", () => {
+  for (const id of ["aitm", "token-theft", "cryptojacking", "llmjacking"]) {
+    const ca = tiersForScenario(templateData.templates, id).find((tier) => tier.id === "strong")
+      .layers.find((layer) => layer.id === "ca").sections.flatMap((section) => section.items);
+    for (const code of ["CA100", "CA109", "CA204"]) {
+      assert.ok(ca.some((item) => item.code === code), `${id}: ${code}`);
+    }
+  }
 });
 
 test("device code phishing includes the flow block and MFA policies as Strong", () => {
