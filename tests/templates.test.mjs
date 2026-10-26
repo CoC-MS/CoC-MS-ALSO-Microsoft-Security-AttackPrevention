@@ -212,6 +212,8 @@ test("site uses one Get package button instead of per-policy template links", as
   const app = await readFile(new URL("../app.js", import.meta.url), "utf8");
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.ok(!app.includes("Open template"));
+  assert.ok(!app.includes("category-description"));
+  assert.ok(!app.includes("layer.description"));
   assert.ok(!app.includes('"policy-links"'));
   assert.match(app, /externalLink\("Get package ↗", scenarioFolderUrl\(scenario\.id\)\)/);
   assert.match(app, /byId\("package-actions"\)\.replaceChildren\(packageLink\)/);

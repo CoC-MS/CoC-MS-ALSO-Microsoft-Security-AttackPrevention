@@ -91,7 +91,7 @@ function renderScenario() {
       const layerSection = element("section", "policy-category");
       layerSection.dataset.category = layer.id;
       const heading = element("h4", "category-title", layer.title);
-      layerSection.append(heading, element("p", "category-description", layer.description));
+      layerSection.append(heading);
       layer.sections.forEach((section) => {
         const group = element("section", "policy-group");
         group.dataset.group = section.id;
