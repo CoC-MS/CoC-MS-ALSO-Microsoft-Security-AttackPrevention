@@ -16,7 +16,8 @@ function externalLink(text, href) {
   const link = element("a", "", text);
   link.href = href;
   link.target = "_blank";
-  link.rel = "noreferrer";
+  link.rel = "noopener";
+  link.referrerPolicy = "strict-origin-when-cross-origin";
   return link;
 }
 
