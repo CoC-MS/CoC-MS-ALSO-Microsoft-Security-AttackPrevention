@@ -28,6 +28,8 @@ const endpointScenarios = new Set(["token-theft", "clickfix", "infostealers"]);
 export function templateStrength(template, scenarioId) {
   if (["cryptojacking", "llmjacking"].includes(scenarioId)) scenarioId = "token-theft";
   if (scenarioId === "ransomware") return "strong";
+  if (template.platform === "macOS" && ["SettingsCatalog", "DeviceConfiguration", "Applications"].includes(template.section)
+    && ["token-theft", "infostealers"].includes(scenarioId)) return "strong";
   if (template.section === "ConditionalAccess") {
     const controls = template.controls ?? [];
     if (identityScenarios.has(scenarioId) && (controls.some((control) => ["phishing", "device"].includes(control))
@@ -52,7 +54,7 @@ export const layers = [
   {
     id: "endpoint", title: "Layer 2 · Endpoint protection",
     description: "Device configuration and compliance that support access requirements and harden endpoints.",
-    sections: ["CompliancePolicies", "SettingsCatalog"]
+    sections: ["CompliancePolicies", "SettingsCatalog", "DeviceConfiguration", "Applications"]
   }
 ];
 
@@ -61,7 +63,9 @@ const sectionTitles = {
   NamedLocations: "Named locations used by Conditional Access",
   AuthenticationContext: "Authentication contexts used by Conditional Access",
   CompliancePolicies: "Device compliance policies (feed the compliant-device CA policies)",
-  SettingsCatalog: "Endpoint configuration profiles"
+  SettingsCatalog: "Endpoint configuration profiles",
+  DeviceConfiguration: "Device configuration profiles",
+  Applications: "Endpoint applications"
 };
 export const sectionTitle = (section) => sectionTitles[section] ?? section;
 export const endpointPlatforms = ["Windows", "Windows Server", "macOS", "Linux", "Android", "iOS / iPadOS"];
@@ -93,6 +97,23 @@ const caInfo = {
 };
 
 const endpointRules = [
+  [/macOS.*AV.*Configuration/i, "macOS · Defender Antivirus configuration", "Configures Defender Antivirus settings for managed Macs. Review the enforcement settings and test for conflicts before assignment."],
+  [/macOS.*Antivirus.*MDE Config/i, "macOS · Defender for Endpoint configuration", "Configures Defender for Endpoint protections on Mac. Deploy the Defender app and required permissions alongside this profile."],
+  [/macOS.*Firewall.*Gatekeeper/i, "macOS · Firewall and Gatekeeper", "Configures macOS firewall and Gatekeeper settings to restrict network exposure and untrusted applications."],
+  [/macOS.*MDE System Extensions/i, "macOS · Defender system extensions", "Allows the Microsoft Defender system extensions needed for endpoint and network protection."],
+  [/macOS.*MDE Accessibility/i, "macOS · Defender accessibility permissions", "Configures accessibility permissions for Defender components. Review permissions before deployment."],
+  [/macOS.*MDE Auto Onboarding/i, "macOS · Defender tenant onboarding", "Connects Defender to your organization. Replace the placeholder profile with your own tenant onboarding package from Microsoft Defender before import; this template cannot onboard devices as supplied."],
+  [/macOS.*MDE Background Services/i, "macOS · Defender background services", "Allows Defender background services to run so endpoint protection remains available."],
+  [/macOS.*MDE Full Disk Access/i, "macOS · Defender full disk access", "Grants Defender components the full disk access required to inspect protected files."],
+  [/macOS.*MDE Network Filter/i, "macOS · Defender network filter", "Configures the Defender network filter used by network protection on Mac."],
+  [/macOS.*MDE Notifications/i, "macOS · Defender notifications", "Allows Defender alerts and notifications so users can see protection and threat messages."],
+  [/macOS.*MDE Settings/i, "macOS · Defender protection settings", "Configures real-time antivirus, cloud protection, automatic definition updates, and tamper protection."],
+  [/Microsoft Defender for Endpoint \(macOS\)/i, "macOS · Microsoft Defender for Endpoint app", "Deploys the Defender application to managed Macs. Also deploy its required permissions and your own tenant onboarding profile."],
+  [/macOS.*Edge.*Password Management/i, "macOS · Microsoft Edge password management", "Controls browser password storage to reduce credentials available to infostealers on Mac."],
+  [/macOS.*Edge.*Profiles, Sign-In and Sync/i, "macOS · Microsoft Edge profiles, sign-in and sync", "Controls Edge profiles, sign-in, and synchronization of browser data on Mac."],
+  [/macOS.*Edge.*Updates/i, "macOS · Microsoft Edge updates", "Configures Edge update settings to keep the managed Mac browser patched."],
+  [/macOS.*Edge.*Extensions/i, "macOS · Microsoft Edge extensions", "Controls installed Edge extensions to limit untrusted browser code on Mac."],
+  [/macOS.*Edge.*Security/i, "macOS · Microsoft Edge security", "Configures Edge browser protections against malicious sites and downloads on Mac."],
   [/Run Command/i, "Windows · Disable the Run dialog (Win+R)", "Disables Win+R, a common place ClickFix lures tell users to paste commands."],
   [/Attack Surface Reduction.*L2|ASR Rules \(L2\)/i, "Windows · Attack surface reduction (L2)", "Blocks, warns on, or audits risky behavior such as credential theft from LSASS and obfuscated scripts. Validate in audit mode before enforcing."],
   [/Windows Server.*ASR|ASR.*Server/i, "Windows Server · Attack surface reduction", "Pre-configured ASR rules in block and audit mode for servers. Review audit results before enforcing."],

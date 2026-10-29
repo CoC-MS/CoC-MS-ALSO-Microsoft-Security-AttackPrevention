@@ -37,7 +37,7 @@ export async function collectTemplates() {
       folder: parts[0],
       section: parts.at(-2) === parts[0] ? "" : parts.at(-2),
       platformFolder: parts.slice(1, -2).join(" / "),
-      platform: ["CompliancePolicies", "SettingsCatalog"].includes(parts.at(-2)) ? endpointPlatform(json, parts.join("/")) : null,
+      platform: ["CompliancePolicies", "SettingsCatalog", "DeviceConfiguration", "Applications"].includes(parts.at(-2)) ? endpointPlatform(json, parts.join("/")) : null,
       path: parts.join("/"),
       name: json.displayName ?? json.name ?? parts.at(-1).replace(/\.json$/, ""),
       description: (json.description ?? "").trim(),

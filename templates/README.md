@@ -46,9 +46,17 @@ https://github.com/user-attachments/assets/88e2ba12-e3d2-41fa-a1ec-5ff9bc2fea42
 Follow the [Windows import guide](https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/main/docs/public/how-to-import.md) and [Windows prerequisites](https://github.com/CoC-MS/ALSO-Microsoft-Security-Windows/blob/main/docs/public/windows-prerequisites.md). Use the selected scenario's endpoint workload folders, rather than importing a second, overlapping Windows package.
 
 1. Select only the required **Compliance policies** and **Settings Catalog** resources in **Bulk > Import**. Leave **Import assignments** unchecked.
-2. Review the target OS on every policy. These packages retain only compliance policies for macOS, not endpoint configuration profiles. For Mac preparation, consult the [macOS repository](https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS); for other platforms use [Android](https://github.com/CoC-MS/ALSO-Microsoft-Security-Android), [iOS / iPadOS](https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS), or [Windows Server](https://github.com/CoC-MS/ALSO-Microsoft-Security-WindowsServer) guidance as appropriate.
+2. Review the target OS on every policy. Token Theft, LLMjacking/Cryptojacking, Infostealers, and Ransomware include a separate `macOS` collection; AiTM and ClickFix do not include these macOS endpoint exports. For Mac preparation, consult the [macOS repository](https://github.com/CoC-MS/ALSO-Microsoft-Security-MacOS); for other platforms use [Android](https://github.com/CoC-MS/ALSO-Microsoft-Security-Android), [iOS / iPadOS](https://github.com/CoC-MS/ALSO-Microsoft-Security-iOSandiPadOS), or [Windows Server](https://github.com/CoC-MS/ALSO-Microsoft-Security-WindowsServer) guidance as appropriate.
 3. Inspect import results and the resulting objects in Intune. Review update rings, Defender onboarding, application-control trust, ASR enforcement modes, and overlapping settings before assignment. Audit-only rules do not block.
 4. Assign reviewed policies to a pilot group, validate deployment and user impact, then expand to the full appropriate scope. Maintain rollback and emergency-access procedures.
+
+### macOS endpoint protection
+
+Select the scenario's `macOS` folder as the import root. Review **SettingsCatalog**, **DeviceConfiguration**, and **Applications** separately and leave **Import assignments** unchecked. These 17 exports include Defender configuration, firewall/Gatekeeper, Defender permissions and extensions, the Defender app, and five Edge profiles.
+
+**Tenant onboarding is not ready to deploy:** the MDE Auto Onboarding profile has `REPLACE_WITH_YOUR_TENANT_ORG_ID` and `REPLACE_WITH_YOUR_TENANT_ONBOARDING_INFO` placeholders inside its encoded payload. Replace this entire profile with a current macOS onboarding profile downloaded from your own Microsoft Defender portal before importing or assigning it. Do not deploy the supplied placeholder profile. Confirm the app is installed, required permissions are granted, and the device reports to your intended tenant.
+
+The MDE Settings custom profile's malformed, unclosed `PayloadIdentifier` string was repaired in these copies. Review overlaps between this profile, the AV configuration, and MDE Config before assignment; do not enforce conflicting settings. Strong indicates the selected policy priority, not that an unassigned profile or an onboarding prerequisite independently prevents an attack.
 
 ### Endpoint policies import video
 

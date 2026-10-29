@@ -96,8 +96,8 @@ test("token theft promotes identity requirements and only the requested endpoint
   const own = templateData.templates.filter((item) => item.folder === "TOKEN THEFT");
   const strong = own.filter((item) => templateStrength(item, "token-theft") === "strong");
   assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 11);
-  assert.equal(strong.filter((item) => item.section === "SettingsCatalog").length, 13);
-  const promoted = own.filter((item) => item.section === "SettingsCatalog" && /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name));
+  assert.equal(strong.filter((item) => item.section === "SettingsCatalog" && item.platform === "Windows").length, 13);
+  const promoted = own.filter((item) => item.section === "SettingsCatalog" && item.platform === "Windows" && /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name));
   assert.equal(promoted.length, 8);
   for (const item of promoted) {
     assert.equal(templateStrength(item, "token-theft"), "strong", item.name);
@@ -131,13 +131,13 @@ test("ClickFix contains all six Strong endpoint controls and infostealers promot
     assert.ok(clickfix.some((item) => pattern.test(item.name)), String(pattern));
   }
   const info = templateData.templates.filter((item) => item.folder === "INFOSTEALERS");
-  assert.equal(info.length, 14);
+  assert.equal(info.length, 31);
   assert.ok(info.some((item) => /Run Command/i.test(item.name)));
   for (const pattern of [/BitLocker/i, /Defender Antivirus Updates/i, /LAPS/i]) {
     assert.ok(info.some((item) => pattern.test(item.name)), String(pattern));
   }
   for (const item of info) {
-    const expected = /Edge|Run Command|ASR.*L2|WDAC|Auto Enrollment|AV Configuration|Firewall|BitLocker|Defender Antivirus Updates|LAPS/i.test(item.name);
+    const expected = item.platform === "macOS" || /Edge|Run Command|ASR.*L2|WDAC|Auto Enrollment|AV Configuration|Firewall|BitLocker|Defender Antivirus Updates|LAPS/i.test(item.name);
     assert.equal(templateStrength(item, "infostealers"), expected ? "strong" : "supporting", item.name);
   }
 });
@@ -183,7 +183,7 @@ test("endpoint sections are separated by OS without changing priorities or losin
   for (const folder of ["TOKEN THEFT", "INFOSTEALERS", "LLM-CRYPTOJACKING"]) {
     const items = templateData.templates.filter((item) => item.folder === folder && item.section === "SettingsCatalog");
     assert.ok(items.some((item) => item.platform === "Windows"));
-    assert.ok(items.every((item) => item.platform !== "macOS"));
+    assert.ok(items.some((item) => item.platform === "macOS"));
   }
   assert.ok(templateData.templates.some((item) => item.platform === "Windows Server"));
   assert.equal(endpointPlatform({ platforms: "windows10" }, "Microsoft Edge - Disable proxy settings"), "Windows");
@@ -192,20 +192,45 @@ test("endpoint sections are separated by OS without changing priorities or losin
   assert.throws(() => endpointPlatform({}, "Unknown policy"), /Unknown endpoint platform/);
 });
 
-test("macOS configuration profiles are removed from packages while all compliance policies remain", () => {
-  const mac = templateData.templates.filter((item) => item.platform === "macOS");
+test("the 17 macOS endpoint exports are Strong only in the five selected scenarios, retaining compliance", () => {
+  const mac = templateData.templates.filter((item) => item.platform === "macOS" && item.section === "CompliancePolicies");
   assert.equal(mac.length, 12);
-  assert.ok(mac.every((item) => item.section === "CompliancePolicies"));
   for (const folder of ["AITM", "TOKEN THEFT", "LLM-CRYPTOJACKING"]) {
     assert.equal(mac.filter((item) => item.folder === folder).length, 4, folder);
   }
+  for (const id of ["token-theft", "cryptojacking", "llmjacking", "infostealers", "ransomware"]) {
+    const items = layersForScenario(templateData.templates, id).flatMap(l => l.sections.flatMap(s => s.items))
+      .filter(item => item.platform === "macOS" && item.section !== "CompliancePolicies");
+    assert.equal(items.length, 17, id);
+    assert.ok(items.every(item => item.strength === "strong" && item.title.startsWith("macOS · ") && item.path.includes("/macOS/")), id);
+    assert.equal(items.filter(item => item.section === "SettingsCatalog").length, 9);
+    assert.equal(items.filter(item => item.section === "DeviceConfiguration").length, 7);
+    assert.equal(items.filter(item => item.section === "Applications").length, 1);
+  }
+  for (const folder of ["AITM", "CLICKFIX"]) {
+    assert.ok(!templateData.templates.some(item => item.folder === folder && item.platform === "macOS" && item.section !== "CompliancePolicies"));
+  }
 });
 
-test("proxy-lock profiles are removed everywhere and ransomware has only Windows platforms", () => {
+test("macOS custom payloads contain no tenant onboarding data and the settings identifier is repaired", async () => {
+  for (const item of templateData.templates.filter(item => item.section === "DeviceConfiguration")) {
+    const json = JSON.parse(await readFile(new URL(`../templates/${item.path}`, import.meta.url), "utf8"));
+    const payload = Buffer.from(json.payload, "base64").toString("utf8");
+    if (/Auto Onboarding/i.test(item.name)) {
+      assert.match(payload, /<key>OrgId<\/key>\s*<string>REPLACE_WITH_YOUR_TENANT_ORG_ID<\/string>/);
+      assert.match(payload, /<key>OnboardingInfo<\/key>\s*<string>REPLACE_WITH_YOUR_TENANT_ONBOARDING_INFO<\/string>/);
+    }
+    if (/MDE Settings/i.test(item.name)) {
+      assert.match(payload, /<key>PayloadIdentifier<\/key>\s*<string>com.microsoft.wdav.settings<\/string>/);
+    }
+  }
+});
+
+test("proxy-lock profiles are removed everywhere and ransomware has Windows and macOS platforms", () => {
   assert.ok(templateData.templates.every((item) => !/Disable proxy/i.test(item.name)));
   const ransomware = templateData.templates.filter((item) => item.folder === "RANSOMWARE");
-  assert.equal(ransomware.length, 16);
-  assert.deepEqual([...new Set(ransomware.map((item) => item.platform))].sort(), ["Windows", "Windows Server"]);
+  assert.equal(ransomware.length, 33);
+  assert.deepEqual([...new Set(ransomware.map((item) => item.platform))].sort(), ["Windows", "Windows Server", "macOS"]);
 });
 
 test("site uses one Get package button instead of per-policy template links", async () => {

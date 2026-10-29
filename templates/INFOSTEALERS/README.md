@@ -7,6 +7,7 @@ Import only reviewed Windows endpoint profiles, leaving **Import assignments** u
 ## Package folders
 
 - [Endpoint configuration: Windows](SettingsCatalog)
+- [macOS endpoint protection: settings, device profiles, and Defender app](macOS)
 
 ## Conditional Access import video
 

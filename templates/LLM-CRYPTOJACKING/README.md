@@ -10,6 +10,7 @@ Import Conditional Access first, with state **OFF**, then reviewed endpoint poli
 - [Authentication context](AuthenticationContext)
 - [Device compliance: Windows, macOS, Android, iOS / iPadOS](CompliancePolicies)
 - [Endpoint configuration: Windows](SettingsCatalog)
+- [macOS endpoint protection: settings, device profiles, and Defender app](macOS)
 - [Supporting groups](Groups)
 - [Migration table](MigrationTable.json)
 

@@ -2,7 +2,7 @@
 
 [All attack packages](../README.md) | [How to download and import](../README.md#download-and-prepare)
 
-Import reviewed endpoint profiles without assignments. Select the Windows 11 or Windows Server subfolder as the package root for the corresponding import. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
+Import reviewed endpoint profiles without assignments. Select the Windows 11, Windows Server, or macOS subfolder as the package root for the corresponding import. [Full endpoint import instructions](../README.md#layer-2-endpoint-protection).
 
 ## Package folders
 
@@ -10,6 +10,7 @@ Import reviewed endpoint profiles without assignments. Select the Windows 11 or 
 - [Windows 11 configuration profiles](WINDOWS%2011/SettingsCatalog)
 - [Windows Server collection](WINDOWS%20SERVER)
 - [Windows Server configuration profiles](WINDOWS%20SERVER/SettingsCatalog)
+- [macOS endpoint protection: settings, device profiles, and Defender app](macOS)
 
 ## Conditional Access import video
 
