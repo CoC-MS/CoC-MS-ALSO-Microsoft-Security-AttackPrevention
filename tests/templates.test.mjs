@@ -95,7 +95,11 @@ test("cryptojacking and LLMjacking have exactly the token theft policy set and p
 test("token theft promotes identity requirements and only the requested endpoint controls", () => {
   const own = templateData.templates.filter((item) => item.folder === "TOKEN THEFT");
   const strong = own.filter((item) => templateStrength(item, "token-theft") === "strong");
-  assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 11);
+  assert.equal(strong.filter((item) => item.section === "ConditionalAccess").length, 17);
+  assert.equal(strong.filter((item) => item.section === "AuthenticationContext").length, 1);
+  for (const code of ["CA102", "CA103", "CA202", "CA206", "CA201", "CA210"]) {
+    assert.ok(strong.some(item => item.section === "ConditionalAccess" && item.name.includes(code)), code);
+  }
   assert.equal(strong.filter((item) => item.section === "SettingsCatalog" && item.platform === "Windows").length, 13);
   const promoted = own.filter((item) => item.section === "SettingsCatalog" && item.platform === "Windows" && /Edge|BitLocker|LAPS|Antivirus Updates/i.test(item.name));
   assert.equal(promoted.length, 8);

@@ -28,6 +28,8 @@ const endpointScenarios = new Set(["token-theft", "clickfix", "infostealers"]);
 export function templateStrength(template, scenarioId) {
   if (["cryptojacking", "llmjacking"].includes(scenarioId)) scenarioId = "token-theft";
   if (scenarioId === "ransomware") return "strong";
+  if (scenarioId === "token-theft" && (template.section === "AuthenticationContext"
+    || (template.section === "ConditionalAccess" && /\bCA(?:102|103|202|206|201|210)\b/.test(template.name)))) return "strong";
   if (template.platform === "macOS" && ["SettingsCatalog", "DeviceConfiguration", "Applications"].includes(template.section)
     && ["token-theft", "infostealers"].includes(scenarioId)) return "strong";
   if (template.section === "ConditionalAccess") {
